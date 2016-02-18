@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script type="text/javascript" src="../src/chartviz.js"></script>
+</head>
+<body>
+    <h3>Test ChartViz Library</h3>
+
+    <script type="text/javascript">
+        var urllnk = "http://ckan.routetopa.eu/dataset/fce7b89c-4c36-47c4-a486-7df5307a884e/resource/1b675fb7-8c9a-46d0-8f80-3e28afe4f4b5/download/litterwardennonulls.csv";
+
+        window.onload = function() {
+            var chartProcessor = new ChartProcessor();
+            chartProcessor.inferDataTypes(urllnk);
+            //chartProcessor.httpGetAsync(urllnk, mycallback);
+        }//EndFunction.
+
+        function mycallback(response) {
+            console.log(response);
+        }//EndFunction.
+    </script>
+</body>
+</html>
