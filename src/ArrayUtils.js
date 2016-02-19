@@ -42,21 +42,16 @@ ArrayUtils.prototype = (function() {
         /**
          * Find the item with the max value within the array.
          * @param arr
-         * @returns {*}
+         * @returns {*} It is an object with index, key, value.
          */
-        findMax: function (arr) {
-            if (arr.length <= 0) return NaN;
-            var max = { index: 0, value: arr[0] }
-            var i=1;
-            for (i=1; i<arr.length; i++) {
-                var value = arr[i];
-                if (value > max.value) {
-                    max.index = i;
-                    max.value = value;
-                }
-            }//EndFor.
+        findMinMax: function (arr, fncompare) {
+            var result = null;
+            for (var key in arr) {
+                if (result == null || fncompare.call(arr[key], result.value))
+                    result = { index: -1, key: key, value: arr[key] };
+            }
 
-            return max;
+            return result;
         }//EndFunction.
     };
 })();

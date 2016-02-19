@@ -70,6 +70,14 @@ ChartProcessor.prototype = (function () {
         //It determines the type of each column.
         var datasetsize = rows.length - 1;
         _fields.map(function (field) {
+            var max = _arrUtil.findMinMax(field._inferredTypes, function (curval, lastval) {
+                return curval > lastval;
+            });
+            field.type = max.key;
+            field.typeConfidence = field._inferredTypes[max.key] / datasetsize;
+
+            //if (field.type === ChartProcessor.TYPES.TEXT && Object.keys(field._inferredValues)) {
+            //}
 
         });
 
