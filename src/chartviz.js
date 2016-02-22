@@ -27,14 +27,19 @@ function ChartProcessor() {
 }
 
 ChartProcessor.TYPES = {
-    TEXT : { value: 0, name: "TEXT" },
-    NUMBER : { value: 1, name: "NUMBER" },
-    BOOL : { value: 2, name: "BOOL" }
+    TEXT        : { value: 0, name: "TEXT" },
+    NUMBER      : { value: 1, name: "NUMBER" },
+    LATITUDE    : { value: 2, name: "LATITUDE" },
+    LONGITUDE   : { value: 2, name: "LONGITUDE" },
+    BOOL        : { value: 3, name: "BOOL"},
+    CONST       : { value: 4, name: "BOOL" },
+    CATEGORY    : { value: 5, name: "CATEGORY" }
 };
 
 ChartProcessor.prototype = (function () {
 
     var _fields = [];
+    var _numOfRows = 0;
     var _arrUtil = new ArrayUtils();
     var _dataTypesUtils = new DataTypesUtils();
 
@@ -43,17 +48,17 @@ ChartProcessor.prototype = (function () {
      * @param theUrl
      * @param callback
      */
-    var httpGetAsync = function(theUrl, callback) {
+    var httpGetAsync = function(theUrl, callbackOnFinish) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status == 200)
-                callback(xhttp.responseText);
+                _processDataset(xhttp.responseText, callbackOnFinish);
         }
         xhttp.open("GET", theUrl, true); // true for asynchronous
         xhttp.send(null);
     };//EndFunction.
 
-    var _processDataset = function (datasetContent) {
+    var _processDataset = function (datasetContent, callbackOnFinish) {
         //Split the dataset rows.
         var rows = datasetContent.split("\n");
 
@@ -74,14 +79,31 @@ ChartProcessor.prototype = (function () {
                 return curval > lastval;
             });
             field.type = max.key;
-            field.typeConfidence = field._inferredTypes[max.key] / datasetsize;
+            field.typeConfidence = field._inferredTypes[max.key] / _numOfRows;
 
-            //if (field.type === ChartProcessor.TYPES.TEXT && Object.keys(field._inferredValues)) {
-            //}
+            //TODO: improve this piece of code.
+            //LAT/LNG.
+            var fieldName = field.name.toLowerCase();
+            var isLatType = (field.type === ChartProcessor.TYPES.LATITUDE.name);
+            var fieldNameContainsLat = fieldName.indexOf('lat') >= 0;
+            var fieldNameContainsLon = fieldName.indexOf('ng') >= 0; //It could be 'lng'.
+            if (isLatType == true && fieldNameContainsLat == false && fieldNameContainsLon == true) {
+                field.type = ChartProcessor.TYPES.LONGITUDE.name;
+            }
 
+            //BOOLEAN.
+            var numOfValues = Object.keys(field._inferredValues).length;
+            if (field.type === ChartProcessor.TYPES.TEXT.name) {
+                if (numOfValues == 1) field.type = ChartProcessor.TYPES.CONST.name;
+                else if (numOfValues == 2) field.type = ChartProcessor.TYPES.BOOL.name;
+                else if (numOfValues < _numOfRows * 0.10) field.type = ChartProcessor.TYPES.CATEGORY.name;
+            }
+
+            console.log("ccc");
         });
 
-        console.log(datasetContent);
+        //Call the user function.
+        callbackOnFinish(_fields);
     };//EndFunction.
 
     var _processHeader = function(header) {
@@ -90,6 +112,12 @@ ChartProcessor.prototype = (function () {
     };//EndFunction.
 
     var _processRow = function(row) {
+        //Avoid empty rows
+        if (typeof row === 'undefined') return;
+        row = row.trim();
+        if (row.length == 0) return;
+
+        //Process the ROW.
         var values = _processSplitRow(row);
         var i;
         for (i=0; i<values.length; i++) {//Loop on the row values.
@@ -97,15 +125,34 @@ ChartProcessor.prototype = (function () {
             _arrUtil.testAndIncrement(_fields[i]._inferredTypes, inferredType.name);
             if (inferredType === ChartProcessor.TYPES.TEXT)
                 _arrUtil.testAndIncrement(_fields[i]._inferredValues, values[i]);
+            if (inferredType === ChartProcessor.TYPES.LATITUDE || inferredType === ChartProcessor.TYPES.LONGITUDE)
+                _arrUtil.testAndIncrement(_fields[i]._inferredTypes, ChartProcessor.TYPES.NUMBER);
         }//EndFor.
+
+        _numOfRows++;
     };//EndFunction.
 
+    /**
+     * Given a dataset value, it tries to recognise the data types.
+     * This is the central function within the library.
+     * @param value
+     * @returns {*}
+     * @private
+     */
     var _processInferType = function(value) {
         value = value.toLocaleString();
 
         //Try to parse the float.
         var isnumber = _dataTypesUtils.filterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.
+            //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
+            if (-90.0 <= isnumber && isnumber <= 90.0)
+                return ChartProcessor.TYPES.LATITUDE;
+
+            //It the number ranges from -180.0 to 180.0, the value is marked as Longitude.
+            if (-180.0 <= isnumber && isnumber <= 180.0)
+                return ChartProcessor.TYPES.LONGITUDE;
+
             return ChartProcessor.TYPES.NUMBER;
         }
 
@@ -119,8 +166,10 @@ ChartProcessor.prototype = (function () {
     return {
         constructor: ChartProcessor,
 
-        inferDataTypes: function (theUrl) {
-            httpGetAsync(theUrl, _processDataset);
+        inferDataTypes: function (theUrl, callback) {
+            _fields = [];
+            _numOfRows = 0;
+            httpGetAsync(theUrl, callback);
         }
     };
 })();
