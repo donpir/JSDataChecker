@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Validator of data type recognition from data.gov.uk</title>
+    <script type="text/javascript" src="../src/ckan/ckan.js"></script>
+</head>
+<body>
+
+    <h3>ChartViz Validator</h3>
+
+    <script type="text/javascript">
+        //This code accesses to CKAN to get all the csv datasets.
+        var api = new CKANApi();
+        api.listDatasets("https://data.gov.uk/api/3/action/package_search");
+    </script>
+
+</body>
+</html>
