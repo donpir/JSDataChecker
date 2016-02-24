@@ -32,6 +32,7 @@ DataTypeAnalyser.TYPES = {
     CONST       : { value: 6, name: "CONST" },
     CATEGORY    : { value: 7, name: "CATEGORY" },
 
+    DATETIME    : { value: 8, name: "DATETIME" },
     OBJECT      : { value: 100, name: "OBJECT" }
 };
 
@@ -179,11 +180,15 @@ DataTypeAnalyser.prototype = (function () {
 
             if (0.0 <= isnumber && isnumber <= 100.0)
                 if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
-                //if(/^(\+)?((0|([1-9][0-9]*))(\.[0-9]+)?)$/)
                     return DataTypeAnalyser.TYPES.PERCENTAGE;
 
             return DataTypeAnalyser.TYPES.NUMBER;
         }
+
+        var _date = Date.parse(value);
+        if (isNaN(_date) == false)
+            return DataTypeAnalyser.TYPES.DATETIME;
+
 
         return DataTypeAnalyser.TYPES.TEXT;
     };//EndFunction.
