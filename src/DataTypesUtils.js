@@ -26,10 +26,29 @@ DataTypesUtils.prototype = (function () {
         constructor: DataTypesUtils,
 
         filterFloat: function (value) {
-            if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
+            if(/^(\-|\+)?((0|([1-9][0-9]*))(\.[0-9]+)?|Infinity)$/
+
+            //if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
                     .test(value))
                 return Number(value);
             return NaN;
+        },//EndFunction.
+
+        /**
+         * Solution from here:
+         * http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
+         * @param num
+         * @returns {number}
+         */
+        decimalPlaces: function (num) {
+            var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+            if (!match) { return 0; }
+            return Math.max(
+                0,
+                // Number of digits right of decimal point.
+                (match[1] ? match[1].length : 0)
+                    // Adjust for scientific notation.
+                - (match[2] ? +match[2] : 0));
         }//EndFunction.
     };
 })();

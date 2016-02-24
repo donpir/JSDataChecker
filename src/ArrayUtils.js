@@ -39,6 +39,15 @@ ArrayUtils.prototype = (function() {
             return arr;
         },//EndFunction.
 
+        iteratorOverKeys: function (arr, callback) {
+            for (var property in arr) {
+                if (arr.hasOwnProperty(property)) {
+                    var item = arr[property];
+                    callback(item);
+                }
+            }
+        },//EndFunction.
+
         /**
          * Find the item with the max value within the array.
          * @param arr

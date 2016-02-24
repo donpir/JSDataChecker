@@ -27,6 +27,8 @@ function CKANApi() {
 
 CKANApi.prototype = (function() {
 
+    var _arrUtil = new ArrayUtils();
+
     var httpGetAsync = function(theUrl, callback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -43,14 +45,22 @@ CKANApi.prototype = (function() {
         var ckanresults = jsonContent.result.results;
 
 
-        
+        var datasetsCSV = [];
+        var arrFormatsSummary = [];
 
         for (var i=0; i<ckanresults.length; i++) {
             var result = ckanresults[i];
             var resources = result.resources;
             for (var j=0; j<resources.length; j++) {
                 var resource = resources[j];
-                //
+
+                var resourceFormat = resource.format;
+                _arrUtil.testAndIncrement(arrFormatsSummary, resourceFormat);
+
+                if (resourceFormat == "CSV")
+                    datasetsCSV.push({ id: resource.id, description: resource.description, url: resource.url });
+
+                //debugger;
             }
         }//EndFor.
 

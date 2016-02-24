@@ -1,7 +1,12 @@
 <html>
 <head>
     <title>Validator of data type recognition from data.gov.uk</title>
+    <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
+    <script type="text/javascript" src="../src/ArrayUtils.js"></script>
     <script type="text/javascript" src="../src/ckan/ckan.js"></script>
+    <script type="text/javascript" src="../src/ckan/ODSApi.js"></script>
+
+    <script type="text/javascript" src="../src/DataTypeAnalyser.js"></script>
 </head>
 <body>
 
@@ -9,8 +14,61 @@
 
     <script type="text/javascript">
         //This code accesses to CKAN to get all the csv datasets.
-        var api = new CKANApi();
-        api.listDatasets("https://data.gov.uk/api/3/action/package_search");
+        //var api = new CKANApi();
+        //api.listDatasets("https://data.gov.uk/api/3/action/package_search"); //data.gov.uk
+        //api.listDatasets("https://data.gov.ie/api/3/action/package_search"); //data.gov.ie
+
+        var api = new ODSApi();
+        api.listDatasets("https://data.issy.com", receiveDatasets);
+
+        function receiveDatasets(datasets) {
+            for (var i=0; i<datasets.length; i++) {
+                var dataset = datasets[i];
+                api.requestDataset("https://data.issy.com", dataset, receiveDataset);
+            }//EndFor.
+        }//EndFunction.
+
+        function receiveDataset(dataset) {
+            var analyser = new DataTypeAnalyser();
+            var _calculatedFields = analyser.inferDataTypes(dataset.rows);
+            var _existingFields = dataset.fields;
+
+            var _arrUtil = new ArrayUtils();
+            var _dtUtils = new DataTypesUtils();
+
+            _arrUtil.iteratorOverKeys(_existingFields, function(item) {
+                var key = item.name;
+                var type = item.type;
+                var _dataset = dataset;
+
+                var calculatedField = _calculatedFields[key];
+                if (typeof calculatedField === 'undefined') {
+                    debugger;
+                    return;
+                }
+                var calculatedType = calculatedField.type;
+
+                if (type == 'text') {
+                    if (calculatedType != DataTypeAnalyser.TYPES.TEXT.name &&
+                        calculatedType != DataTypeAnalyser.TYPES.CONST.name &&
+                        calculatedType != DataTypeAnalyser.TYPES.CATEGORY.name) debugger;
+
+                } else if (type == 'int' || type == 'double') {
+                    if (calculatedType != DataTypeAnalyser.TYPES.NUMBER.name &&
+                            calculatedType != DataTypeAnalyser.TYPES.PERCENTAGE.name) debugger;
+
+                } else if (type == 'geo_point_2d' || type == 'geo_shape' || type == 'file') {
+                    if (calculatedType != DataTypeAnalyser.TYPES.OBJECT.name) debugger;
+
+                } else
+                    debugger;
+
+            });
+
+            console.log("Dataset completed: " + dataset.id);
+            debugger;
+        }//EndFunction.
+
     </script>
 
 </body>
