@@ -201,6 +201,11 @@ DataTypeAnalyser.prototype = (function () {
             _numOfRows = 0;
             _processDataset(jsonRows);
             return _fields;
-        }
+        },//EndFunction.
+
+        inferDataTypeOfValue: function (value) {
+            return _processInferType(value);
+        }//EndFunction.
+
     };
 })();
