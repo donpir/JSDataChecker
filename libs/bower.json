@@ -1,0 +1,19 @@
+{
+  "name": "libs",
+  "version": "0.0.0",
+  "homepage": "https://github.com/donpir/chartviz",
+  "authors": [
+    "'Donato <'donatopirozzi@gmail.com'>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "qunit": "~1.22.0"
+  }
+}

@@ -1,12 +1,12 @@
 <html>
 <head>
     <title>Validator of data type recognition from data.gov.uk</title>
-    <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
-    <script type="text/javascript" src="../src/ArrayUtils.js"></script>
-    <script type="text/javascript" src="../src/ckan/ckan.js"></script>
-    <script type="text/javascript" src="../src/ckan/ODSApi.js"></script>
+    <script type="text/javascript" src="../../src/DataTypesUtils.js"></script>
+    <script type="text/javascript" src="../../src/ArrayUtils.js"></script>
+    <script type="text/javascript" src="../../src/ckan/ckan.js"></script>
+    <script type="text/javascript" src="../../src/ckan/ODSApi.js"></script>
 
-    <script type="text/javascript" src="../src/DataTypeAnalyser.js"></script>
+    <script type="text/javascript" src="../../src/DataTypeAnalyser.js"></script>
 </head>
 <body>
 
@@ -19,12 +19,12 @@
         //api.listDatasets("https://data.gov.ie/api/3/action/package_search"); //data.gov.ie
 
         var api = new ODSApi();
-        //api.listDatasets("https://data.issy.com", receiveDatasets);
+        api.listDatasets("https://data.issy.com", receiveDatasets);
 
-        api.requestDataset("https://data.issy.com",
-                { datasetid: "les-principales-actualites-du-moment-a-issy-les-moulineaux",
-                  url: "/api/records/1.0/search/?dataset=les-principales-actualites-du-moment-a-issy-les-moulineaux&rows=1000"},
-                receiveDataset);
+        //api.requestDataset("https://data.issy.com",
+        //        { datasetid: "les-principales-actualites-du-moment-a-issy-les-moulineaux",
+        //          url: "/api/records/1.0/search/?dataset=les-principales-actualites-du-moment-a-issy-les-moulineaux&rows=1000"},
+        //        receiveDataset);
 
         function receiveDatasets(datasets) {
             for (var i=0; i<datasets.length; i++) {

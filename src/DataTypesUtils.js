@@ -25,10 +25,26 @@ DataTypesUtils.prototype = (function () {
     return {
         constructor: DataTypesUtils,
 
+        filterDate: function (value) {
+            if (/^[0-9][0-9][0-9][0-9]\-[0-9][0-9]$/.test(value)) {
+                var year = parseInt(value.substring(0, 4));
+                var month = parseInt(value.substring(5));
+                return new Date(year, month);
+            }
+
+            var patt = new RegExp("[^0-9\-Tt:]");
+            var isDate = !patt.test(value);
+            if (isDate == false) return NaN;
+            return Date.parse(value);
+        },//EndFunction.
+
+        /**
+         * Converts the value in a number, NaN if it is not a number.
+         * @param value
+         * @returns {*}
+         */
         filterFloat: function (value) {
             if(/^(\-|\+)?((0|([1-9][0-9]*))(\.[0-9]+)?|Infinity)$/
-
-            //if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
                     .test(value))
                 return Number(value);
             return NaN;

@@ -25,6 +25,14 @@ ArrayUtils.prototype = (function() {
     return {
         constructor: ArrayUtils,
 
+        testAndSet: function (arr, key, object) {
+            if (typeof arr == 'undefined') return null;
+            if (Array.isArray(arr) == false) return null;
+            if (typeof arr[key] == 'undefined')
+                arr[key] = object;
+            return arr[key];
+        },//EndFunction.
+
         /***
          * It tests whether the array has the key, if not it insert it;
          * then increases the value by one unit.
@@ -43,7 +51,7 @@ ArrayUtils.prototype = (function() {
             for (var property in arr) {
                 if (arr.hasOwnProperty(property)) {
                     var item = arr[property];
-                    callback(item);
+                    callback(item, property);
                 }
             }
         },//EndFunction.
