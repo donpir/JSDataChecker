@@ -8,7 +8,7 @@ var httpGetAsync = function(theUrl, callback) {
     xhttp.send(null);
 };//EndFunction.
 
-httpGetAsync("http://localhost:63342/chartviz/tests/datasets/dataset02.csv", runTests);
+httpGetAsync("../datasets/dataset02.csv", runTests);
 
 function runTests(textualContent) {
     var dataset = textualContent
@@ -43,7 +43,7 @@ function runTests(textualContent) {
         var types = _converter.inferJsonDataType(jsonDataset, path);
 
         //anne column.
-        var key = "records,fields,annee";
+        var key = "records,Final_Cost";
         var actualType = types[key].type;
         var expectedType = DataTypeConverter.TYPES.NUMBER.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);

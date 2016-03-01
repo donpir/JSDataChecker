@@ -9,7 +9,7 @@ var httpGetAsync = function(theUrl, callback) {
     xhttp.send(null);
 };//EndFunction.
 
-httpGetAsync("http://localhost:63342/chartviz/tests/datasets/dataset01.json", runTests);
+httpGetAsync("../datasets/dataset01.json", runTests);
 
 function runTests(jsonTextualContent) {
     var jsonDataset = JSON.parse(jsonTextualContent);
