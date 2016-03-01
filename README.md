@@ -1,2 +1,2 @@
 # chartviz
-JavaScript Library that reads dataset content and recommends a set of suitable chart visualisations.
+JavaScript Library to read dataset content (e.g., Open Data), infer data types, give a data quality indicator and parse content.
