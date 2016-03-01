@@ -1,0 +1,66 @@
+<html>
+<head>
+    <script type="text/javascript" src="../src/ArrayUtils.js"></script>
+    <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
+    <script type="text/javascript" src="../src/chartviz.js"></script>
+</head>
+<body>
+    <h3>Dataset Visualizer</h3>
+
+    Dataset URL: <input id="txtDatasetUrl" type="text" style="width: 75%;"
+            value="http://ckan.routetopa.eu/dataset/fce7b89c-4c36-47c4-a486-7df5307a884e/resource/1b675fb7-8c9a-46d0-8f80-3e28afe4f4b5/download/litterwardennonulls.csv">
+    <input id="btnLoad" type="button" value="Load dataset" onclick="btnLoad_OnClick();">
+
+    <br/>
+    <br>
+    <table border=1>
+        <thead>
+        <tr id="trHeader">
+
+        </tr>
+        <tr id="trHeaderType">
+
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+
+        window.onload = function() {
+            //var chartProcessor = new ChartProcessor();
+            //chartProcessor.inferDataTypes(urllnk);
+        }//EndFunction.
+
+        function btnLoad_OnClick() {
+            //Take the url from the input text.
+            var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
+
+            var chartProcessor = new ChartProcessor();
+            chartProcessor.inferDataTypes(valDatasetUrl, update);
+        }//EndFunction.
+
+        function update(fields) {
+            console.log("update function.");
+
+            var trHeader = document.getElementById('trHeader');
+            for (var i=0;i<fields.length; i++) {
+                var field = fields[i];
+                var ntd = document.createElement("th");
+                ntd.innerHTML = field.name;
+                trHeader.appendChild(ntd);
+            }//EndFor.
+
+            var trHeaderType = document.getElementById('trHeaderType');
+            for (var i=0;i<fields.length; i++) {
+                var field = fields[i];
+                var ntd = document.createElement("th");
+                ntd.innerHTML = field.type + " (" + Math.round(field.typeConfidence * 100) + "%)";
+                trHeaderType.appendChild(ntd);
+            }//EndFor.
+        }//EndFunction.
+    </script>
+</body>
+</html>

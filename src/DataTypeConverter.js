@@ -222,7 +222,7 @@ DataTypeConverter.prototype = (function () {
                 if (fieldKey == '*') {
                     var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
-                    _arrUtil.iteratorOverKeys(jsonSubtree, function (item, key) {
+                    _arrUtil.iteratorOverKeys(item, function (item, key) {
                         var inferredType = _processInferType(item);
                         var curKey = sProcessedKeys + "," + key;
 
