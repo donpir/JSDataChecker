@@ -2,7 +2,8 @@
 <head>
     <script type="text/javascript" src="../src/ArrayUtils.js"></script>
     <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
-    <script type="text/javascript" src="../src/chartviz.js"></script>
+    <script type="text/javascript" src="../src/CSVReader.js"></script>
+    <script type="text/javascript" src="../src/DataTypeConverter.js"></script>
 </head>
 <body>
     <h3>Dataset Visualizer</h3>
@@ -34,32 +35,51 @@
             //chartProcessor.inferDataTypes(urllnk);
         }//EndFunction.
 
+        var httpGetAsync = function(theUrl, callback) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200)
+                    callback(xhttp.responseText);
+            };
+            xhttp.open("GET", theUrl, true); // true for asynchronous
+            xhttp.send(null);
+        };//EndFunction.
+
         function btnLoad_OnClick() {
             //Take the url from the input text.
             var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
 
-            var chartProcessor = new ChartProcessor();
-            chartProcessor.inferDataTypes(valDatasetUrl, update);
-        }//EndFunction.
+            //Call Ajax to load the dataset content.
+            httpGetAsync(valDatasetUrl, update);
+        };//EndFunction.
 
-        function update(fields) {
+        function update(csvContent) {
             console.log("update function.");
+            var _arrUtils = new ArrayUtils();
 
+            var reader = new CSVReader();
+            var jsonDataset = reader.read(csvContent);
+
+            var _converter = new DataTypeConverter();
+            var path = [ "records", "*" ];
+            var types = _converter.inferJsonDataType(jsonDataset, path);
+
+            //Create the header table.
             var trHeader = document.getElementById('trHeader');
-            for (var i=0;i<fields.length; i++) {
-                var field = fields[i];
+            _arrUtils.iteratorOverKeys(types, function(field) {
                 var ntd = document.createElement("th");
                 ntd.innerHTML = field.name;
                 trHeader.appendChild(ntd);
-            }//EndFor.
+            });
 
+            debugger;
             var trHeaderType = document.getElementById('trHeaderType');
-            for (var i=0;i<fields.length; i++) {
-                var field = fields[i];
+            _arrUtils.iteratorOverKeys(types, function(field){
                 var ntd = document.createElement("th");
                 ntd.innerHTML = field.type + " (" + Math.round(field.typeConfidence * 100) + "%)";
                 trHeaderType.appendChild(ntd);
-            }//EndFor.
+            });
+
         }//EndFunction.
     </script>
 </body>

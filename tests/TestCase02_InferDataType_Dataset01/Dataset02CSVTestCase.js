@@ -43,7 +43,7 @@ function runTests(textualContent) {
         var types = _converter.inferJsonDataType(jsonDataset, path);
 
         //anne column.
-        var key = "records,Final_Cost";
+        var key = "records,fields,annee";
         var actualType = types[key].type;
         var expectedType = DataTypeConverter.TYPES.NUMBER.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
