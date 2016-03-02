@@ -253,7 +253,13 @@ DataTypeConverter.prototype = (function () {
 
             _analyseDataTypes(fieldsType);
 
-            return fieldsType;
+            //Data quality.
+            var quality = { homogeneity: 1 };
+            _arrUtil.iteratorOverKeys(fieldsType, function(fieldType) {
+                quality.homogeneity *= fieldType.typeConfidence;
+            });
+
+            return { types: fieldsType, qualityIndex: quality };
         },//EndFunction.
 
         inferDataTypes: function (jsonRows) {

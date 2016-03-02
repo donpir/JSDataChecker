@@ -4,6 +4,18 @@
     <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
     <script type="text/javascript" src="../src/CSVReader.js"></script>
     <script type="text/javascript" src="../src/DataTypeConverter.js"></script>
+
+    <link rel="import" href="../libs/bower_components/polymer/polymer.html">
+    <link rel="import" href="../libs/bower_components/paper-progress/paper-progress.html">
+
+    <style is="custom-style">
+        paper-progress {
+            --paper-progress-active-color: #FFC107;
+            --paper-progress-container-color: white;
+            --paper-progress-height: 20px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h3>Dataset Visualizer</h3>
@@ -13,6 +25,19 @@
     <input id="btnLoad" type="button" value="Load dataset" onclick="btnLoad_OnClick();">
 
     <br/>
+
+
+
+
+    <table border="0">
+    <tr>
+        <td>Data homogeneity:</td>
+        <td><paper-progress id="barHomogeneity" value="0">sbiricuda</paper-progress></td>
+        <td id="barHomogeneityValue"></td>
+    </tr>
+    </table>
+
+
     <br>
     <table border=1>
         <thead>
@@ -23,7 +48,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
 
         </tbody>
     </table>
@@ -62,7 +87,8 @@
 
             var _converter = new DataTypeConverter();
             var path = [ "records", "*" ];
-            var types = _converter.inferJsonDataType(jsonDataset, path);
+            var processingResult = _converter.inferJsonDataType(jsonDataset, path);
+            var types = processingResult.types;
 
             //Create the header table.
             var trHeader = document.getElementById('trHeader');
@@ -76,9 +102,15 @@
             var trHeaderType = document.getElementById('trHeaderType');
             _arrUtils.iteratorOverKeys(types, function(field){
                 var ntd = document.createElement("th");
-                ntd.innerHTML = field.type + " (" + Math.round(field.typeConfidence * 100) + "%)";
+                ntd.innerHTML = field.type + " (" + Math.round(field.typeConfidence * 100 * 100) / 100 + "%)";
                 trHeaderType.appendChild(ntd);
             });
+
+            var percentage = processingResult.qualityIndex.homogeneity*100;
+            var barHomogeneity = document.getElementById("barHomogeneity");
+            barHomogeneity.setAttribute("value", percentage);
+
+            document.getElementById("barHomogeneityValue").innerHTML = Math.round(percentage*100)/100 + "%";
 
         }//EndFunction.
     </script>

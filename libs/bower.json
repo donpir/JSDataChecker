@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
+    "paper-progress": "PolymerElements/paper-progress#~1.0.8",
     "polymer": "Polymer/polymer#1.2.0",
     "qunit": "~1.22.0"
   }
