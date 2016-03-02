@@ -47,6 +47,10 @@ function runTests(textualContent) {
             assert.failed;
         }
 
+        //Read the CSV Content.
+        var reader = new CSVReader();
+        var jsonDataset = reader.read(dataset);
+
     });
 
 }//EndTestSuite.

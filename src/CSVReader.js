@@ -93,8 +93,11 @@ CSVReader.RecogniseCSVSeparator = function(rows) {
 
 CSVReader.prototype = (function() {
 
-    var _processHeader = function(header) {
-        var headerNames = header.split(',');
+    var _processHeader = function(header, colseparator) {
+        if (colseparator == null || typeof colseparator == 'undefined')
+            throw "Cannot process the CSV header because the column separator is null";
+
+        var headerNames = header.split(colseparator);
         var fields = [];
 
         headerNames.forEach( function(item, index) {
@@ -124,7 +127,7 @@ CSVReader.prototype = (function() {
             var separator = CSVReader.RecogniseCSVSeparator(rows);
 
             //First row is the header.
-            fields = _processHeader(rows[0]);
+            fields = _processHeader(rows[0], separator);
 
             //Loop through the dataset's rows.
             for (var i=1; i<rows.length; i++) {
