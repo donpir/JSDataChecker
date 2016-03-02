@@ -30,56 +30,22 @@ var httpGetAsync = function(theUrl, callback) {
     xhttp.send(null);
 };//EndFunction.
 
-httpGetAsync("../datasets/dataset02.csv", runTests);
+httpGetAsync("../datasets/dataset03.csv", runTests);
 
 function runTests(textualContent) {
     var dataset = textualContent
 
-    QUnit.test("CSVReader Split TestCase", function(assert) {
-        var line = "\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line);
-        assert.equal(values.length, 2, "The line has the correct number of values");
-
-        var line = "Hello,\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line);
-        assert.equal(values.length, 3, "The line has the correct number of values");
-    });
-
-    QUnit.test( "Dataset02", function( assert ) {
+    QUnit.test( "Dataset03", function( assert ) {
         assert.notEqual(dataset, null, "Dataset correctly loaded.");
 
         //Infer the SEPARATOR.
         try {
             var rows = dataset.split(/\r\n?/);
             var separator = CSVReader.RecogniseCSVSeparator(rows);
-            assert.equal(separator, ',', "CSV Separator ; recognized");
+            assert.equal(separator, ';', "CSV Separator ; recognized");
         } catch (err) {
             assert.failed;
         }
-
-        //Read the CSV Content.
-        var reader = new CSVReader();
-        var jsonDataset = reader.read(dataset);
-
-        assert.notEqual(jsonDataset, null, "Dataset correctly read.");
-
-        assert.equal(jsonDataset.fields.length, 19, "The dataset has the expected number of columns.");
-        assert.equal(jsonDataset.records.length, 14, "The dataset has the expected number of rows.");
-
-        debugger;
-
-        //Parse the dataset type.
-        var _converter = new DataTypeConverter();
-        var path = [ "records", "*" ];
-        var metadata = _converter.inferJsonDataType(jsonDataset, path);
-
-        //anne column.
-        var key = "records,Final_Cost";
-        var actualType = metadata.types[key].type;
-        var expectedType = DataTypeConverter.TYPES.NUMBER.name;
-        assert.equal(actualType, expectedType, "Check inferred type on " + key);
-
-        debugger;
 
     });
 

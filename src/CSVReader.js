@@ -23,8 +23,8 @@
 function CSVReader() {
 };//EndConstructor.
 
-CSVReader.Split = function(line) {
-    var COL_SEPARATOR = ',';
+CSVReader.Split = function(line, colseparator) {
+    var COL_SEPARATOR = typeof colseparator == 'undefined' ? ',' : colseparator;
 
     var STATE = {
         INIT :    { id: 0 },
@@ -54,6 +54,38 @@ CSVReader.Split = function(line) {
     }//EndFor.
 
     return cells;
+};//EndFunction.
+
+CSVReader.RecogniseCSVSeparator = function(rows) {
+
+    var tryToSplit = function (rows, colsep) {
+        var numCols = -1;
+        for (var i=1; i<rows.length && i<10; i++) {
+            var cells = CSVReader.Split(rows[i], colsep);
+            var rowNumCols = cells.length;
+
+            if (numCols == -1 && rowNumCols > 1) {
+                numCols = rowNumCols;
+                continue;
+            }
+
+            if (numCols != rowNumCols)
+                return false;
+        }//EndFor.
+
+        return true;
+    };
+
+    //Try to use the ";" character as separator.
+    var SEPARATOR = ';';
+    var foundSparator = tryToSplit(rows, SEPARATOR);
+    if (foundSparator) return SEPARATOR;
+
+    SEPARATOR = ',';
+    foundSparator = tryToSplit(rows, SEPARATOR);
+    if (foundSparator) return SEPARATOR;
+
+    throw "Cannot infer the CSV column separator.";
 };//EndFunction.
 
 CSVReader.prototype = (function() {

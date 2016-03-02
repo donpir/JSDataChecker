@@ -240,7 +240,7 @@ DataTypeConverter.prototype = (function () {
                 }
 
                 if (value == null || typeof value == 'undefined' || (value + "").length == 0) {
-                    datasetErrors++;
+                    //datasetErrors++;
                 } //isRowInvalid = true;
 
                 if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name) {
