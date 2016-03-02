@@ -62,7 +62,7 @@ DataTypeConverter.prototype = (function () {
         xhttp.send(null);
     };//EndFunction.
 
-    var _processDataset = function (jsonRows) {
+    /*var _processDataset = function (jsonRows) {
         //Check if the jsonRow is an array.
         if (Array.isArray(jsonRows) == false) return;
 
@@ -74,7 +74,7 @@ DataTypeConverter.prototype = (function () {
         _analyseDataTypes(this._fields);
 
         return this._fields;
-    };//EndFunction.
+    };//EndFunction.*/
 
     var _processRow = function(row) {
         //Avoid empty rows
@@ -300,13 +300,18 @@ DataTypeConverter.prototype = (function () {
             return { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality };
         },//EndFunction.
 
-        inferDataTypes: function (jsonRows) {
+        /*inferDataTypes: function (jsonRows) {
             this._fields = [];
             this._numOfRows = 0;
             _processDataset(jsonRows);
             return this._fields;
-        },//EndFunction.
+        },//EndFunction.*/
 
+        /**
+         * Given in input a value, the function infers the data type.
+         * @param value
+         * @returns {*}
+         */
         inferDataTypeOfValue: function (value) {
             return _processInferType(value);
         }//EndFunction.
