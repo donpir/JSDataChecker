@@ -219,18 +219,49 @@ DataTypeConverter.prototype = (function () {
          * @param path Format: field1->field2->field3
          */
         convert: function (metadata) {
-            debugger;
+            var lastRowIndex = 0;
+            var isRowInvalid = false;
+            var numOfRowsInvalid = 0;
+
+            var numOfRows = 0;
+            var numOfValues = 0;
+
+            var datasetErrors = 0;
+            var datasetMissingValues = 0;
+
             jsonTraverse(metadata.dataset, metadata.fieldKeys, function(value, key, traversedKeys, rowIndex) {
                 var inferredType = metadata.types[traversedKeys];
+                numOfValues++;
+
+                if (lastRowIndex != rowIndex) {
+                    lastRowIndex = rowIndex;
+                    numOfRows++;
+                    //if (isRowInvalid) numOfRowsInvalid++;
+                }
+
+                if (value == null || typeof value == 'undefined' || (value + "").length == 0) {
+                    datasetErrors++;
+                } //isRowInvalid = true;
 
                 if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name) {
                     var number = parseFloat(value);
-                    return  isNaN(number) ? value : number;
+
+                    if (isNaN(number)) {
+                        datasetErrors++;
+                        return value;
+                    }
+
+                    return number;
                 }
 
                 return value;
             });
 
+
+            metadata.qualityIndex.notNullValues = (numOfValues - datasetMissingValues) / numOfValues;
+            metadata.qualityIndex.errors = (numOfValues - datasetErrors) / numOfValues;
+
+            debugger;
            return metadata;
         },//EndFunction.
 

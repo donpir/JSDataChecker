@@ -7,6 +7,7 @@
 
     <link rel="import" href="../libs/bower_components/polymer/polymer.html">
     <link rel="import" href="../libs/bower_components/paper-progress/paper-progress.html">
+    <script type="text/javascript" src="../libs/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
     <style is="custom-style">
         paper-progress {
@@ -34,6 +35,18 @@
         <td>Data homogeneity:</td>
         <td><paper-progress id="barHomogeneity" value="0">sbiricuda</paper-progress></td>
         <td id="barHomogeneityValue"></td>
+    </tr>
+
+    <!--<tr>
+        <td>Dataset Not Null Values:</td>
+        <td><paper-progress id="barNotNull" value="0">sbiricuda</paper-progress></td>
+        <td id="barNotNullValues"></td>
+    </tr>-->
+
+    <tr>
+        <td>Dataset Errors/Missing values:</td>
+        <td><paper-progress id="barErrors" value="0">sbiricuda</paper-progress></td>
+        <td id="barErrorsValues"></td>
     </tr>
     </table>
 
@@ -106,13 +119,23 @@
                 trHeaderType.appendChild(ntd);
             });
 
+            var processingResults = _converter.convert(processingResult);
+
             var percentage = processingResult.qualityIndex.homogeneity*100;
             var barHomogeneity = document.getElementById("barHomogeneity");
             barHomogeneity.setAttribute("value", percentage);
-
             document.getElementById("barHomogeneityValue").innerHTML = Math.round(percentage*100)/100 + "%";
 
-            _converter.convert(processingResult);
+            /*var percentage = processingResult.qualityIndex.notNullValues*100;
+            var barConsistency = document.getElementById("barNotNull");
+            barConsistency.setAttribute("value", percentage);
+            document.getElementById("barNotNullValues").innerHTML = Math.round(percentage*100)/100 + "%";*/
+
+            var percentage = processingResult.qualityIndex.errors*100;
+            var barConsistency = document.getElementById("barErrors");
+            barConsistency.setAttribute("value", percentage);
+            document.getElementById("barErrorsValues").innerHTML = Math.round(percentage*100)/100 + "%";
+
         }//EndFunction.
     </script>
 </body>
