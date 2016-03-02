@@ -37,11 +37,11 @@ function runTests(textualContent) {
 
     QUnit.test("CSVReader Split TestCase", function(assert) {
         var line = "\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line);
+        var values = CSVReader.Split(line, ',');
         assert.equal(values.length, 2, "The line has the correct number of values");
 
         var line = "Hello,\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line);
+        var values = CSVReader.Split(line, ',');
         assert.equal(values.length, 3, "The line has the correct number of values");
     });
 

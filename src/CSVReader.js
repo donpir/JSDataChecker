@@ -23,8 +23,11 @@
 function CSVReader() {
 };//EndConstructor.
 
-CSVReader.Split = function(line, colseparator) {
-    var COL_SEPARATOR = typeof colseparator == 'undefined' ? ',' : colseparator;
+CSVReader.Split = function(line, COL_SEPARATOR) {
+    //var COL_SEPARATOR = typeof colseparator == 'undefined' ? ',' : colseparator;
+
+    if (COL_SEPARATOR == null || typeof COL_SEPARATOR == 'undefined')
+        throw "CSV Column separator is null.";
 
     var STATE = {
         INIT :    { id: 0 },
@@ -118,6 +121,7 @@ CSVReader.prototype = (function() {
             var fields = null;
 
             var rows = csvContent.split(/\r\n?/);
+            var separator = CSVReader.RecogniseCSVSeparator(rows);
 
             //First row is the header.
             fields = _processHeader(rows[0]);
@@ -125,7 +129,7 @@ CSVReader.prototype = (function() {
             //Loop through the dataset's rows.
             for (var i=1; i<rows.length; i++) {
                 var row = rows[i];
-                var values = CSVReader.Split(row);
+                var values = CSVReader.Split(row, separator);
                 var jsonRow = [];
 
                 for (var j=0; j<values.length; j++) {
