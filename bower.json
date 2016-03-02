@@ -1,0 +1,23 @@
+{
+  "name": "JSDataChecker",
+  "version": "0.1",
+  "homepage": "https://github.com/donpir/JSDataChecker",
+  "authors": [
+    "'Donato Pirozzi <'donatopirozzi@gmail.com'>"
+  ],
+  "description": "Javascript library to read dataset content (e.g., Open Data), infer data types, give a data quality indicator and parse content",
+  "main": "JSDataChecker.js",
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "paper-progress": "PolymerElements/paper-progress#~1.0.8",
+    "polymer": "Polymer/polymer#1.2.0",
+    "qunit": "~1.22.0"
+  }
+}

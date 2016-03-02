@@ -8,5 +8,5 @@ QUnit.test( "TestDate", function( assert ) {
     var value = "2023-04";
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.DATETIME, "Text /" + value + "/ correctly recognized.");
-    debugger;
+
 });
