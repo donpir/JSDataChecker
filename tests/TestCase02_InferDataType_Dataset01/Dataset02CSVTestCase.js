@@ -19,6 +19,7 @@
  ** License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  **/
 
+
 var httpGetAsync = function(theUrl, callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

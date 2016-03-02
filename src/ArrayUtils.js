@@ -21,13 +21,22 @@
 
 function ArrayUtils() {}
 
-/*ArrayUtils.TestAndSet = function (arr, key, object) {
+/**
+ * It tests if the array has an element with the specified key,
+ * if does not have the key it initialises it with the object.
+ * @param arr
+ * @param key
+ * @param object
+ * @returns {*}
+ * @constructor
+ */
+ArrayUtils.TestAndSet = function (arr, key, object) {
     if (typeof arr == 'undefined') return null;
     if (Array.isArray(arr) == false) return null;
     if (typeof arr[key] == 'undefined')
         arr[key] = object;
     return arr[key];
-};//EndFunction.*/
+};//EndFunction.
 
 /***
  * It tests whether the array has the key, if not it insert it;
@@ -36,28 +45,35 @@ function ArrayUtils() {}
  * @param key
  * @returns {The array}
  */
-/*TestAndIncrement = function (arr, key) {
+ArrayUtils.TestAndIncrement = function (arr, key) {
     var exists = arr[key];
     if (typeof exists === 'undefined') arr[key] = 0;
     arr[key]++;
     return arr;
 };//EndFunction.
 
-IteratorOverKeys: function (arr, callback) {
+/**
+ * Iterate over the key within the array arr. For each array
+ * value it calls the callback function.
+ * @param arr
+ * @param callback
+ * @constructor
+ */
+ArrayUtils.IteratorOverKeys = function (arr, callback) {
     for (var property in arr) {
         if (arr.hasOwnProperty(property)) {
             var item = arr[property];
             callback(item, property);
         }
     }
-},//EndFunction.*/
+};//EndFunction.
 
 /**
  * Find the item with the max value within the array.
  * @param arr
  * @returns {*} It is an object with index, key, value.
  */
-/*FindMinMax: function (arr, fncompare) {
+ArrayUtils.FindMinMax = function (arr, fncompare) {
     var result = null;
     for (var key in arr) {
         if (result == null || fncompare.call(arr[key], result.value))
@@ -65,58 +81,5 @@ IteratorOverKeys: function (arr, callback) {
     }
 
     return result;
-}//EndFunction.*/
+}//EndFunction.
 
-
-ArrayUtils.prototype = (function() {
-    return {
-        constructor: ArrayUtils,
-
-        testAndSet: function (arr, key, object) {
-            if (typeof arr == 'undefined') return null;
-            if (Array.isArray(arr) == false) return null;
-            if (typeof arr[key] == 'undefined')
-                arr[key] = object;
-            return arr[key];
-        },//EndFunction.
-
-        /***
-         * It tests whether the array has the key, if not it insert it;
-         * then increases the value by one unit.
-         * @param arr
-         * @param key
-         * @returns {The array}
-         */
-        testAndIncrement: function (arr, key) {
-            var exists = arr[key];
-            if (typeof exists === 'undefined') arr[key] = 0;
-            arr[key]++;
-            return arr;
-        },//EndFunction.
-
-        iteratorOverKeys: function (arr, callback) {
-            for (var property in arr) {
-                if (arr.hasOwnProperty(property)) {
-                    var item = arr[property];
-                    callback(item, property);
-                }
-            }
-        },//EndFunction.
-
-        /**
-         * Find the item with the max value within the array.
-         * @param arr
-         * @returns {*} It is an object with index, key, value.
-         */
-        findMinMax: function (arr, fncompare) {
-            var result = null;
-            for (var key in arr) {
-                if (result == null || fncompare.call(arr[key], result.value))
-                    result = { index: -1, key: key, value: arr[key] };
-            }
-
-            return result;
-        }//EndFunction.
-
-    };
-})();

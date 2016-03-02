@@ -71,11 +71,11 @@
         };//EndFunction.
 
         function btnLoad_OnClick() {
-            //Take the url from the input text.
-            var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
+        //Take the url from the input text.
+        var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
 
-            //Call Ajax to load the dataset content.
-            httpGetAsync(valDatasetUrl, update);
+        //Call Ajax to load the dataset content.
+        httpGetAsync(valDatasetUrl, update);
         };//EndFunction.
 
         function update(csvContent) {
@@ -92,7 +92,7 @@
 
             //Create the header table.
             var trHeader = document.getElementById('trHeader');
-            _arrUtils.iteratorOverKeys(types, function(field) {
+            ArrayUtils.IteratorOverKeys(types, function(field) {
                 var ntd = document.createElement("th");
                 ntd.innerHTML = field.name;
                 trHeader.appendChild(ntd);
@@ -100,7 +100,7 @@
 
             debugger;
             var trHeaderType = document.getElementById('trHeaderType');
-            _arrUtils.iteratorOverKeys(types, function(field){
+            ArrayUtils.IteratorOverKeys(types, function(field){
                 var ntd = document.createElement("th");
                 ntd.innerHTML = field.type + " (" + Math.round(field.typeConfidence * 100 * 100) / 100 + "%)";
                 trHeaderType.appendChild(ntd);

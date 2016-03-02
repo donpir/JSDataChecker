@@ -42,9 +42,6 @@ DataTypeConverter.TYPES = {
 
 DataTypeConverter.prototype = (function () {
 
-    var _arrUtil = new ArrayUtils();
-    var _dataTypesUtils = new DataTypesUtils();
-
     /***
      * Make an asynchronous call to load the content.
      * @param theUrl
@@ -76,7 +73,7 @@ DataTypeConverter.prototype = (function () {
         return this._fields;
     };//EndFunction.*/
 
-    var _processRow = function(row) {
+    /*var _processRow = function(row) {
         //Avoid empty rows
         if (typeof row === 'undefined') return;
 
@@ -102,11 +99,11 @@ DataTypeConverter.prototype = (function () {
         }
 
         this._numOfRows++;
-    };//EndFunction.
+    };//EndFunction.*/
 
     var _analyseDataTypes = function(fields) {
-        _arrUtil.iteratorOverKeys(fields, function(field) {
-            var max = _arrUtil.findMinMax(field._inferredTypes, function (curval, lastval) {
+        ArrayUtils.IteratorOverKeys(fields, function(field) {
+            var max = ArrayUtils.FindMinMax(field._inferredTypes, function (curval, lastval) {
                 return curval > lastval;
             });
             field.type = max.key;
@@ -150,7 +147,7 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.OBJECT;
 
         //Try to parse the float.
-        var isnumber = _dataTypesUtils.filterFloat(value);
+        var isnumber = DataTypesUtils.FilterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             //if (-90.0 <= isnumber && isnumber <= 90.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)
@@ -167,7 +164,7 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.NUMBER;
         }
 
-        var _date = _dataTypesUtils.filterDate(value);
+        var _date = DataTypesUtils.FilterDate(value);
         if (isNaN(_date) == false)
             return DataTypeConverter.TYPES.DATETIME;
 
@@ -190,7 +187,7 @@ DataTypeConverter.prototype = (function () {
             if (fieldKey == '*') {
                 var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
-                _arrUtil.iteratorOverKeys(item, function (value, key) {
+                ArrayUtils.IteratorOverKeys(item, function (value, key) {
                     var curKey = sProcessedKeys + "," + key;
                     var _value = callback(value, key, curKey, numOfRows);
                     item[key] = _value;
@@ -260,17 +257,17 @@ DataTypeConverter.prototype = (function () {
                 if (fieldKey == '*') {
                     var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
-                    _arrUtil.iteratorOverKeys(item, function (item, key) {
+                    ArrayUtils.IteratorOverKeys(item, function (item, key) {
                         var inferredType = _processInferType(item);
                         var curKey = sProcessedKeys + "," + key;
 
-                        var fieldType = _arrUtil.testAndSet(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
+                        var fieldType = ArrayUtils.TestAndSet(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
-                        _arrUtil.testAndIncrement(fieldType._inferredTypes, inferredType.name);
+                        ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)
-                            _arrUtil.testAndIncrement(fieldType._inferredValues, item);
+                            ArrayUtils.TestAndIncrement(fieldType._inferredValues, item);
                         if (inferredType === DataTypeConverter.TYPES.LATITUDE || inferredType === DataTypeConverter.TYPES.LONGITUDE)
-                            _arrUtil.testAndIncrement(fieldType._inferredTypes, DataTypeConverter.TYPES.NUMBER);
+                            ArrayUtils.TestAndIncrement(fieldType._inferredTypes, DataTypeConverter.TYPES.NUMBER);
 
                     });
 
@@ -293,7 +290,7 @@ DataTypeConverter.prototype = (function () {
 
             //Data quality.
             var quality = { homogeneity: 1 };
-            _arrUtil.iteratorOverKeys(fieldsType, function(fieldType) {
+            ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
                 quality.homogeneity *= fieldType.typeConfidence;
             });
 
