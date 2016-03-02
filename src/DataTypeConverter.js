@@ -175,6 +175,43 @@ DataTypeConverter.prototype = (function () {
         return DataTypeConverter.TYPES.TEXT;
     };//EndFunction.
 
+    var jsonTraverse = function(json, fieldKeys, callback) {
+        var stack = [];
+        var numOfRows = 0;
+        stack.push({ item: json, fieldKeyIndex: 0 });
+
+        while (stack.length > 0) {
+            var stackTask = stack.pop();
+            var item = stackTask.item;
+            var fieldKeyIndex = stackTask.fieldKeyIndex;
+            var fieldKey = fieldKeys[fieldKeyIndex];
+
+            //Test fieldKey Value.
+            if (fieldKey == '*') {
+                var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
+
+                _arrUtil.iteratorOverKeys(item, function (value, key) {
+                    var curKey = sProcessedKeys + "," + key;
+                    var _value = callback(value, key, curKey, numOfRows);
+                    item[key] = _value;
+                });
+
+                numOfRows++;
+                continue;
+            }
+
+            var jsonSubtree = item[fieldKey];
+            if (Array.isArray(jsonSubtree)) { //It is an array.
+                for (var j=0; j<jsonSubtree.length; j++) {
+                    var jsonItem = jsonSubtree[j];
+                    stack.push({ item: jsonItem, fieldKeyIndex: fieldKeyIndex+1 });
+                }//EndForJ.
+            } else {
+                stack.push({ item: jsonSubtree, fieldKeyIndex: fieldKeyIndex+1 });
+            }
+        }//EndWhile.
+    };//EndFunction.
+
     return {
         constructor: DataTypeConverter,
 
@@ -184,19 +221,20 @@ DataTypeConverter.prototype = (function () {
          * @param json
          * @param path Format: field1->field2->field3
          */
-        convert: function (json, fieldKeys) {
-            this._fields = [];
-            for (var i=0; i<path.length; i++) {
-                var fieldKey = fieldKeys[i];
-                this._fields.push({ name: fieldKey });
+        convert: function (metadata) {
+            debugger;
+            jsonTraverse(metadata.dataset, metadata.fieldKeys, function(value, key, traversedKeys, rowIndex) {
+                var inferredType = metadata.types[traversedKeys];
 
-                var jsonLevel = json[fieldKey];
-                if (Array.isArray(jsonLevel)) { //It is an array.
-
-                } else {//It is a value.
-
+                if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name) {
+                    var number = parseFloat(value);
+                    return  isNaN(number) ? value : number;
                 }
-            }//EndFor.
+
+                return value;
+            });
+
+           return metadata;
         },//EndFunction.
 
         /**
@@ -259,7 +297,7 @@ DataTypeConverter.prototype = (function () {
                 quality.homogeneity *= fieldType.typeConfidence;
             });
 
-            return { types: fieldsType, qualityIndex: quality };
+            return { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality };
         },//EndFunction.
 
         inferDataTypes: function (jsonRows) {
