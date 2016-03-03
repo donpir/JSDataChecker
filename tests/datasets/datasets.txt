@@ -5,5 +5,10 @@ quality: good quality dataset
 ----------------------------------------------------------------------
 name: dataset02.csv 
 description: contains data about road maintenance in Dublin.
-quality: poor dataset, has bad formatted finantial costs.
+quality: poor dataset, has bad formatted financial costs.
+----------------------------------------------------------------------
+name: dataset04.csv
+description:
+quality:
+original link:
 ----------------------------------------------------------------------

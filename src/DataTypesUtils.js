@@ -22,10 +22,24 @@
 function DataTypesUtils() {}
 
 DataTypesUtils.FilterDate = function (value) {
+    //year-month.
     if (/^[0-9][0-9][0-9][0-9]\-[0-9][0-9]$/.test(value)) {
         var year = parseInt(value.substring(0, 4));
         var month = parseInt(value.substring(5));
         return new Date(year, month);
+    }
+
+    if (/^[0-9]{2}(\-|\/)[0-9]{2}(\-|\/)[0-9]{4} [0-9]{2}:[0-9]{2}$/.test(value)) {
+        var sday = value.substring(0, 2);
+        var smonth = value.substring(3,5);
+        var syear = value.substring(6, 10);
+
+        var day = parseInt(sday);
+        var month = parseInt(smonth);
+        var year = parseInt(syear);
+
+        var _date = new Date(year, month, day);
+        return _date;
     }
 
     var patt = new RegExp("[^0-9\-Tt:]");

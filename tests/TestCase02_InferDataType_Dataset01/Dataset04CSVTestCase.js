@@ -63,6 +63,7 @@ function runTests(textualContent) {
 
         //Type checking.
         AssertType(analysisResults, "records,CODICE", DataTypeConverter.TYPES.TEXT.name);
+        AssertType(analysisResults, "records,DATA", DataTypeConverter.TYPES.DATETIME.name);
 
     });
 
