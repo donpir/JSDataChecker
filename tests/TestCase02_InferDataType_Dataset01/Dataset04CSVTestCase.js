@@ -62,7 +62,7 @@ function runTests(textualContent) {
         var analysisResults = analyser.inferJsonDataType(jsonDataset, path);
 
         //Type checking.
-        AssertType(analysisResults, "records,CODICE", DataTypeConverter.TYPES.NUMBER.name);
+        AssertType(analysisResults, "records,CODICE", DataTypeConverter.TYPES.TEXT.name);
 
     });
 
