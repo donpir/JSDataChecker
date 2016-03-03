@@ -146,6 +146,11 @@ DataTypeConverter.prototype = (function () {
         if (typeof value === 'object')
             return DataTypeConverter.TYPES.OBJECT;
 
+        //If the value starts with a zero and contains all numbers, it is
+        //inferred as textual content.
+        if (/^0[0-9]*$/.test(value))
+            return DataTypeConverter.TYPES.TEXT;
+
         //Try to parse the float.
         var isnumber = DataTypesUtils.FilterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.
