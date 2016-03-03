@@ -275,6 +275,9 @@ DataTypeConverter.prototype = (function () {
             var fieldsType = [];
             var numOfRows = 0;
 
+            if (typeof fieldKeys == 'undefined')
+                throw "IllegalArgumentException: undefined json path to analyse.";
+
             //Insert the first item (json root) within the stack.
             stack.push({ item: json, fieldKeyIndex: 0 });
 

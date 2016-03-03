@@ -3,10 +3,10 @@
     <title>Validator of data type recognition from data.gov.uk</title>
     <script type="text/javascript" src="../../src/DataTypesUtils.js"></script>
     <script type="text/javascript" src="../../src/ArrayUtils.js"></script>
-    <script type="text/javascript" src="../../src/ckan/ckan.js"></script>
-    <script type="text/javascript" src="../../src/ckan/ODSApi.js"></script>
+    <script type="text/javascript" src="../../src/ODPlatforms/ckan.js"></script>
+    <script type="text/javascript" src="../../src/ODPlatforms/ODSApi.js"></script>
 
-    <script type="text/javascript" src="../../src/oldsrc/DataTypeAnalyser.js"></script>
+    <script type="text/javascript" src="../../src/DataTypeConverter.js"></script>
 </head>
 <body>
 
@@ -34,19 +34,22 @@
         }//EndFunction.
 
         function receiveDataset(dataset) {
-            var analyser = new DataTypeAnalyser();
-            var _calculatedFields = analyser.inferDataTypes(dataset.rows);
+            var analyser = new DataTypeConverter();
+            var path = [ "rows", "*" ];
+            var _calculatedFields = analyser.inferJsonDataType(dataset, path);
             var _existingFields = dataset.fields;
 
             var _arrUtil = new ArrayUtils();
             var _dtUtils = new DataTypesUtils();
 
-            _arrUtil.iteratorOverKeys(_existingFields, function(item) {
-                var key = item.name;
+            //This piece of code compares the types inferred by the library
+            //against the types declared by the source dataset.
+            ArrayUtils.IteratorOverKeys(_existingFields, function(item) {
+                var key = path[0] + "," + item.name;
                 var type = item.type;
                 var _dataset = dataset;
 
-                var calculatedField = _calculatedFields[key];
+                var calculatedField = _calculatedFields.types[key];
                 if (typeof calculatedField === 'undefined') {
                     debugger;
                     return;
@@ -54,16 +57,16 @@
                 var calculatedType = calculatedField.type;
 
                 if (type == 'text') {
-                    if (calculatedType != DataTypeAnalyser.TYPES.TEXT.name &&
-                        calculatedType != DataTypeAnalyser.TYPES.CONST.name &&
-                        calculatedType != DataTypeAnalyser.TYPES.CATEGORY.name) debugger;
+                    if (calculatedType != DataTypeConverter.TYPES.TEXT.name &&
+                        calculatedType != DataTypeConverter.TYPES.CONST.name &&
+                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name) debugger;
 
                 } else if (type == 'int' || type == 'double') {
-                    if (calculatedType != DataTypeAnalyser.TYPES.NUMBER.name &&
-                            calculatedType != DataTypeAnalyser.TYPES.PERCENTAGE.name) debugger;
+                    if (calculatedType != DataTypeConverter.TYPES.NUMBER.name &&
+                            calculatedType != DataTypeConverter.TYPES.PERCENTAGE.name) debugger;
 
                 } else if (type == 'geo_point_2d' || type == 'geo_shape' || type == 'file') {
-                    if (calculatedType != DataTypeAnalyser.TYPES.OBJECT.name) debugger;
+                    if (calculatedType != DataTypeConverter.TYPES.OBJECT.name) debugger;
 
                 } else
                     debugger;
