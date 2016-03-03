@@ -20,5 +20,8 @@
     "polymer": "Polymer/polymer#1.2.0",
     "qunit": "~1.22.0"
   },
+  "dependencies": {
+    "csvjson": "0.1.0"
+  },
   "private": true
 }

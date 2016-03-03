@@ -37,11 +37,11 @@ function runTests(textualContent) {
 
     QUnit.test("CSVReader Split TestCase", function(assert) {
         var line = "\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line, ',');
+        var values = csvjson.Split(line, ',');
         assert.equal(values.length, 2, "The line has the correct number of values");
 
         var line = "Hello,\"2,23\",\"5,5\"";
-        var values = CSVReader.Split(line, ',');
+        var values = csvjson.Split(line, ',');
         assert.equal(values.length, 3, "The line has the correct number of values");
     });
 
@@ -51,14 +51,14 @@ function runTests(textualContent) {
         //Infer the SEPARATOR.
         try {
             var rows = dataset.split(/\r\n?/);
-            var separator = CSVReader.RecogniseCSVSeparator(rows);
+            var separator = csvjson.RecogniseCSVSeparator(rows);
             assert.equal(separator, ',', "CSV Separator ; recognized");
         } catch (err) {
             assert.failed;
         }
 
         //Read the CSV Content.
-        var reader = new CSVReader();
+        var reader = new csvjson();
         var jsonDataset = reader.read(dataset);
 
         assert.notEqual(jsonDataset, null, "Dataset correctly read.");

@@ -1,8 +1,10 @@
 <html>
 <head>
+
+    <script type="text/javascript" src="../bower_components/csvjson/csvjson.min.js"></script>
+
     <script type="text/javascript" src="../src/ArrayUtils.js"></script>
     <script type="text/javascript" src="../src/DataTypesUtils.js"></script>
-    <script type="text/javascript" src="../src/CSVReader.js"></script>
     <script type="text/javascript" src="../src/DataTypeConverter.js"></script>
 
     <link rel="import" href="../bower_components/polymer/polymer.html">
@@ -95,7 +97,7 @@
             console.log("update function.");
             var _arrUtils = new ArrayUtils();
 
-            var reader = new CSVReader();
+            var reader = new csvjson();
             var jsonDataset = reader.read(csvContent);
 
             var _converter = new DataTypeConverter();

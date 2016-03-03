@@ -41,14 +41,14 @@ function runTests(textualContent) {
         //Infer the SEPARATOR.
         try {
             var rows = dataset.split(/\r\n?/);
-            var separator = CSVReader.RecogniseCSVSeparator(rows);
+            var separator = csvjson.RecogniseCSVSeparator(rows);
             assert.equal(separator, ';', "CSV Separator ; recognized");
         } catch (err) {
             assert.failed;
         }
 
         //Read the CSV Content.
-        var reader = new CSVReader();
+        var reader = new csvjson();
         var jsonDataset = reader.read(dataset);
 
     });
