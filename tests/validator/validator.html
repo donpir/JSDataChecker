@@ -42,6 +42,11 @@
             var _arrUtil = new ArrayUtils();
             var _dtUtils = new DataTypesUtils();
 
+            var libraryTypeMismatches = 0;
+
+            console.log("----------------------------------------")
+            console.log("Dataset completed: " + dataset.id);
+
             //This piece of code compares the types inferred by the library
             //against the types declared by the source dataset.
             ArrayUtils.IteratorOverKeys(_existingFields, function(item) {
@@ -51,7 +56,8 @@
 
                 var calculatedField = _calculatedFields.types[key];
                 if (typeof calculatedField === 'undefined') {
-                    debugger;
+                    //libraryTypeMismatches++;
+                    //debugger;
                     return;
                 }
                 var calculatedType = calculatedField.type;
@@ -59,22 +65,34 @@
                 if (type == 'text') {
                     if (calculatedType != DataTypeConverter.TYPES.TEXT.name &&
                         calculatedType != DataTypeConverter.TYPES.CONST.name &&
-                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name) debugger;
+                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name) {
+                        libraryTypeMismatches++;
+                        debugger;
+                    }
 
                 } else if (type == 'int' || type == 'double') {
                     if (calculatedType != DataTypeConverter.TYPES.NUMBER.name &&
-                            calculatedType != DataTypeConverter.TYPES.PERCENTAGE.name) debugger;
+                            calculatedType != DataTypeConverter.TYPES.PERCENTAGE.name) {
+                        libraryTypeMismatches++;
+                        debugger;
+                    }
 
                 } else if (type == 'geo_point_2d' || type == 'geo_shape' || type == 'file') {
-                    if (calculatedType != DataTypeConverter.TYPES.OBJECT.name) debugger;
+                    if (calculatedType != DataTypeConverter.TYPES.OBJECT.name) {
+                        libraryTypeMismatches++;
+                        debugger;
+                    }
 
-                } else
+                } else {
+                    libraryTypeMismatches++;
                     debugger;
+                }
 
             });
 
-            console.log("Dataset completed: " + dataset.id);
-            debugger;
+
+            console.log("Rows: " + dataset.rows.length + " Cols: " + dataset.fields.length + " TypeMismatches: " + libraryTypeMismatches);
+            //debugger;
         }//EndFunction.
 
     </script>

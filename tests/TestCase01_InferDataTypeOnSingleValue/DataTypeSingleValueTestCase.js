@@ -13,6 +13,10 @@ QUnit.test( "TestDate", function( assert ) {
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.TEXT, "Text /" + value + "/ correctly recognized.");
 
+    var value = "0";
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.TYPES.NUMBER, "Text /" + value + "/ correctly recognized.");
+
     var value = "02/03/2016 18:57";
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.DATETIME, "Text /" + value + "/ correctly recognized.");

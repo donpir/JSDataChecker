@@ -26,18 +26,27 @@ function DataTypeConverter() {
 
 DataTypeConverter.TYPES = {
     TEXT        : { value: 0, name: "TEXT" },
-    NUMBER      : { value: 1, name: "NUMBER" },
-    PERCENTAGE  : { value: 2, name: "PERCENTAGE" },
+    CODE        : { value: 1, name: "CODE"},
 
-    LATITUDE    : { value: 3, name: "LATITUDE" },
-    LONGITUDE   : { value: 4, name: "LONGITUDE" },
+    NUMBER      : { value: 2, name: "NUMBER" },
+    OBJECT      : { value: 3, name: "OBJECT" },
+
+
     BOOL        : { value: 5, name: "BOOL"},
     CONST       : { value: 6, name: "CONST" },
     CATEGORY    : { value: 7, name: "CATEGORY" },
 
     DATETIME    : { value: 8, name: "DATETIME" },
-    OBJECT      : { value: 100, name: "OBJECT" },
-    NULL        : { value: 101, name: "NULL" }
+
+
+
+    EMPTY       : { value: 101, name: "NULL" }
+};
+
+DataTypeConverter.SUBTYPES = {
+    PERCENTAGE  : { value: 1000, name: "PERCENTAGE" },
+    LATITUDE    : { value: 1001, name: "LATITUDE" },
+    LONGITUDE   : { value: 1002, name: "LONGITUDE" }
 };
 
 DataTypeConverter.prototype = (function () {
@@ -103,6 +112,17 @@ DataTypeConverter.prototype = (function () {
 
     var _analyseDataTypes = function(fields) {
         ArrayUtils.IteratorOverKeys(fields, function(field) {
+            if (field._inferredTypes[DataTypeConverter.TYPES.CODE.name]) {
+                var confidence = field._inferredTypes[DataTypeConverter.TYPES.CODE.name] / field.numOfItems;
+                var _numericalInferredType = field._inferredTypes[DataTypeConverter.TYPES.NUMBER.name];
+                if (typeof _numericalInferredType != 'undefined') confidence += _numericalInferredType / field.numOfItems;
+
+                field.type = DataTypeConverter.TYPES.CODE.name;
+                field.typeConfidence = confidence;
+                return;
+            }
+
+
             var max = ArrayUtils.FindMinMax(field._inferredTypes, function (curval, lastval) {
                 return curval > lastval;
             });
@@ -141,15 +161,15 @@ DataTypeConverter.prototype = (function () {
         //value = value.toLocaleString();
 
         if (value === null || typeof value == 'undefined')
-            return DataTypeConverter.TYPES.NULL;
+            return DataTypeConverter.TYPES.EMPTY;
 
         if (typeof value === 'object')
             return DataTypeConverter.TYPES.OBJECT;
 
         //If the value starts with a zero and contains all numbers, it is
         //inferred as textual content.
-        if (/^0[0-9]*$/.test(value))
-            return DataTypeConverter.TYPES.TEXT;
+        if (/^0[0-9]+$/.test(value))
+            return DataTypeConverter.TYPES.CODE;
 
         //Try to parse the float.
         var isnumber = DataTypesUtils.FilterFloat(value);
@@ -305,8 +325,8 @@ DataTypeConverter.prototype = (function () {
                         ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)
                             ArrayUtils.TestAndIncrement(fieldType._inferredValues, item);
-                        if (inferredType === DataTypeConverter.TYPES.LATITUDE || inferredType === DataTypeConverter.TYPES.LONGITUDE)
-                            ArrayUtils.TestAndIncrement(fieldType._inferredTypes, DataTypeConverter.TYPES.NUMBER);
+                        //if (inferredType === DataTypeConverter.TYPES.LATITUDE || inferredType === DataTypeConverter.TYPES.LONGITUDE)
+                        //    ArrayUtils.TestAndIncrement(fieldType._inferredTypes, DataTypeConverter.TYPES.NUMBER);
 
                     });
 
