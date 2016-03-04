@@ -12,3 +12,5 @@ description:
 quality:
 original link:
 ----------------------------------------------------------------------
+name: dataset05.csv
+original link: https://data.issy.com/explore/dataset/parkings/export/?disjunctive.gestionnaire&disjunctive.commune&disjunctive.type_de_parking&sort=type

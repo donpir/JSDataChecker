@@ -65,7 +65,8 @@
                 if (type == 'text') {
                     if (calculatedType != DataTypeConverter.TYPES.TEXT.name &&
                         calculatedType != DataTypeConverter.TYPES.CONST.name &&
-                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name) {
+                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name &&
+                        calculatedType != DataTypeConverter.TYPES.CODE.name) {
                         libraryTypeMismatches++;
                         debugger;
                     }

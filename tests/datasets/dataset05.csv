@@ -1,0 +1,70 @@
+Geo Point;Payant;GESTIONNAIRE;LOCALISATION;COMMUNE;NOM DU PARKING;TYPE DE PARKING;TYPE;DSP;NOMBRE DE PLACES;HAUTEUR MAXIMUM;HORAIRES;WEB
+48.8263722052, 2.191042652;OUI;INDIGO;12 rue de Sèvres;VILLE D'AVRAY;Square Malglaive;Surface;;NON;31;;;
+48.827169206, 2.18897008234;OUI;INDIGO;Rue de Saint Cloud côté pair à l'angle avec la rue de Sèvres;VILLE D'AVRAY;Square André Maningue;Surface;Horodateur;NON;15;;;
+48.8150740957, 2.15751476591;NON;ONF;Carrefour de Fausse Repose;VILLE D'AVRAY;Fausse repose;Surface;;NON;0;;;
+48.821371819, 2.22770282603;OUI;INDIGO;Rue Marcel Allégot;MEUDON;Marcel Allégot;Surface;;NON;20;;;
+48.8346491598, 2.22270811388;OUI;QPARK;Route de Saint Cloud;SEVRES;Ile de Monsieur Nord;Surface;Enclos;OUI;67;;24h/24;
+48.8338315311, 2.25714967581;OUI;INDIGO;Place Abel Gance et Avenue du stade Pierre de Coubertin;BOULOGNE-BILLANCOURT;Point du Jour;Souterrain;Enclos;OUI;525;1,90 m;24h/24;
+48.8181999897, 2.15076904387;NON;ONF;Carrefour de la Porte Verte;VILLE D'AVRAY;Porte Verte;Surface;;NON;0;;;
+48.8242143595, 2.23730566599;OUI;INDIGO;Pont Daydé;BOULOGNE-BILLANCOURT;Pont Daydé;Souterrain;Enclos;OUI;595;;;
+48.830774909, 2.22907054244;OUI;INDIGO;82 rue de Sèvres (quai Alphonse-Le-Gallo);BOULOGNE-BILLANCOURT;Pont de Sèvres ou Sous Préfecture;Souterrain;;NON;600;;;
+48.8210766386, 2.17374544206;NON;ONF;Route des Cerisiers;VILLE D'AVRAY;Forêt de Fausses Reposes;Surface;;NON;0;;;
+48.8294849968, 2.26269139033;OUI;QPARK;7 rue Rouget de L'Isle;ISSY-LES-MOULINEAUX;Val de Seine;Semi-enterré;Enclos;OUI;297;1,95 m;Entrée : 24h/24 - Sortie 24h/24;
+48.8079740581, 2.23540167902;OUI;INDIGO;Rue Terre Neuve;MEUDON;Terre Neuve;Surface;;;33;;;
+48.8238217165, 2.17135491079;NON;;Carrefour Thierry;VILLE D'AVRAY;Carrefour Thierry;Surface;0;;;;;
+48.8150740957, 2.15751476591;NON;;Carrefour de Fausse Repose;VILLE D'AVRAY;Fausse repose;Surface;0;;;;;
+48.8465320081, 2.23639420471;OUI;QPARK;7 ter rue du Parchamp;BOULOGNE-BILLANCOURT;Parchamp;Souterrain;Enclos;OUI;300;2,90 m au -1 et 1,90 m au -2 et -3;De 7h à 22h. 7j/7;
+48.8248454299, 2.27389428117;OUI;INDIGO;60 rue du Général Leclerc;ISSY-LES-MOULINEAUX;Hôtel de Ville;Souterrain;Enclos;OUI;270;;De 7h à 12h. 7j/7;
+48.8057277532, 2.18662628503;NON;GPSO;4 rue du Colonel Marchand;CHAVILLE;Le Muguet;Surface;;NON;10;;;
+48.823666118, 2.21134761012;OUI;QPARK;9 avenue de l'Europe;SEVRES;Théâtre - Europe;Semi-enterré;Enclos;OUI;369;1,95 m;24h/24;
+48.8125584528, 2.19226664266;OUI;SPL SEINE OUEST AMENAGEMENT;925 avenue Roger Salengro;CHAVILLE;Atrium;Souterrain;Enclos;OUI;131;;;
+48.8270903817, 2.27833312336;OUI;INDIGO;19 rue Vaudetard;ISSY-LES-MOULINEAUX;Corentin Celton;Souterrain;Enclos;OUI;187;;De 7h à 22h du lundi au samedi. De 7h à 13h le dimanche.;
+48.8261533641, 2.20000526378;OUI;QPARK;Rue Riocreux;SEVRES;Riocreux;Surface;;NON;18;;;
+48.8258793966, 2.21819441973;OUI;QPARK;39-41 Grande Rue;SEVRES;Des Cents Gardes;Souterrain;Horodateur;OUI;118;;;
+48.8265447688, 2.22484462114;OUI;SEMISEVRES;6-10 rue Troyon;SEVRES;De la Voye;Souterrain;;NON;108;;;
+48.8260363788, 2.20095615622;OUI;QPARK;Rue de Ville d'Avray;SEVRES;Brancas;Surface;;NON;17;;;
+48.7985301813, 2.18858816542;NON;GPSO;Rue Jean Jaurès;CHAVILLE;Jean Jaurès;Surface;;NON;15;;;
+48.7875839526, 2.22882572494;OUI;INDIGO;Rue Bernard Delpuech;MEUDON;Place Centrale, Meudon La Forêt;Souterrain;Enclos;OUI;106;;24h/24;
+48.8238217165, 2.17135491079;NON;ONF;Carrefour Thierry;VILLE D'AVRAY;Carrefour Thierry;Surface;;NON;0;;;
+48.8219960632, 2.23192275447;OUI;INDIGO;Rue Henri Savignac;MEUDON;Brimborion;Surface;;NON;40;;;
+48.8231464577, 2.16595772001;NON;;Carrefour de l'Etoile Royale;VILLE D'AVRAY;Etoile Royale;Surface;0;;;;;
+48.8271060406, 2.17479273952;NON;;Route de l'Impératrice;VILLE D'AVRAY;Impératrice;Surface;0;;;;;
+48.8356917, 2.2312161;OUI;Zenpark;178 rue Gallieni;BOULOGNE-BILLANCOURT;Parking Boulogne - Gallieni Silly;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;http://zenpark.com/parkings/boulogne-gallieni-silly
+48.8138178, 2.1938945;OUI;Yespark;3 rue de la Fontaine Henri IV;CHAVILLE;Parking Chaville Rive Droite;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;https://www.yespark.fr/parkings/chaville-rive-droite
+48.8235682633, 2.2096562508;OUI;QPARK;4 avenue de l'Europe;SEVRES;Marché Saint Romain;Souterrain;Horodateur;OUI;37;;;
+48.8216315637, 2.28779671766;OUI;SPL SEINE OUEST AMENAGEMENT;Rue Antoine Frataci;VANVES;Marché;Semi-enterré;Enclos;OUI;90;;;
+48.8135974102, 2.23611997287;OUI;INDIGO;15 Boulevard des Nations Unies;MEUDON;Parking du Centre d'Art et de Culture;Surface;Horodateur;OUI;25;;;
+48.8359837306, 2.24123414365;OUI;QPARK;Rue Gallieni et 24 bis avenue André Morizet;BOULOGNE-BILLANCOURT;Hôtel de Ville;Souterrain;Enclos;OUI;584;1,90 m;De 7h à 22h du lundi au samedi. Fermé le dimanche.;
+48.8231464577, 2.16595772001;NON;ONF;Carrefour de l'Etoile Royale;VILLE D'AVRAY;Etoile Royale;Surface;;NON;0;;;
+48.8073515327, 2.23726580995;OUI;INDIGO;Rue de Baudreuil;MEUDON;Baudreuil;Surface;;NON;23;;;
+48.8253464473, 2.2579008986;OUI;INDIGO;169 Bis quai de Stalingrad;ISSY-LES-MOULINEAUX;Ile Saint Germain;Surface;;NON;220;1,90 m;24h/24 et 7j/7;
+48.8263839658, 2.1890981135;OUI;INDIGO;Place Charles de Gaulle;VILLE D'AVRAY;Parking de l'Eglise;Surface;Horodateur;NON;0;;;
+48.8088199447, 2.18999511619;OUI;VILLE;27-29 rue de Stalingrad;CHAVILLE;Stalingrad;Souterrain;;NON;44;;;
+48.8275686797, 2.18877299246;OUI;INDIGO;5 Rue de Saint Cloud;VILLE D'AVRAY;Fontaine du Roy;Semi-enterré;;OUI;69;;De 7h à 21h. 7j/7;
+48.8221586757, 2.18222293861;NON;;Rue de Versailles;VILLE D'AVRAY;Versailles;Surface;0;;;;;
+48.827169206, 2.18897008234;OUI;;Rue de Saint Cloud côté pair à l'angle avec la rue de Sèvres;VILLE D'AVRAY;Square André Maningue;Surface;15;;;;;
+48.8336893, 2.2478033;OUI;YesPark;80 rue Marcel Dassault;BOULOGNE-BILLANCOURT;Parking Parc des Princes;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;https://www.yespark.fr/parkings/parc-princes
+48.8297311, 2.2476656;OUI;Zenpark;7 rue Molière;BOULOGNE-BILLANCOURT;Parking Boulogne - Point-du-Jour;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;http://zenpark.com/parkings/boulogne-point-du-jour
+48.8222627, 2.2064193;OUI;Yespark;124 Grande Rue;SEVRES;Parking Marché Saint Romain;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;https://www.yespark.fr/parkings/marche-saint-romain-sevres
+48.837213403, 2.23954099324;OUI;INDIGO;Rue dAguesseau et Rue Le Corbusier;BOULOGNE-BILLANCOURT;Passages de lHôtel-de-ville;Souterrain;;NON;600;;;
+48.8291894916, 2.22488742948;OUI;QPARK;Route de Saint Cloud;SEVRES;Ile de Monsieur Sud;Surface;Enclos;OUI;147;;24h/24;
+48.8305035546, 2.26549354059;OUI;INDIGO;56 Rue Camille Desmoulins;ISSY-LES-MOULINEAUX;Camille Desmoulins;Semi-enterré;;NON;176;1,90 m;Lundi au vendredi de 7h à 22h;
+48.8377510965, 2.24267889318;OUI;INDIGO;20 quater, rue de la Belle-Feuille;BOULOGNE-BILLANCOURT;Belle-Feuille;Souterrain;Enclos;OUI;287;;De 7h à 00h du lundi au samedi. Fermé le dimanche sauf en cas d'événements sportifs ou culturels.;
+48.8210766386, 2.17374544206;NON;;Route des Cerisiers;VILLE D'AVRAY;Forêt de Fausses Reposes;Surface;0;;;;;
+48.821735994, 2.20613183145;OUI;QPARK;Place Gabriel Péri;SEVRES;Gallardon;Semi-enterré;Enclos;OUI;58;1,90 m;De 7h à 21h. 7j/7;
+48.8271060406, 2.17479273952;NON;ONF;Route de l'Impératrice;VILLE D'AVRAY;Impératrice;Surface;;NON;0;;;
+48.8294050394, 2.22360458526;OUI;QPARK;Route de Saint Cloud;SEVRES;Manufacture;Surface;Enclos;OUI;63;;24h/24;
+48.8087118158, 2.18955460619;NON;VILLE;47 rue de Stalingrad;CHAVILLE;Stalingrad 2;Surface;;NON;15;;;
+48.831741927, 2.24155727377;OUI;INDIGO;150 rue du Vieux Pont de Sèvres;BOULOGNE-BILLANCOURT;Marché de Billancourt;Souterrain;Enclos;OUI;210;1,90 m;;
+48.8167447836, 2.19170794176;NON;GPSO;Rue des Mortes Fontaines;CHAVILLE;Mortes Fontaines;Surface;;NON;9;;;
+48.8309045492, 2.24020798134;OUI;INDIGO;12 bis et 14, rue Heyrault;BOULOGNE-BILLANCOURT;Heyrault (abonnés);Souterrain;Enclos;OUI;98;1,90 m;24h/24;
+48.8264580973, 2.23270830022;OUI;INDIGO;55 Cours de l'Ile Seguin;BOULOGNE-BILLANCOURT;Cours de l'Ile Seguin;Souterrain;Enclos;OUI;602;1,90 m;De 7h à 21h - 7j/7;
+48.8207973738, 2.2880091481;OUI;SPL SEINE OUEST AMENAGEMENT;Rue Jacques Cabourg;VANVES;Cabourg;Semi-enterré;Enclos;OUI;75;;24h/24;
+48.8221586757, 2.18222293861;NON;ONF;Rue de Versailles;VILLE D'AVRAY;Versailles;Surface;;NON;0;;;
+48.8126017513, 2.18767039031;OUI;GPSO;Rue Carnot;CHAVILLE;Carnot;Surface;;NON;49;;;
+48.8263722052, 2.191042652;OUI;;12 rue de Sèvres;VILLE D'AVRAY;Square Malglaive;Surface;31;;;;;
+48.8263839658, 2.1890981135;OUI;;Place Charles de Gaulle;VILLE D'AVRAY;Parking de l'Eglise;Surface;0;;;;;
+48.8330625, 2.2568174;OUI;Zenpark;130 rue Les Enfants du Paradis;BOULOGNE-BILLANCOURT;Parking Paris - Porte de Saint-Cloud;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;http://zenpark.com/parkings/paris-porte-saint-cloud
+48.81576183, 2.26519554;OUI;Bepark;68, rue Rabelais;ISSY-LES-MOULINEAUX;Parking Issy - Louise Michel;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;https://www.bepark.eu/fr/parking/france/issy-les-moulineaux/rue-rabelais/272
+48.8226388, 2.2573726;OUI;Yespark;26 rue Jean-Jacques Rousseau;ISSY-LES-MOULINEAUX;Parking Issy;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;https://www.yespark.fr/parkings/issy
+48.8231252, 2.2483237;OUI;Zenpark;8 Allée Louis Bonnier;ISSY-LES-MOULINEAUX;Parking Issy-les-Moulineaux - Ile Saint-Germain;Parking partagé;;;;;24 heures sur 24 - 7 jours sur 7;http://zenpark.com/parkings/issy-ile-saint-germain
