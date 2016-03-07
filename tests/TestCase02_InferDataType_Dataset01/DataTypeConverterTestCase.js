@@ -36,7 +36,7 @@ function runTests(jsonTextualContent) {
         //Column.
         var key = "records,fields,cbc_charte_bonne_conduite";
         var actualType = infos.types[key].type;
-        var expectedType = DataTypeConverter.TYPES.CATEGORY.name;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         //Column.
@@ -48,7 +48,7 @@ function runTests(jsonTextualContent) {
         //Column.
         var key = "records,fields,preteur";
         var actualType = infos.types[key].type;
-        var expectedType = DataTypeConverter.TYPES.CATEGORY.name;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         //Column.
@@ -60,7 +60,7 @@ function runTests(jsonTextualContent) {
         //Column.
         var key = "records,fields,type";
         var actualType = infos.types[key].type;
-        var expectedType = DataTypeConverter.TYPES.CATEGORY.name;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         debugger;

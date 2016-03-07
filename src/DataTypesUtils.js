@@ -92,10 +92,7 @@ DataTypesUtils.FilterDate = function (value, dtDate) {
         return dtDate;
     }
 
-    var patt = new RegExp("[^0-9\-Tt:]");
-    var isDate = !patt.test(value);
-    if (isDate == false) return NaN;
-    return Date.parse(value);
+    return null;
 };//EndFunction.
 
 /**

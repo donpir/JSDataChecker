@@ -25,8 +25,11 @@ QUnit.test( "TestDate", function( assert ) {
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.DATETIME, "Text /" + value + "/ correctly recognized.");
 
-    var value = "2016-03-07T11:26:17+00:00"
+    var value = "2016-03-07T11:26:17+00:00";
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.DATETIME, "Text /" + value + "/ correctly recognized.");
 
+    var value = "92077-02";
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.TYPES.TEXT, "Text /" + value + "/ correctly recognized.");
 });

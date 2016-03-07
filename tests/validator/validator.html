@@ -45,8 +45,8 @@
             var libraryTypeMismatches = 0;
             var libraryCorrectTypeMismatches = 0;
 
-            console.log("----------------------------------------")
-            console.log("Dataset completed: " + dataset.id);
+            //console.log("----------------------------------------")
+            //console.log("Dataset completed: " + dataset.id);
 
             //This piece of code compares the types inferred by the library
             //against the types declared by the source dataset.
@@ -63,20 +63,22 @@
                 }
                 var calculatedType = calculatedField.type;
 
+                if (calculatedType == DataTypeConverter.TYPES.NUMBER.name && calculatedField.typeConfidence == 1) {
+                    libraryCorrectTypeMismatches++
+                    return;
+                } else if ((type != 'date' && type != 'datetime') && calculatedType == DataTypeConverter.TYPES.DATETIME.name && calculatedField.typeConfidence == 1) {
+                    libraryCorrectTypeMismatches++
+                    debugger;
+                    return;
+                }
+
                 if (type == 'text') {
                     if (calculatedType != DataTypeConverter.TYPES.TEXT.name &&
                         calculatedType != DataTypeConverter.TYPES.CONST.name &&
-                        calculatedType != DataTypeConverter.TYPES.CATEGORY.name &&
                         calculatedType != DataTypeConverter.TYPES.CODE.name) {
 
-                        if (calculatedType == DataTypeConverter.TYPES.NUMBER.name && calculatedField.typeConfidence == 1) {
-                            libraryCorrectTypeMismatches++
-                        } else
-                        {
                             libraryTypeMismatches++;
                             debugger;
-                        }
-
                     }
 
                 } else if (type == 'int' || type == 'double') {
@@ -91,16 +93,24 @@
                         libraryTypeMismatches++;
                         debugger;
                     }
-
+                } else if (type == 'date' || type == 'datetime') {
+                    if (calculatedType != DataTypeConverter.TYPES.DATETIME.name) {
+                        libraryTypeMismatches++;
+                        debugger;
+                    }
                 } else {
+
                     libraryTypeMismatches++;
                     debugger;
                 }
 
             });
 
-
-            console.log("Rows: " + dataset.rows.length + " Cols: " + dataset.fields.length + " TypeMismatches: " + libraryTypeMismatches + " Correct Type Mismatches: " + libraryCorrectTypeMismatches);
+            console.log("id:" + dataset.id + ";"
+                       + "Rows: " + dataset.rows.length + ";"
+                       + "Cols: " + dataset.fields.length + ";"
+                       + "TypeMismatches: " + libraryTypeMismatches + ";"
+                       + "Correct Type Mismatches: " + libraryCorrectTypeMismatches + ";");
             //debugger;
         }//EndFunction.
 

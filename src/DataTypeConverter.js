@@ -140,13 +140,13 @@ DataTypeConverter.prototype = (function () {
              }*/
 
             //BOOLEAN.
-            var numOfValues = Object.keys(field._inferredValues).length;
+            /*var numOfValues = Object.keys(field._inferredValues).length;
             if (field.type === DataTypeConverter.TYPES.TEXT.name) {
                 //if (numOfValues == 1) field.type = DataTypeConverter.TYPES.CONST.name;
                 //else if (numOfValues == 2) field.type = DataTypeConverter.TYPES.BOOL.name;
                 //else
                 if (numOfValues < field.numOfItems * 0.20) field.type = DataTypeConverter.TYPES.CATEGORY.name;
-            }
+            }*/
         });
     };//EndFunction.
 
