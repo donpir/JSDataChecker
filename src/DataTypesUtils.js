@@ -21,25 +21,75 @@
 
 function DataTypesUtils() {}
 
-DataTypesUtils.FilterDate = function (value) {
+DataTypesUtils.FilterTime = function (value) {
+    var expTime = /^[0-9]{2}:[0-9]{2}(:[0-9]{2})?(\+[0-9]{2}:[0-9]{2})?$/;
+    if (expTime.test(value) == false) return null;
+
+    var splitted = value.split(/[:|\+]/);
+
+    var expNumber = /^[0-9]{2}$/;
+    var HH = expNumber.test(splitted[0]) ? parseInt(splitted[0]) : 0;
+    var MM = expNumber.test(splitted[1]) ? parseInt(splitted[1]) : 0;
+    var SS = splitted.length >=3 && expNumber.test(splitted[2]) ? parseInt(splitted[2]) : 0;
+
+    var dt = new Date();
+    dt.setHours(HH);
+    dt.setMinutes(MM);
+    dt.setSeconds(SS);
+    return dt;
+}//EndFunction.
+
+DataTypesUtils.FilterDateTime = function (value) {
+    var _dtSplitted = value.split(/[T|\s]/);
+    if (_dtSplitted.length == 2) {
+        var dtTime = DataTypesUtils.FilterTime(_dtSplitted[1]);
+        if (dtTime == null) return null;
+
+        var dtDateTime = DataTypesUtils.FilterDate(_dtSplitted[0], dtTime);
+        return dtDateTime;
+    } else {
+        var dtDate = DataTypesUtils.FilterDate(value);
+        if (dtDate != null) return dtDate;
+
+        var dtTime = DataTypesUtils.FilterTime(value);
+        return dtTime;
+    }
+}//EndFunction.
+
+DataTypesUtils.FilterDate = function (value, dtDate) {
+    if (dtDate == null) dtDate = new Date();
+
     //year-month.
     if (/^[0-9][0-9][0-9][0-9]\-[0-9][0-9]$/.test(value)) {
         var year = parseInt(value.substring(0, 4));
         var month = parseInt(value.substring(5));
-        return new Date(year, month);
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        return dtDate;
     }
 
-    if (/^[0-9]{2}(\-|\/)[0-9]{2}(\-|\/)[0-9]{4} [0-9]{2}:[0-9]{2}$/.test(value)) {
-        var sday = value.substring(0, 2);
-        var smonth = value.substring(3,5);
-        var syear = value.substring(6, 10);
+    var expDate = /^[0-9]{4}(\-|\/)[0-9]{2}((\-|\/)[0-9]{2})?$/;
+    if (expDate.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[0]);
+        var month = parseInt(splitted[1]);
+        var day = splitted.length == 3 ? parseInt(splitted[2]) : 0;
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        dtDate.setDate(day);
+        return dtDate;
+    }
 
-        var day = parseInt(sday);
-        var month = parseInt(smonth);
-        var year = parseInt(syear);
-
-        var _date = new Date(year, month, day);
-        return _date;
+    expDate = /^[0-9]{2}(\-|\/)[0-9]{2}(\-|\/)[0-9]{4}$/;
+    if (expDate.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[2]);
+        var month = parseInt(splitted[1]);
+        var day = parseInt(splitted[0]);
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        dtDate.setDate(day);
+        return dtDate;
     }
 
     var patt = new RegExp("[^0-9\-Tt:]");

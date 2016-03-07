@@ -43,6 +43,7 @@
             var _dtUtils = new DataTypesUtils();
 
             var libraryTypeMismatches = 0;
+            var libraryCorrectTypeMismatches = 0;
 
             console.log("----------------------------------------")
             console.log("Dataset completed: " + dataset.id);
@@ -67,8 +68,15 @@
                         calculatedType != DataTypeConverter.TYPES.CONST.name &&
                         calculatedType != DataTypeConverter.TYPES.CATEGORY.name &&
                         calculatedType != DataTypeConverter.TYPES.CODE.name) {
-                        libraryTypeMismatches++;
-                        debugger;
+
+                        if (calculatedType == DataTypeConverter.TYPES.NUMBER.name && calculatedField.typeConfidence == 1) {
+                            libraryCorrectTypeMismatches++
+                        } else
+                        {
+                            libraryTypeMismatches++;
+                            debugger;
+                        }
+
                     }
 
                 } else if (type == 'int' || type == 'double') {
@@ -92,7 +100,7 @@
             });
 
 
-            console.log("Rows: " + dataset.rows.length + " Cols: " + dataset.fields.length + " TypeMismatches: " + libraryTypeMismatches);
+            console.log("Rows: " + dataset.rows.length + " Cols: " + dataset.fields.length + " TypeMismatches: " + libraryTypeMismatches + " Correct Type Mismatches: " + libraryCorrectTypeMismatches);
             //debugger;
         }//EndFunction.
 

@@ -189,8 +189,8 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.NUMBER;
         }
 
-        var _date = DataTypesUtils.FilterDate(value);
-        if (isNaN(_date) == false)
+        var _date = DataTypesUtils.FilterDateTime(value);
+        if (isNaN(_date) == false && _date != null)
             return DataTypeConverter.TYPES.DATETIME;
 
 
