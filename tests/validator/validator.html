@@ -18,8 +18,17 @@
         //api.listDatasets("https://data.gov.uk/api/3/action/package_search"); //data.gov.uk
         //api.listDatasets("https://data.gov.ie/api/3/action/package_search"); //data.gov.ie
 
+        //var baseurl = "https://data.issy.com";
+        //var baseurl = "http://opendata.paris.fr";
+        //var baseurl = "http://data.corse.fr/";
+        //var baseurl = "http://data.enseignementsup-recherche.gouv.fr";
+
+        var baseurl = "http://data.iledefrance.fr/";
+
+
+
         var api = new ODSApi();
-        api.listDatasets("https://data.issy.com", receiveDatasets);
+        api.listDatasets(baseurl, receiveDatasets);
 
         //api.requestDataset("https://data.issy.com",
         //        { datasetid: "les-principales-actualites-du-moment-a-issy-les-moulineaux",
@@ -29,7 +38,7 @@
         function receiveDatasets(datasets) {
             for (var i=0; i<datasets.length; i++) {
                 var dataset = datasets[i];
-                api.requestDataset("https://data.issy.com", dataset, receiveDataset);
+                api.requestDataset(baseurl, dataset, receiveDataset);
             }//EndFor.
         }//EndFunction.
 
@@ -45,6 +54,10 @@
             var libraryTypeMismatches = 0;
             var libraryCorrectTypeMismatches = 0;
 
+            var _errMotivation = "";
+
+            var isDebuggerActivated = false;
+
             //console.log("----------------------------------------")
             //console.log("Dataset completed: " + dataset.id);
 
@@ -54,6 +67,11 @@
                 var key = path[0] + "," + item.name;
                 var type = item.type;
                 var _dataset = dataset;
+
+
+                var extract = function(originalType, calculatedType) {
+                    return calculatedType.name + " [" + originalType + "] => " + calculatedType.type + "(" + Math.round(calculatedType.typeConfidence * 100) / 100 + ")#";
+                };
 
                 var calculatedField = _calculatedFields.types[key];
                 if (typeof calculatedField === 'undefined') {
@@ -65,10 +83,11 @@
 
                 if (calculatedType == DataTypeConverter.TYPES.NUMBER.name && calculatedField.typeConfidence == 1) {
                     libraryCorrectTypeMismatches++
+                    if (isDebuggerActivated) debugger;
                     return;
                 } else if ((type != 'date' && type != 'datetime') && calculatedType == DataTypeConverter.TYPES.DATETIME.name && calculatedField.typeConfidence == 1) {
                     libraryCorrectTypeMismatches++
-                    debugger;
+                    if (isDebuggerActivated) debugger;
                     return;
                 }
 
@@ -76,32 +95,35 @@
                     if (calculatedType != DataTypeConverter.TYPES.TEXT.name &&
                         calculatedType != DataTypeConverter.TYPES.CONST.name &&
                         calculatedType != DataTypeConverter.TYPES.CODE.name) {
-
+                            _errMotivation += extract(type, calculatedField);
                             libraryTypeMismatches++;
-                            debugger;
+                        if (isDebuggerActivated) debugger;
                     }
 
                 } else if (type == 'int' || type == 'double') {
                     if (calculatedType != DataTypeConverter.TYPES.NUMBER.name &&
                             calculatedType != DataTypeConverter.TYPES.PERCENTAGE.name) {
+                        _errMotivation += extract(type, calculatedField);
                         libraryTypeMismatches++;
-                        debugger;
+                        if (isDebuggerActivated) debugger;
                     }
 
                 } else if (type == 'geo_point_2d' || type == 'geo_shape' || type == 'file') {
                     if (calculatedType != DataTypeConverter.TYPES.OBJECT.name) {
+                        _errMotivation += extract(type, calculatedField);
                         libraryTypeMismatches++;
-                        debugger;
+                        if (isDebuggerActivated) debugger;
                     }
                 } else if (type == 'date' || type == 'datetime') {
                     if (calculatedType != DataTypeConverter.TYPES.DATETIME.name) {
+                        _errMotivation += extract(type, calculatedField);
                         libraryTypeMismatches++;
-                        debugger;
+                        if (isDebuggerActivated) debugger;
                     }
                 } else {
-
+                    _errMotivation += extract(type, calculatedField);
                     libraryTypeMismatches++;
-                    debugger;
+                    if (isDebuggerActivated) debugger;
                 }
 
             });
@@ -110,7 +132,8 @@
                        + "Rows: " + dataset.rows.length + ";"
                        + "Cols: " + dataset.fields.length + ";"
                        + "TypeMismatches: " + libraryTypeMismatches + ";"
-                       + "Correct Type Mismatches: " + libraryCorrectTypeMismatches + ";");
+                       + "Correct Type Mismatches: " + libraryCorrectTypeMismatches + ";"
+                       + "Motivation: " + _errMotivation );
             //debugger;
         }//EndFunction.
 

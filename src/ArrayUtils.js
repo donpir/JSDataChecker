@@ -76,7 +76,7 @@ ArrayUtils.IteratorOverKeys = function (arr, callback) {
 ArrayUtils.FindMinMax = function (arr, fncompare) {
     var result = null;
     for (var key in arr) {
-        if (result == null || fncompare.call(arr[key], result.value))
+        if (result == null || fncompare(arr[key], result.value))
             result = { index: -1, key: key, value: arr[key] };
     }
 

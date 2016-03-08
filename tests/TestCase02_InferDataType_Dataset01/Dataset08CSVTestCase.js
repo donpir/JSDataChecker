@@ -30,12 +30,12 @@ var httpGetAsync = function(theUrl, callback) {
     xhttp.send(null);
 };//EndFunction.
 
-httpGetAsync("../datasets/dataset04.csv", runTests);
+httpGetAsync("../datasets/dataset08.csv", runTests);
 
 function runTests(textualContent) {
     var dataset = textualContent
 
-    QUnit.test( "Dataset04", function( assert ) {
+    QUnit.test( "Dataset08", function( assert ) {
         var AssertType = function (analysisResults, key, expectedTypeName) {
             var actualType = analysisResults.types[key].type;
             var expectedType = expectedTypeName;
@@ -62,9 +62,8 @@ function runTests(textualContent) {
         var analysisResults = analyser.inferJsonDataType(jsonDataset, path);
 
         //Type checking.
-        AssertType(analysisResults, "records,CODICE", DataTypeConverter.TYPES.CODE.name);
-        AssertType(analysisResults, "records,DATA", DataTypeConverter.TYPES.DATETIME.name);
-
+        AssertType(analysisResults, "records,Téléphone", DataTypeConverter.TYPES.TEXT.name);
+        debugger;
     });
 
 }//EndTestSuite.
