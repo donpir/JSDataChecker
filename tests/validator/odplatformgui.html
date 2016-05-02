@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="../../src/odplatforms/CKAN.js"></script>
+</head>
+<body>
+
+    <h3>Open Data Portal - Statistical Analysis</h3>
+
+    Open Data Portal URL: <input id="txtPortalURL" type="text" style="width: 75%;"
+                        value="http://ckan.comune.prato.it">
+    <input id="btnLoad" type="button" value="Load dataset" onclick="btnLoad_OnClick();">
+
+    <br/>
+
+
+    <script type="text/javascript">
+
+        function btnLoad_OnClick() {
+            var valPlatformUrl = document.getElementById('txtPortalURL').value;
+
+            var ckanapi = new CKANApi();
+
+            ckanapi.listDatasets(valPlatformUrl, RetrievedListOfDataset);
+        };
+
+        function RetrievedListOfDataset(datasets) {
+            console.log("loaded");
+            debugger;
+        };
+
+    </script>
+
+</body>
+</html>

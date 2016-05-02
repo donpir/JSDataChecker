@@ -27,19 +27,18 @@ function CKANApi() {
 
 CKANApi.prototype = (function() {
 
-    var _arrUtil = new ArrayUtils();
-
     var httpGetAsync = function(theUrl, callback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status == 200)
-                _processListOfDataset(xhttp.responseText);
+                callback(xhttp.responseText);
         };
         xhttp.open("GET", theUrl, true);//true for asynchronous.
         xhttp.send(null);
     };//EndFunction.
 
-    var _processListOfDataset = function(requestContent) {
+    /*var _processListOfDataset = function(requestContent) {
+
         var jsonContent = JSON.parse(requestContent);
         if (jsonContent.success == false) return;
         var ckanresults = jsonContent.result.results;
@@ -65,14 +64,38 @@ CKANApi.prototype = (function() {
         }//EndFor.
 
         console.log("...");
+    };//EndFunction.*/
+
+    var _retrieveListOfDatasets = function(baseUrl, userCallback) {
+        httpGetAsync(baseUrl, function(responseText) {
+            var datasets = [];
+
+            var jsonResponse = JSON.parse(responseText);
+            var jsonResults = jsonResponse.result.results;
+
+            for (var i=0; i<jsonResults.length; i++) {
+                var jsonResult = jsonResults[i];
+                var jsonResources = jsonResult.resources;
+
+                for (var j=0; j<jsonResources.length; j++) {
+                    var jsonResource = jsonResources[j];
+
+                    datasets.push({ format: jsonResource.format, url: jsonResource.url });
+                }//EndForJ.
+            }//EndForI.
+
+            userCallback(datasets);
+        });
     };//EndFunction.
 
     //PUBLIC CLASS CONTENT.
     return {
         constructor: CKANApi,
 
-        listDatasets: function (urlBase) {
-            httpGetAsync(urlBase);
+        listDatasets: function (baseUrl, userCallback) {
+            var apiListDataset = baseUrl + "/api/3/action/package_search" + "?rows=10000";
+            _retrieveListOfDatasets(apiListDataset, userCallback)
+
         }//EndFunction.
     };
 

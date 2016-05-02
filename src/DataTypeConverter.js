@@ -197,6 +197,11 @@ DataTypeConverter.prototype = (function () {
         return DataTypeConverter.TYPES.TEXT;
     };//EndFunction.
 
+    var _processInferSubType = function(value) {
+        //Try to parse lat/lng.
+
+    };//EndFunction.
+
     var jsonTraverse = function(json, fieldKeys, callback) {
         var stack = [];
         var numOfRows = 0;
