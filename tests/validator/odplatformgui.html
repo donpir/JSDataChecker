@@ -2,6 +2,9 @@
 <head>
     <title></title>
 
+    <script type="text/javascript" src="../../bower_components/csvjson/csvjson.js"></script>
+
+    <!-- JSDataChecker Library -->
     <script type="text/javascript" src="../../src/ArrayUtils.js"></script>
     <script type="text/javascript" src="../../src/odplatforms/CKAN.js"></script>
     <script type="text/javascript" src="../../src/odplatforms/ODStatistics.js"></script>
@@ -35,30 +38,78 @@
 
     <h4>Datasets Content Analysis</h4>
 
+    <table>
+        <tr><td>Total # Datasets Analysed:</td><td id="totDatasets"></td></tr>
+
+        <tr><td>Total # Rows Processed:</td><td id="totRows"></td></tr>
+        <tr><td>Max Rows per Dataset:</td><td id="maxRows"></td></tr>
+        <tr><td>Min Rows per Dataset:</td><td id="minRows"></td></tr>
+
+        <tr><td>Total # Cols Processed:</td><td id="totCols"></td></tr>
+        <tr><td>Max Cols per Dataset:</td><td id="maxCols"></td></tr>
+        <tr><td>Min Cols per Dataset:</td><td id="minCols"></td></tr>
+    </table>
 
     <script type="text/javascript">
 
         var ckanapi = new CKANApi();
-        var stats = new ODStatistics();
+        var statapi = new ODStatistics();
+
+        var _stat = null;
+        var _datasets = null;
 
         function btnLoad_OnClick() {
             var valPlatformUrl = document.getElementById('txtPortalURL').value;
 
             ckanapi.listDatasets(valPlatformUrl, RetrievedListOfDataset);
-        };
+
+
+        };//EndFunction.
 
         function RetrievedListOfDataset(datasets) {
-            var stat = stats.analyse(datasets);
+            _stat = statapi.analyse(datasets);
+            _datasets =  datasets;
 
             //Initialises the data-table with datasets formats.
             //This must be done via source code because the array fields are dinamic.
             var $tblFormats = document.querySelector("#tblFormats");
-            $tblFormats.data = stat.formats;
+            $tblFormats.data = _stat.formats;
             $tblFormats.refreshPage(1);
 
+            RetrieveAllDatasetsContent(datasets, _stat);
+        };//EndFunction.
 
-            debugger;
-        };
+
+        function RetrieveAllDatasetsContent(datasets, _stat) {
+            var valPlatformUrl = document.getElementById('txtPortalURL').value;
+
+            //Perform statistics for all datasets.
+            for (var i=0; i<15; i++) {
+                var ds = datasets[i];
+
+                if (ds.format.toLowerCase() === "csv") {//CSV.
+                    var dsContent = ckanapi.retrieveDataset(valPlatformUrl, ds.id, function(dataset) {
+
+                        //debugger;
+                        _stat.totDatasetsAnalysed++;
+                        _stat = statapi.analyseDataset(dataset, _stat);
+                        document.querySelector("#totDatasets").innerHTML = _stat.totDatasetsAnalysed + "/" + _stat.numOfDatasets;
+
+                        document.querySelector("#totRows").innerHTML = _stat.totRows;
+                        document.querySelector("#maxRows").innerHTML = _stat.maxRowsPerDataset;
+                        document.querySelector("#minRows").innerHTML = _stat.minRowsPerDataset;
+
+                        document.querySelector("#totCols").innerHTML = _stat.totCols;
+                        document.querySelector("#maxCols").innerHTML = _stat.maxColsPerDataset;
+                        document.querySelector("#minCols").innerHTML = _stat.minColsPerDataset;
+                    });
+                }
+
+            }//EndForI.
+
+
+
+        };//EndFunction.
 
     </script>
 

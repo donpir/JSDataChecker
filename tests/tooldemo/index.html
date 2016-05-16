@@ -86,11 +86,11 @@
         };//EndFunction.
 
         function btnLoad_OnClick() {
-        //Take the url from the input text.
-        var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
+            //Take the url from the input text.
+            var valDatasetUrl = document.getElementById('txtDatasetUrl').value;
 
-        //Call Ajax to load the dataset content.
-        httpGetAsync(valDatasetUrl, update);
+            //Call Ajax to load the dataset content.
+            httpGetAsync(valDatasetUrl, update);
         };//EndFunction.
 
         function update(csvContent) {

@@ -33,6 +33,10 @@ CKANApi.prototype = (function() {
             if (xhttp.readyState == 4 && xhttp.status == 200)
                 callback(xhttp.responseText);
         };
+        xhttp.onerror = function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log( 'The data failed to load :(' );
+            console.log(JSON.stringify(XMLHttpRequest));
+        };
         xhttp.open("GET", theUrl, true);//true for asynchronous.
         xhttp.send(null);
     };//EndFunction.
@@ -80,7 +84,7 @@ CKANApi.prototype = (function() {
                 for (var j=0; j<jsonResources.length; j++) {
                     var jsonResource = jsonResources[j];
 
-                    datasets.push({ format: jsonResource.format, url: jsonResource.url });
+                    datasets.push({ id: jsonResource.id, format: jsonResource.format, url: jsonResource.url });
                 }//EndForJ.
             }//EndForI.
 
@@ -95,8 +99,18 @@ CKANApi.prototype = (function() {
         listDatasets: function (baseUrl, userCallback) {
             var apiListDataset = baseUrl + "/api/3/action/package_search" + "?rows=10000";
             _retrieveListOfDatasets(apiListDataset, userCallback)
+        },//EndFunction.
 
-        }//EndFunction.
+        retrieveDataset: function (baseUrl, datasetId, userCallback) {
+            var linkDataset = baseUrl + "/api/action/datastore_search?resource_id=" + datasetId;
+            httpGetAsync(linkDataset, function(responseContent) {
+                var jsonResponseCKAN = JSON.parse(responseContent);
+                var numOfRows = jsonResponseCKAN.result.total;
+                var numOfCols = jsonResponseCKAN.result.fields.length;
+                var record = { original: jsonResponseCKAN, numOfRows: numOfRows, numOfCols: numOfCols };
+                userCallback(record);
+            });
+        }//EndFunction
     };
 
 })();

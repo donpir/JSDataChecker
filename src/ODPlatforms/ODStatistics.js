@@ -30,6 +30,10 @@ ODStatistics.prototype = (function() {
             if (xhttp.readyState == 4 && xhttp.status == 200)
                 callback(xhttp.responseText);
         };
+        xhttp.onerror = function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log( 'The data failed to load :(' );
+            console.log(JSON.stringify(XMLHttpRequest));
+        };
         xhttp.open("GET", theUrl, true);//true for asynchronous.
         xhttp.send(null);
     };//EndFunction.
@@ -38,6 +42,12 @@ ODStatistics.prototype = (function() {
 
     };//EndFunction.
 
+    /**
+     * Retrieves the formats of all datasets.
+     * @param datasets
+     * @returns {{}}
+     * @private
+     */
     var _analyseFormats = function(datasets) {
         var stats = {};
 
@@ -67,8 +77,44 @@ ODStatistics.prototype = (function() {
         return stats;
     };//EndFunction.
 
-    var _analyse = function(datasets) {
-        var stats = _analyseFormats(datasets);
+    /**
+     * Given a dataset in input it calculates statistics.
+     * @param dataset
+     * @private
+     */
+    var _analyseDataset = function(dataset, stats) {
+        if (typeof stats === 'undefined')
+            stats = {};
+
+        if (!stats.hasOwnProperty('totRows')) {
+            stats.totRows = 0;
+            stats.totCols = 0;
+            stats.maxRowsPerDataset = null;
+            stats.minRowsPerDataset = null;
+
+            stats.maxColsPerDataset = null;
+            stats.minColsPerDataset = null;
+
+            stats.totDatasetsAnalysed = 0;
+        }
+
+        console.log("numOfRows" + dataset.numOfRows);
+
+        stats.totRows += dataset.numOfRows;
+        stats.totCols += dataset.numOfCols;
+
+        if (stats.maxRowsPerDataset === null || dataset.numOfRows > stats.maxRowsPerDataset)
+            stats.maxRowsPerDataset = dataset.numOfRows;
+
+        if (stats.minRowsPerDataset === null || dataset.numOfRows < stats.minRowsPerDataset)
+            stats.minRowsPerDataset = dataset.numOfRows;
+
+        if (stats.maxColsPerDataset === null || dataset.numOfRows > stats.maxColsPerDataset)
+            stats.maxColsPerDataset = dataset.numOfCols;
+
+        if (stats.minColsPerDataset === null || dataset.numOfRows < stats.minColsPerDataset)
+            stats.minColsPerDataset = dataset.numOfCols;
+
         return stats;
     };//EndFunction.
 
@@ -76,7 +122,12 @@ ODStatistics.prototype = (function() {
         constructor: ODStatistics,
 
         analyse: function (datasets) {
-            return _analyse(datasets);
+            var stats = _analyseFormats(datasets); //Analyses the datasets formats.
+            return stats;
+        },//EndFunction.
+
+        analyseDataset: function (dataset, stats) {
+            return _analyseDataset(dataset, stats);
         }//EndFunction.
 
     };
