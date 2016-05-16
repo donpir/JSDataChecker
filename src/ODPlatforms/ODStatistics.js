@@ -38,14 +38,45 @@ ODStatistics.prototype = (function() {
 
     };//EndFunction.
 
+    var _analyseFormats = function(datasets) {
+        var stats = {};
+
+        stats.numOfDatasets = datasets.length;
+        stats.formats = [];
+
+        for (var i=0; i<datasets.length; i++) {
+            var dataset = datasets[i];
+
+            //Statistics on the datasets' formats.
+            ArrayUtils.TestAndIncrement(stats.formats, dataset.format);
+        }//EndForI.
+
+        //Calculates the formats percentages.
+        var tmpArrFormats = stats.formats;
+        stats.formats = [];
+
+        ArrayUtils.IteratorOverKeys(tmpArrFormats, function(item, property) {
+            var recordFormat = {};
+            recordFormat.name = property;
+            recordFormat.occurrance = item;
+            recordFormat.occurrancePercentage = (item / datasets.length) * 100;
+            recordFormat.occurrancePercentage = Math.round(recordFormat.occurrancePercentage * 100) / 100;
+            stats.formats.push(recordFormat);
+        });
+
+        return stats;
+    };//EndFunction.
+
+    var _analyse = function(datasets) {
+        var stats = _analyseFormats(datasets);
+        return stats;
+    };//EndFunction.
+
     return {
         constructor: ODStatistics,
 
         analyse: function (datasets) {
-            for (var i=0; i<datasets.length; i++) {
-                var dataset = datasets[i];
-
-            }//EndForI.
+            return _analyse(datasets);
         }//EndFunction.
 
     };

@@ -2,31 +2,61 @@
 <head>
     <title></title>
 
+    <script type="text/javascript" src="../../src/ArrayUtils.js"></script>
     <script type="text/javascript" src="../../src/odplatforms/CKAN.js"></script>
+    <script type="text/javascript" src="../../src/odplatforms/ODStatistics.js"></script>
+
+    <!-- POLYMER DEPENDENCY -->
+    <link rel="import" href="../../bower_components/polymer/polymer.html">
+    <script type="text/javascript" src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <link rel="import" href="../../bower_components/polywc/data-table/data-table.html">
+
 </head>
 <body>
 
     <h3>Open Data Portal - Statistical Analysis</h3>
 
     Open Data Portal URL: <input id="txtPortalURL" type="text" style="width: 75%;"
-                        value="http://ckan.comune.prato.it">
+                        value="https://data.dublinked.ie">
     <input id="btnLoad" type="button" value="Load dataset" onclick="btnLoad_OnClick();">
 
     <br/>
 
+    <h3>Statistics about Open Data Platform Provider</h3>
+
+    <h4>Dataset Formats</h4>
+
+
+    <data-table id="tblFormats" headers='["format", "# datasets", "% datasets"]'
+                fields='["name", "occurrance", "occurrancePercentage"]'
+                postfixes='["", "", "%"]'
+                show-pager></data-table>
+
+    <h4>Datasets Content Analysis</h4>
+
 
     <script type="text/javascript">
 
+        var ckanapi = new CKANApi();
+        var stats = new ODStatistics();
+
         function btnLoad_OnClick() {
             var valPlatformUrl = document.getElementById('txtPortalURL').value;
-
-            var ckanapi = new CKANApi();
 
             ckanapi.listDatasets(valPlatformUrl, RetrievedListOfDataset);
         };
 
         function RetrievedListOfDataset(datasets) {
-            console.log("loaded");
+            var stat = stats.analyse(datasets);
+
+            //Initialises the data-table with datasets formats.
+            //This must be done via source code because the array fields are dinamic.
+            var $tblFormats = document.querySelector("#tblFormats");
+            $tblFormats.data = stat.formats;
+            $tblFormats.refreshPage(1);
+
+
             debugger;
         };
 
