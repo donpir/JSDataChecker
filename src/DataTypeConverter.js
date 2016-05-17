@@ -353,12 +353,53 @@ DataTypeConverter.prototype = (function () {
             _analyseDataTypes(fieldsType);
 
             //Data quality.
-            var quality = { homogeneity: 1 };
+            var quality = { homogeneity: 1, completeness: 1, totalNullValues: 0, totalValues: 0 };
             ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
+                quality.totalValues += fieldType.numOfItems;
                 quality.homogeneity *= fieldType.typeConfidence;
+
+                fieldType.totalNullValues = 0;
+                if (fieldType._inferredTypes.hasOwnProperty(DataTypeConverter.TYPES.EMPTY.name)) {
+                    fieldType.totalNullValues = fieldType._inferredTypes[DataTypeConverter.TYPES.EMPTY.name];
+                    quality.totalNullValues += fieldType.totalNullValues;
+                }
+
+            });
+            quality.homogeneity = Math.round(quality.homogeneity * 100) / 100;
+            var totFullValues = quality.totalValues - quality.totalNullValues;
+            quality.completeness = Math.round(totFullValues / quality.totalValues * 100) / 100;
+
+            //Converts confidence to description.
+            var warningsTextual = "";
+            ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
+                fieldType.errorsDescription = "";
+
+                var description = "";
+
+                if (fieldType.typeConfidence < 1 || fieldType.totalNullValues > 0)
+                    description = "The field <" + fieldType.name + "> is a <" + fieldType.type + ">  ";
+
+                if (fieldType.typeConfidence < 1) {
+                    /*if (fieldType._inferredTypes.hasOwnProperty(DataTypeConverter.TYPES.EMPTY.name)) {
+                        var numNulls = fieldType._inferredTypes[DataTypeConverter.TYPES.EMPTY.name];
+                        if (typeof numNulls !== 'undefined' && numNulls > 0)
+                            description += " and has " + numNulls + " EMPTY values, ";
+                    }*/
+
+                    var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
+                    if (incorrect > 0)
+                        description += ", but " + incorrect + " values are not a " + fieldType.type;
+                }
+
+                if (fieldType.totalNullValues > 0) {
+                    description += "The column has " + fieldType.totalNullValues + " EMPTY values";
+                }
+
+                fieldType.errorsDescription = description;
+                warningsTextual += description;
             });
 
-            return { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality };
+            return { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality, warningsTextual: warningsTextual };
         },//EndFunction.
 
         /*inferDataTypes: function (jsonRows) {

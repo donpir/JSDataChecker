@@ -9,6 +9,9 @@
     <script type="text/javascript" src="../../src/odplatforms/CKAN.js"></script>
     <script type="text/javascript" src="../../src/odplatforms/ODStatistics.js"></script>
 
+    <script type="text/javascript" src="../../src/DataTypesUtils.js"></script>
+    <script type="text/javascript" src="../../src/DataTypeConverter.js"></script>
+
     <!-- POLYMER DEPENDENCY -->
     <link rel="import" href="../../bower_components/polymer/polymer.html">
     <script type="text/javascript" src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -34,6 +37,13 @@
     <data-table id="tblFormats" headers='["format", "# datasets", "% datasets"]'
                 fields='["name", "occurrance", "occurrancePercentage"]'
                 postfixes='["", "", "%"]'
+                show-pager></data-table>
+
+    <h4>Datasets Quality Analysis</h4>
+
+    <data-table id="tblQuality" headers='["Title", "#Cols", "#Rows", "Homogeneity", "Completeness", "Link", "Warnings"]'
+                fields='["title", "numOfCols", "numOfRows", "homogeneity", "completeness", "link", "warningsTextual" ]'
+                postfixes='["", "", "", "%", "%"]'
                 show-pager></data-table>
 
     <h4>Datasets Content Analysis</h4>
@@ -82,15 +92,35 @@
 
         function RetrieveAllDatasetsContent(datasets, _stat) {
             var valPlatformUrl = document.getElementById('txtPortalURL').value;
+            var $tblQualities = document.querySelector("#tblQuality");
+            _stat.datasets = [];
 
             //Perform statistics for all datasets.
             for (var i=0; i<15; i++) {
                 var ds = datasets[i];
 
                 if (ds.format.toLowerCase() === "csv") {//CSV.
+                    (function(ds){
                     var dsContent = ckanapi.retrieveDataset(valPlatformUrl, ds.id, function(dataset) {
+                        var _converter = new DataTypeConverter();
+                        var path = [ "records", "*" ];
+                        var processingResult = _converter.inferJsonDataType(dataset.original.result, path);
+                        var types = processingResult.types;
 
-                        //debugger;
+                        //dataset.typeAnalysis = processingResult;
+                        dataset.title = ds.name;
+                        dataset.homogeneity = processingResult.qualityIndex.homogeneity * 100;
+                        dataset.completeness = processingResult.qualityIndex.completeness * 100;
+                        dataset.link = ds.url; //"<a href='" + ds.url + "'>link</a>";
+                        dataset.warningsTextual = processingResult.warningsTextual;
+
+                        _stat.datasets.push(dataset);
+
+                        $tblQualities.data = _stat.datasets;
+                        $tblQualities.refreshPage(1);
+
+                        debugger;
+
                         _stat.totDatasetsAnalysed++;
                         _stat = statapi.analyseDataset(dataset, _stat);
                         document.querySelector("#totDatasets").innerHTML = _stat.totDatasetsAnalysed + "/" + _stat.numOfDatasets;
@@ -103,6 +133,7 @@
                         document.querySelector("#maxCols").innerHTML = _stat.maxColsPerDataset;
                         document.querySelector("#minCols").innerHTML = _stat.minColsPerDataset;
                     });
+                    })(ds);
                 }
 
             }//EndForI.

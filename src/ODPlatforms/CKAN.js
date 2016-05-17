@@ -83,8 +83,7 @@ CKANApi.prototype = (function() {
 
                 for (var j=0; j<jsonResources.length; j++) {
                     var jsonResource = jsonResources[j];
-
-                    datasets.push({ id: jsonResource.id, format: jsonResource.format, url: jsonResource.url });
+                    datasets.push({ id: jsonResource.id, name: jsonResource.name, format: jsonResource.format, url: jsonResource.url });
                 }//EndForJ.
             }//EndForI.
 
