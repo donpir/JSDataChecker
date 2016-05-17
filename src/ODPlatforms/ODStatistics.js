@@ -98,8 +98,6 @@ ODStatistics.prototype = (function() {
             stats.totDatasetsAnalysed = 0;
         }
 
-        console.log("numOfRows" + dataset.numOfRows);
-
         stats.totRows += dataset.numOfRows;
         stats.totCols += dataset.numOfCols;
 
@@ -109,11 +107,13 @@ ODStatistics.prototype = (function() {
         if (stats.minRowsPerDataset === null || dataset.numOfRows < stats.minRowsPerDataset)
             stats.minRowsPerDataset = dataset.numOfRows;
 
-        if (stats.maxColsPerDataset === null || dataset.numOfRows > stats.maxColsPerDataset)
+        if (stats.maxColsPerDataset === null || dataset.numOfCols > stats.maxColsPerDataset)
             stats.maxColsPerDataset = dataset.numOfCols;
 
-        if (stats.minColsPerDataset === null || dataset.numOfRows < stats.minColsPerDataset)
+        if (stats.minColsPerDataset === null || dataset.numOfCols < stats.minColsPerDataset)
             stats.minColsPerDataset = dataset.numOfCols;
+
+
 
         return stats;
     };//EndFunction.

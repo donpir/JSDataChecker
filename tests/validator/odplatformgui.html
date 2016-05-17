@@ -119,7 +119,6 @@
                         $tblQualities.data = _stat.datasets;
                         $tblQualities.refreshPage(1);
 
-                        debugger;
 
                         _stat.totDatasetsAnalysed++;
                         _stat = statapi.analyseDataset(dataset, _stat);
@@ -132,6 +131,8 @@
                         document.querySelector("#totCols").innerHTML = _stat.totCols;
                         document.querySelector("#maxCols").innerHTML = _stat.maxColsPerDataset;
                         document.querySelector("#minCols").innerHTML = _stat.minColsPerDataset;
+
+                        debugger;
                     });
                     })(ds);
                 }
