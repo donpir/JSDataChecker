@@ -376,8 +376,8 @@ DataTypeConverter.prototype = (function () {
 
                 var description = "";
 
-                if (fieldType.typeConfidence < 1 || fieldType.totalNullValues > 0)
-                    description = "The field <" + fieldType.name + "> is a <" + fieldType.type + ">  ";
+                //if (fieldType.typeConfidence < 1 || fieldType.totalNullValues > 0)
+                //    description = "The field <" + fieldType.name + "> is a <" + fieldType.type + ">,  ";
 
                 if (fieldType.typeConfidence < 1) {
                     /*if (fieldType._inferredTypes.hasOwnProperty(DataTypeConverter.TYPES.EMPTY.name)) {
@@ -387,13 +387,19 @@ DataTypeConverter.prototype = (function () {
                     }*/
 
                     var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
-                    if (incorrect > 0)
+                    if (incorrect > 0) {
+                        description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">  ";
                         description += ", but " + incorrect + " values are not a " + fieldType.type;
+                    }
                 }
 
                 if (fieldType.totalNullValues > 0) {
-                    description += "The column has " + fieldType.totalNullValues + " EMPTY values";
+                    description += "The column <" + fieldType.name + ">  has " + fieldType.totalNullValues + " EMPTY value";
+                    if (fieldType.totalNullValues > 1) description += "s";
                 }
+
+                if (description.length > 0)
+                    description += ".";
 
                 fieldType.errorsDescription = description;
                 warningsTextual += description;

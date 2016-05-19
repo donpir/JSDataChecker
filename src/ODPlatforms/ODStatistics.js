@@ -113,8 +113,6 @@ ODStatistics.prototype = (function() {
         if (stats.minColsPerDataset === null || dataset.numOfCols < stats.minColsPerDataset)
             stats.minColsPerDataset = dataset.numOfCols;
 
-
-
         return stats;
     };//EndFunction.
 

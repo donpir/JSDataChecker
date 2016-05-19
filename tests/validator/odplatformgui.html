@@ -41,7 +41,7 @@
 
     <h4>Datasets Quality Analysis</h4>
 
-    <data-table id="tblQuality" headers='["Title", "#Cols", "#Rows", "Homogeneity", "Completeness", "Link", "Warnings"]'
+    <data-table id="tblQuality" headers='["Dataset Title", "Number of Columns", "Number of Rows", "Homogeneity", "Completeness", "Link", "Warnings" ]'
                 fields='["title", "numOfCols", "numOfRows", "homogeneity", "completeness", "link", "warningsTextual" ]'
                 postfixes='["", "", "", "%", "%"]'
                 show-pager></data-table>
@@ -96,43 +96,50 @@
             _stat.datasets = [];
 
             //Perform statistics for all datasets.
-            for (var i=0; i<15; i++) {
+            for (var i=0; i<datasets.length; i++) {
                 var ds = datasets[i];
 
                 if (ds.format.toLowerCase() === "csv") {//CSV.
                     (function(ds){
                     var dsContent = ckanapi.retrieveDataset(valPlatformUrl, ds.id, function(dataset) {
-                        var _converter = new DataTypeConverter();
-                        var path = [ "records", "*" ];
-                        var processingResult = _converter.inferJsonDataType(dataset.original.result, path);
-                        var types = processingResult.types;
 
-                        //dataset.typeAnalysis = processingResult;
+                        //basic dataset info.
                         dataset.title = ds.name;
-                        dataset.homogeneity = processingResult.qualityIndex.homogeneity * 100;
-                        dataset.completeness = processingResult.qualityIndex.completeness * 100;
-                        dataset.link = ds.url; //"<a href='" + ds.url + "'>link</a>";
-                        dataset.warningsTextual = processingResult.warningsTextual;
+                        dataset.link = ds.pageUrl;
 
+                        if (dataset.error == true) {
+                            dataset.warningsTextual = "DATASET Access ERROR." + dataset.errorMessage;
+                        } else {
+                            //Provides info on the types.
+                            var _converter = new DataTypeConverter();
+                            var path = [ "records", "*" ];
+                            var processingResult = _converter.inferJsonDataType(dataset.original.result, path);
+                            var types = processingResult.types;
+
+                            dataset.homogeneity = Math.round(processingResult.qualityIndex.homogeneity * 100);
+                            dataset.completeness = Math.round(processingResult.qualityIndex.completeness * 100);
+                            dataset.warningsTextual = processingResult.warningsTextual;
+                        }
+
+                        //Updates the table.
                         _stat.datasets.push(dataset);
-
+                        _stat.totDatasetsAnalysed++;
                         $tblQualities.data = _stat.datasets;
                         $tblQualities.refreshPage(1);
 
+                        if (dataset.error == false) {
+                            _stat = statapi.analyseDataset(dataset, _stat);
+                            document.querySelector("#totDatasets").innerHTML = _stat.totDatasetsAnalysed + "/" + _stat.numOfDatasets;
 
-                        _stat.totDatasetsAnalysed++;
-                        _stat = statapi.analyseDataset(dataset, _stat);
-                        document.querySelector("#totDatasets").innerHTML = _stat.totDatasetsAnalysed + "/" + _stat.numOfDatasets;
+                            document.querySelector("#totRows").innerHTML = _stat.totRows;
+                            document.querySelector("#maxRows").innerHTML = _stat.maxRowsPerDataset;
+                            document.querySelector("#minRows").innerHTML = _stat.minRowsPerDataset;
 
-                        document.querySelector("#totRows").innerHTML = _stat.totRows;
-                        document.querySelector("#maxRows").innerHTML = _stat.maxRowsPerDataset;
-                        document.querySelector("#minRows").innerHTML = _stat.minRowsPerDataset;
-
-                        document.querySelector("#totCols").innerHTML = _stat.totCols;
-                        document.querySelector("#maxCols").innerHTML = _stat.maxColsPerDataset;
-                        document.querySelector("#minCols").innerHTML = _stat.minColsPerDataset;
-
-                        debugger;
+                            document.querySelector("#totCols").innerHTML = _stat.totCols;
+                            document.querySelector("#maxCols").innerHTML = _stat.maxColsPerDataset;
+                            document.querySelector("#minCols").innerHTML = _stat.minColsPerDataset;
+                        }
+                        //debugger;
                     });
                     })(ds);
                 }

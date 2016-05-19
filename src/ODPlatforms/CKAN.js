@@ -27,7 +27,7 @@ function CKANApi() {
 
 CKANApi.prototype = (function() {
 
-    var httpGetAsync = function(theUrl, callback) {
+    var httpGetAsync = function(theUrl, callback, errorCallback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status == 200)
@@ -35,7 +35,8 @@ CKANApi.prototype = (function() {
         };
         xhttp.onerror = function (XMLHttpRequest, textStatus, errorThrown) {
             console.log( 'The data failed to load :(' );
-            console.log(JSON.stringify(XMLHttpRequest));
+            if (typeof errorCallback !== 'undefined')
+                errorCallback("Check DataStoreAPI.");
         };
         xhttp.open("GET", theUrl, true);//true for asynchronous.
         xhttp.send(null);
@@ -83,7 +84,11 @@ CKANApi.prototype = (function() {
 
                 for (var j=0; j<jsonResources.length; j++) {
                     var jsonResource = jsonResources[j];
-                    datasets.push({ id: jsonResource.id, name: jsonResource.name, format: jsonResource.format, url: jsonResource.url });
+
+                    var idx = baseUrl.indexOf("/api");
+                    var pageUrl = baseUrl.substring(0, idx) + "/dataset/" + jsonResult.name + "/resource/" + jsonResource.id;
+                    datasets.push({ id: jsonResource.id, name: jsonResource.name, format: jsonResource.format,
+                        url: jsonResource.url, pageUrl: pageUrl });
                 }//EndForJ.
             }//EndForI.
 
@@ -106,7 +111,10 @@ CKANApi.prototype = (function() {
                 var jsonResponseCKAN = JSON.parse(responseContent);
                 var numOfRows = jsonResponseCKAN.result.total;
                 var numOfCols = jsonResponseCKAN.result.fields.length;
-                var record = { original: jsonResponseCKAN, numOfRows: numOfRows, numOfCols: numOfCols };
+                var record = { error: false, original: jsonResponseCKAN, numOfRows: numOfRows, numOfCols: numOfCols };
+                userCallback(record);
+            }, function (errMsg) {
+                var record = { error: true, errorMessage: errMsg };
                 userCallback(record);
             });
         }//EndFunction
