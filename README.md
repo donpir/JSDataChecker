@@ -6,3 +6,15 @@ In details, it analysis the json (specified paths) to infer the data type. In ad
 ## Documentation
 
 See wiki pages [here](https://github.com/donpir/JSDataChecker/wiki).
+
+## License 
+
+The library has released with the LGPL license [link here](http://www.gnu.org/licenses/lgpl.html).
+
+Briefly with this license:
+ 
+ - Freedom to modify and distribute modified copies of POLYWC-DATA-TABLE, distributing the source code and releasing it with the same LGPL license;
+ - You can dynamically (not statically) link POLYWC-DATA-TABLE library in a proprietary software, keeping the JS files as they are.
+  
+ 
+ 
