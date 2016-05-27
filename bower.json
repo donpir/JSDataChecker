@@ -6,7 +6,7 @@
     "'Donato Pirozzi <'donatopirozzi@gmail.com'>"
   ],
   "description": "Javascript library to read dataset content (e.g., Open Data), infer data types, give a data quality indicator and parse content",
-  "main": "jsdatachecker/jsdatachecker.js",
+  "main": "JSDataChecker/jsdatachecker.min.js",
   "license": "GPL",
   "ignore": [
     "**/.*",
