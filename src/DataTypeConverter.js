@@ -426,13 +426,14 @@ DataTypeConverter.prototype = (function () {
 
                     var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
                     if (incorrect > 0) {
-                        description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">  ";
-                        description += ", but " + incorrect + " values are not a " + fieldType.type;
+                        description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">";
+                        var verb = (incorrect == 1) ? " value is" : " values are";
+                        description += ", but " + incorrect + verb + " not a " + fieldType.type;
                     }
                 }
 
                 if (fieldType.totalNullValues > 0) {
-                    description += "The column <" + fieldType.name + ">  has " + fieldType.totalNullValues + " EMPTY value";
+                    description += "The column <" + fieldType.name + "> has " + fieldType.totalNullValues + " EMPTY value";
                     if (fieldType.totalNullValues > 1) description += "s";
                 }
 
