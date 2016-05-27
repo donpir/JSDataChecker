@@ -160,7 +160,7 @@ DataTypeConverter.prototype = (function () {
     var _processInferType = function(value) {
         //value = value.toLocaleString();
 
-        if (value === null || typeof value == 'undefined')
+        if (value === null || typeof value === 'undefined')
             return DataTypeConverter.TYPES.EMPTY;
 
         if (typeof value === 'object')
@@ -257,7 +257,20 @@ DataTypeConverter.prototype = (function () {
          * @param json
          * @param path Format: field1->field2->field3
          */
-        convert: function (metadata) {
+        cast: function(metadata, options) {
+            if (typeof options === 'undefined' || options == null)
+                options = { castThresholdConfidence: 1, castIfNull: false };
+            return this.convert(metadata, options);
+        },
+
+        /**
+         * It parses the json in input and converts the content
+         * in according to the inferred data types.
+         * @param json
+         * @param path Format: field1->field2->field3
+         * @deprecated
+         */
+        convert: function (metadata, options) {
             var lastRowIndex = 0;
             var isRowInvalid = false;
             var numOfRowsInvalid = 0;
@@ -267,6 +280,9 @@ DataTypeConverter.prototype = (function () {
 
             var datasetErrors = 0;
             var datasetMissingValues = 0;
+
+            if (typeof options === 'undefined' || options == null)
+                options = { castThresholdConfidence: 1, castIfNull: false };
 
             jsonTraverse(metadata.dataset, metadata.fieldKeys, function(value, key, traversedKeys, rowIndex) {
                 var inferredType = metadata.types[traversedKeys];
@@ -282,7 +298,9 @@ DataTypeConverter.prototype = (function () {
                     //datasetErrors++;
                 } //isRowInvalid = true;
 
-                if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name) {
+                //var isCast = !(options.castIfNull == false && inferredType.totalNullValues > 0);
+                var isCast = inferredType.typeConfidence >= options.castThresholdConfidence;
+                if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name && isCast) {
                     var number = parseFloat(value);
 
                     if (isNaN(number)) {
@@ -310,7 +328,7 @@ DataTypeConverter.prototype = (function () {
          */
         inferJsonDataType: function (json, fieldKeys) {
             var stack = [];
-            var fieldsType = [];
+            var fieldsType = {};
             var numOfRows = 0;
 
             if (typeof fieldKeys == 'undefined')
@@ -335,7 +353,7 @@ DataTypeConverter.prototype = (function () {
                         var inferredType = _processInferType(item);
                         var curKey = sProcessedKeys + ((sProcessedKeys.length == 0) ? "" : ",") + key;
 
-                        var fieldType = ArrayUtils.TestAndSet(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
+                        var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
                         ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)

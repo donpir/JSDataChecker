@@ -38,6 +38,14 @@ ArrayUtils.TestAndSet = function (arr, key, object) {
     return arr[key];
 };//EndFunction.
 
+ArrayUtils.TestAndInitializeKey = function (obj, key, value) {
+    if (typeof obj == 'undefined') return null;
+    if (typeof obj[key] == 'undefined')
+        obj[key] = value;
+
+    return obj[key];
+};//EndFunction.
+
 /***
  * It tests whether the array has the key, if not it insert it;
  * then increases the value by one unit.

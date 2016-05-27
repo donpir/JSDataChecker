@@ -1,0 +1,80 @@
+[{
+  "Strength": "8",
+  "Name": "Bird Man",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herobirdman.jpg",
+  "Lon": "14.794936",
+  "Intelligence": "7",
+  "Lat": "40.778066",
+  "_id": 1,
+  "Speed": "7"
+}, {
+  "Strength": "6",
+  "Name": "Lasso Boy",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herolassoboy.jpg",
+  "Lon": "14.594936",
+  "Intelligence": "8",
+  "Lat": "40.878066",
+  "_id": 2,
+  "Speed": "8"
+}, {
+  "Strength": null,
+  "Name": "Mini Girl",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herominigirl.jpg",
+  "Lon": " ",
+  "Lat": "40.578066",
+  "_id": 3,
+  "Speed": ""
+}, {
+  "Strength": "7",
+  "Name": "Rocket Woman",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herorocketwoman.jpg",
+  "Lon": "14.794936",
+  "Intelligence": "6",
+  "Lat": "40.478066",
+  "_id": 4,
+  "Speed": "9"
+}, {
+  "Strength": "8",
+  "Name": "Man Boy",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_heroromanboy.jpg",
+  "Lon": "14.294936",
+  "Intelligence": "8",
+  "Lat": "40.378066",
+  "_id": 5,
+  "Speed": "8"
+}, {
+  "Strength": "9",
+  "Name": "Star Man",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herostarman.jpg",
+  "Lon": "14.494936",
+  "Intelligence": "7",
+  "Lat": "40.278066",
+  "_id": 6,
+  "Speed": "7"
+}, {
+  "Strength": "6",
+  "Name": "Voltage Woman",
+  "Similarity": "unknown",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_herovoltagewoman.jpg",
+  "Lon": "14.694936",
+  "Intelligence": "7",
+  "Lat": "40.778066",
+  "_id": 7,
+  "Speed": "9"
+}, {
+  "Strength": "8",
+  "Name": "Angle Man",
+  "Similarity": "Renato",
+  "Photo": "https://flavorwire.files.wordpress.com/2012/05/28_heroangleman.jpg",
+  "Lon": "14.194936",
+  "Intelligence": "9",
+  "Lat": "40.678066",
+  "_id": 8,
+  "Speed": "6"
+}]
