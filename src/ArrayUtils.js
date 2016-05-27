@@ -60,6 +60,23 @@ ArrayUtils.TestAndIncrement = function (arr, key) {
     return arr;
 };//EndFunction.
 
+/***
+ * It converts the object to an array. It loops through the object
+ * keys/properties, retrieves the objects and pushes it in the array.
+ * @param obj
+ * @returns {Array}
+ */
+ArrayUtils.toFieldsArray = function (obj) {
+    var fields = [];
+
+    ArrayUtils.IteratorOverKeys(obj, function(field, key) {
+        field.key = key;
+        fields.push(field);
+    });
+
+    return fields;
+};//EndFunction.
+
 /**
  * Iterate over the key within the array arr. For each array
  * value it calls the callback function.

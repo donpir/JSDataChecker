@@ -30,6 +30,9 @@ function runTests(jsonTextualContent) {
         //Converts the dataset.
         var converted = _converter.cast(infos);
 
+        //It converts the "types" object to "array"
+        var arrFields = ArrayUtils.toFieldsArray(infos.types);
+
         debugger;
     });
 
