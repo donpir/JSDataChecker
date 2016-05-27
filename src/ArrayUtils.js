@@ -83,3 +83,9 @@ ArrayUtils.FindMinMax = function (arr, fncompare) {
     return result;
 }//EndFunction.
 
+ArrayUtils.isArray = function (arr) {
+    if (Array.isArray(arr))
+        return (arr.length > 0);
+    return false;
+}//EndFunction.
+

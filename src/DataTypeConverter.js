@@ -214,16 +214,25 @@ DataTypeConverter.prototype = (function () {
             var fieldKey = fieldKeys[fieldKeyIndex];
 
             //Test fieldKey Value.
-            if (fieldKey == '*') {
+            if (fieldKey == '*' && ArrayUtils.isArray(item) == false) {
                 var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
                 ArrayUtils.IteratorOverKeys(item, function (value, key) {
-                    var curKey = sProcessedKeys + "," + key;
+                    var curKey = sProcessedKeys + (sProcessedKeys.length > 0 ? "," : "")  + key;
                     var _value = callback(value, key, curKey, numOfRows);
                     item[key] = _value;
                 });
 
                 numOfRows++;
+                continue;
+            }
+
+            //It is an array, loops through its cells and pushes items within the stack.
+            if (fieldKey == '*' && ArrayUtils.isArray(item) == true) {
+                for (var j= 0, cell; j<item.length && (cell = item[j]); j++) {
+                    stack.push({item: cell, fieldKeyIndex: fieldKeyIndex});
+                    numOfRows++;
+                }
                 continue;
             }
 
@@ -291,8 +300,7 @@ DataTypeConverter.prototype = (function () {
             metadata.qualityIndex.notNullValues = (numOfValues - datasetMissingValues) / numOfValues;
             metadata.qualityIndex.errors = (numOfValues - datasetErrors) / numOfValues;
 
-            debugger;
-           return metadata;
+            return metadata;
         },//EndFunction.
 
         /**
@@ -318,12 +326,14 @@ DataTypeConverter.prototype = (function () {
                 var fieldKey = fieldKeys[fieldKeyIndex];
 
                 //Test fieldKey Value.
-                if (fieldKey == '*') {
+                //This if is executed when the fieldKey is * and the dataset it is NOT an ARRAY.
+                //Thus, it loops through the javascript object KEYs.
+                if (fieldKey == '*' && ArrayUtils.isArray(item) == false) {
                     var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
                     ArrayUtils.IteratorOverKeys(item, function (item, key) {
                         var inferredType = _processInferType(item);
-                        var curKey = sProcessedKeys + "," + key;
+                        var curKey = sProcessedKeys + ((sProcessedKeys.length == 0) ? "" : ",") + key;
 
                         var fieldType = ArrayUtils.TestAndSet(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
@@ -339,6 +349,16 @@ DataTypeConverter.prototype = (function () {
                     continue;
                 }
 
+                //Loops through the array cells.
+                if (fieldKey == '*' && ArrayUtils.isArray(item)) {
+                    for (var j= 0, cell; j<item.length && (cell = item[j]); j++) {
+                        stack.push({item: cell, fieldKeyIndex: fieldKeyIndex});
+                        numOfRows++;
+                    }
+                    continue;
+                }
+
+                //This is executed when the fieldKey is not *
                 var jsonSubtree = item[fieldKey];
                 if (Array.isArray(jsonSubtree)) { //It is an array.
                     for (var j=0; j<jsonSubtree.length; j++) {

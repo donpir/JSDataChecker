@@ -66,8 +66,6 @@ function runTests(textualContent) {
         assert.equal(jsonDataset.fields.length, 19, "The dataset has the expected number of columns.");
         assert.equal(jsonDataset.records.length, 14, "The dataset has the expected number of rows.");
 
-        debugger;
-
         //Parse the dataset type.
         var _converter = new DataTypeConverter();
         var path = [ "records", "*" ];
@@ -79,8 +77,8 @@ function runTests(textualContent) {
         var expectedType = DataTypeConverter.TYPES.NUMBER.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
-        debugger;
-
+        //Casts the dataset.
+        var converted = _converter.convert(metadata);
     });
 
 }//EndTestSuite.
