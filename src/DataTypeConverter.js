@@ -123,11 +123,18 @@ DataTypeConverter.prototype = (function () {
             }
 
 
+            //Infers the field TYPE.
             var max = ArrayUtils.FindMinMax(field._inferredTypes, function (curval, lastval) {
                 return curval > lastval;
             });
-            field.type = max.key;
-            field.typeConfidence = field._inferredTypes[max.key] / field.numOfItems;
+
+            var tkey = max.first.key;
+            if (tkey === DataTypeConverter.TYPES.EMPTY.name)
+                tkey = max.second.key;
+
+            field.type = tkey;
+            field.typeConfidence = field._inferredTypes[max.first.key] / field.numOfItems;
+
 
             /*//TODO: improve this piece of code.
              //LAT/LNG.

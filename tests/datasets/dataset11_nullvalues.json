@@ -1,0 +1,392 @@
+[
+  {
+    "capital_restant_du": 2400000,
+    "annee": 2008,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 4483333.33,
+    "annee": 2008,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1960765.28,
+    "annee": 2008,
+    "preteur": "Crédit Mutuel",
+    "type": null
+  },
+  {
+    "capital_restant_du": 396059.18,
+    "annee": 2008,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 19419985.28,
+    "annee": 2008,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1102890.61,
+    "annee": 2008,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1469159.97,
+    "annee": 2008,
+    "preteur": "Société Générale",
+    "type": null
+  },
+  {
+    "capital_restant_du": 16188489.95,
+    "annee": 2009,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1020268.58,
+    "annee": 2009,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1768403.48,
+    "annee": 2009,
+    "preteur": "Crédit Mutuel",
+    "type": null
+  },
+  {
+    "capital_restant_du": 4091666.66,
+    "annee": 2009,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 316471.96,
+    "annee": 2009,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 2000000,
+    "annee": 2009,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 863714.83,
+    "annee": 2009,
+    "preteur": "Société Générale",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1600000,
+    "annee": 2010,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 287701.78,
+    "annee": 2010,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1570113.11,
+    "annee": 2010,
+    "preteur": "Crédit Mutuel",
+    "type": null
+  },
+  {
+    "capital_restant_du": 937646.55,
+    "annee": 2010,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 12605816.58,
+    "annee": 2010,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 229551.37,
+    "annee": 2010,
+    "preteur": "Société Générale",
+    "type": null
+  },
+  {
+    "capital_restant_du": 3699999.99,
+    "annee": 2010,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 855024.52,
+    "annee": 2011,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 3308333.32,
+    "annee": 2011,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1200000,
+    "annee": 2011,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 258931.6,
+    "annee": 2011,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1365711.45,
+    "annee": 2011,
+    "preteur": "Crédit Mutuel",
+    "type": null
+  },
+  {
+    "capital_restant_du": 9128714.06,
+    "annee": 2011,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 800000,
+    "annee": 2012,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 772362.11,
+    "annee": 2012,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 5755897.58,
+    "annee": 2012,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 2916666.65,
+    "annee": 2012,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 1155010.14,
+    "annee": 2012,
+    "preteur": "Crédit Mutuel",
+    "type": null
+  },
+  {
+    "capital_restant_du": 230161.42,
+    "annee": 2012,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 125000,
+    "annee": 2013,
+    "preteur": "Crédit Agricole",
+    "type": null
+  },
+  {
+    "capital_restant_du": 2566666.64,
+    "annee": 2013,
+    "preteur": "Caisse Française de Financement Local (ex Dexia)",
+    "type": null
+  },
+  {
+    "capital_restant_du": 693374.37,
+    "annee": 2013,
+    "preteur": "CAF 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 400000,
+    "annee": 2013,
+    "preteur": "Caisse d'Epargne",
+    "type": null
+  },
+  {
+    "capital_restant_du": 201391.24,
+    "annee": 2013,
+    "preteur": "Conseil général 92",
+    "type": null
+  },
+  {
+    "capital_restant_du": 33651,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2017-01",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 86895.97,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2022-01",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 129000,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2024-12",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 162144.74,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2022-01",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 172621.06,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2020-01",
+    "annee": 2014,
+    "preteur": "Conseil général 92",
+    "taux": 2.85
+  },
+  {
+    "capital_restant_du": 87453,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-03",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 149671.84,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2024-11",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 51887,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-10",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 42683.08,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-10",
+    "annee": 2014,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 46127,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 134421.84,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2024-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 143850.88,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2020-01",
+    "annee": 2015,
+    "preteur": "Conseil général 92",
+    "taux": 2.85
+  },
+  {
+    "capital_restant_du": 37751.35,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 21455.08,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2017-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 77733,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2023-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 129000,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2025-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 76033.98,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2022-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  },
+  {
+    "capital_restant_du": 141876.64,
+    "cbc_charte_bonne_conduite": "1A",
+    "type": "Fixe",
+    "date_de_fin": "2022-01",
+    "annee": 2015,
+    "preteur": "CAF 92",
+    "taux": 0
+  }
+]

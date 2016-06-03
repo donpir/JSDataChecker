@@ -99,13 +99,22 @@ ArrayUtils.IteratorOverKeys = function (arr, callback) {
  * @returns {*} It is an object with index, key, value.
  */
 ArrayUtils.FindMinMax = function (arr, fncompare) {
-    var result = null;
-    for (var key in arr) {
-        if (result == null || fncompare(arr[key], result.value))
-            result = { index: -1, key: key, value: arr[key] };
-    }
+    var max1 = null;
+    var max2 = null;
 
-    return result;
+    for (var key in arr) {
+        //if (max1 == null) //Only the first time.
+        //    max1 = {index: -1, key: key, value: arr[key]};
+
+        if (max1 == null || fncompare(arr[key], max1.value)) {
+            max2 = max1;
+            max1 = {index: -1, key: key, value: arr[key]};
+        } else if (max2 == null || fncompare(arr[key], max2.value))
+            max2 = {index: -1, key: key, value: arr[key]};
+
+    }//EndFor.
+
+    return { first: max1, second: max2 };
 }//EndFunction.
 
 ArrayUtils.isArray = function (arr) {
