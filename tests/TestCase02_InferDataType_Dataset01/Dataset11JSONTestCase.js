@@ -27,8 +27,6 @@ function runTests(jsonTextualContent) {
         var actualType = infos.types[key].type;
         var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
-
-        //debugger;
     });
 
 }//EndTestSuite.

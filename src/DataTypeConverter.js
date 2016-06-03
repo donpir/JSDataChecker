@@ -128,6 +128,7 @@ DataTypeConverter.prototype = (function () {
                 return curval > lastval;
             });
 
+            //When the first key is null, it uses the second one.
             var tkey = max.first.key;
             if (tkey === DataTypeConverter.TYPES.EMPTY.name)
                 tkey = max.second.key;
