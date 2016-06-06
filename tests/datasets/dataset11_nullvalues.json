@@ -3,7 +3,8 @@
     "capital_restant_du": 2400000,
     "annee": 2008,
     "preteur": "Caisse d'Epargne",
-    "type": null
+    "type": null,
+    "undefkey": null
   },
   {
     "capital_restant_du": 4483333.33,

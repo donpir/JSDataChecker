@@ -130,7 +130,8 @@ DataTypeConverter.prototype = (function () {
 
             //When the first key is null, it uses the second one.
             var tkey = max.first.key;
-            if (tkey === DataTypeConverter.TYPES.EMPTY.name)
+            if (tkey === DataTypeConverter.TYPES.EMPTY.name &&
+                max.second != null && typeof max.second !== 'undefined')
                 tkey = max.second.key;
 
             field.type = tkey;
