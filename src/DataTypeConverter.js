@@ -38,8 +38,6 @@ DataTypeConverter.TYPES = {
 
     DATETIME    : { value: 8, name: "DATETIME" },
 
-
-
     EMPTY       : { value: 101, name: "NULL" }
 };
 
@@ -138,14 +136,14 @@ DataTypeConverter.prototype = (function () {
             field.typeConfidence = field._inferredTypes[max.first.key] / field.numOfItems;
 
 
-            /*//TODO: improve this piece of code.
+            //TODO: improve this piece of code.
              //LAT/LNG.
-             var fieldName = field.name.toLowerCase();
+             /*var fieldName = field.name.toLowerCase();
              var isLatType = (field.type === DataTypeConverter.TYPES.LATITUDE.name);
              var fieldNameContainsLat = fieldName.indexOf('lat') >= 0;
              var fieldNameContainsLon = fieldName.indexOf('ng') >= 0; //It could be 'lng'.
              if (isLatType == true && fieldNameContainsLat == false && fieldNameContainsLon == true) {
-             field.type = DataTypeConverter.TYPES.LONGITUDE.name;
+                field.type = DataTypeConverter.TYPES.LONGITUDE.name;
              }*/
 
             //BOOLEAN.
