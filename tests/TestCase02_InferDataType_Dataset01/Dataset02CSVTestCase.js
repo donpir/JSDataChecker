@@ -74,7 +74,7 @@ function runTests(textualContent) {
         //anne column.
         var key = "records,Final_Cost";
         var actualType = metadata.types[key].type;
-        var expectedType = DataTypeConverter.TYPES.NUMBER.name;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         //Casts the dataset.

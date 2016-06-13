@@ -120,7 +120,6 @@ DataTypeConverter.prototype = (function () {
                 return;
             }
 
-
             //Infers the field TYPE.
             var max = ArrayUtils.FindMinMax(field._inferredTypes, function (curval, lastval) {
                 return curval > lastval;
@@ -136,15 +135,31 @@ DataTypeConverter.prototype = (function () {
             field.typeConfidence = field._inferredTypes[max.first.key] / field.numOfItems;
 
 
-            //TODO: improve this piece of code.
-             //LAT/LNG.
-             /*var fieldName = field.name.toLowerCase();
-             var isLatType = (field.type === DataTypeConverter.TYPES.LATITUDE.name);
-             var fieldNameContainsLat = fieldName.indexOf('lat') >= 0;
-             var fieldNameContainsLon = fieldName.indexOf('ng') >= 0; //It could be 'lng'.
-             if (isLatType == true && fieldNameContainsLat == false && fieldNameContainsLon == true) {
-                field.type = DataTypeConverter.TYPES.LONGITUDE.name;
-             }*/
+            //##########
+            //Infers the field SUBTYPE.
+
+            var max = ArrayUtils.FindMinMax(field._inferredSubTypes, function (curval, lastval) {
+                return curval > lastval;
+            });
+            field.subtype = null;
+            if (max != null && max.first != null) {
+                field.subtype = max.first.key;
+                field.subtypeConfidence = field._inferredSubTypes[field.subtype] / field.numOfItems;
+
+                //TODO: improve this piece of code.
+                //LAT/LNG.
+                var fieldName = field.name.toLowerCase();
+                var isLatType = (field.subtype === DataTypeConverter.TYPES.LATITUDE.name);
+                var fieldNameContainsLat = fieldName.indexOf('lat') >= 0;
+                var fieldNameContainsLon = fieldName.indexOf('ng') >= 0; //It could be 'lng'.
+                if (isLatType == true && fieldNameContainsLat == false && fieldNameContainsLon == true) {
+                    field.subtype = DataTypeConverter.TYPES.LONGITUDE.name;
+                }
+            }
+
+            ///
+            /// SUBTYPES.
+
 
             //BOOLEAN.
             /*var numOfValues = Object.keys(field._inferredValues).length;
@@ -200,13 +215,58 @@ DataTypeConverter.prototype = (function () {
         if (isNaN(_date) == false && _date != null)
             return DataTypeConverter.TYPES.DATETIME;
 
-
         return DataTypeConverter.TYPES.TEXT;
     };//EndFunction.
 
-    var _processInferSubType = function(value) {
-        //Try to parse lat/lng.
+    var _processInferSubType = function (value) {
+        if (value === null || typeof value === 'undefined') return null;
 
+        //Try to parse the float.
+        var isnumber = DataTypesUtils.FilterFloat(value);
+        if (isNaN(isnumber) !== true) {//It is a number.
+            //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
+            if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
+                return DataTypeConverter.TYPES.LATITUDE;
+
+            //It the number ranges from -180.0 to 180.0, the value is marked as Longitude.
+            if (-180.0 <= isnumber && isnumber <= 180.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
+                return DataTypeConverter.TYPES.LONGITUDE;
+
+            if (0.0 <= isnumber && isnumber <= 100.0)
+             if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
+             return DataTypeConverter.TYPES.PERCENTAGE;
+
+            return null;
+        }
+
+        return null;
+    };//EndFunction.
+
+    var _filterBasedOnThreshold = function(metadata, threshold) {
+        ArrayUtils.IteratorOverKeys(metadata.types, function (fieldType, key) {
+            if (fieldType.typeConfidence >= threshold) return;
+
+            var arrHierarchyTypes = DataTypeHierarchy.HIERARCHY[fieldType.type];
+            var lastFieldType = { lastType: arrHierarchyTypes[0],
+                lastTypeCounter: fieldType._inferredTypes[arrHierarchyTypes[0]],
+                typeConfidence:  0 };
+            lastFieldType.typeConfidence = lastFieldType.lastTypeCounter / fieldType.numOfItems;
+
+            for (var i= 1, curType; i<arrHierarchyTypes.length, curType = arrHierarchyTypes[i]; i++) {
+                var numItemsOfCurType = fieldType._inferredTypes.hasOwnProperty(curType) ? fieldType._inferredTypes[curType] : 0 ;
+                lastFieldType.lastType = curType;
+                lastFieldType.lastTypeCounter += numItemsOfCurType;
+                lastFieldType.typeConfidence = lastFieldType.lastTypeCounter / fieldType.numOfItems;
+
+                if (lastFieldType.typeConfidence >= threshold) {
+                    fieldType.type = lastFieldType.lastType;
+                    fieldType.typeConfidence = lastFieldType.typeConfidence;
+                    break;
+                }
+            }
+        });
+
+        return metadata;
     };//EndFunction.
 
     var jsonTraverse = function(json, fieldKeys, callback) {
@@ -332,10 +392,15 @@ DataTypeConverter.prototype = (function () {
          * It parses the json and infers the data types.
          * @param json
          * @param path Array of field keys/names.
+         * @param options Infer Data Type options, in particular the threshold value for the confidence.
          */
-        inferJsonDataType: function (json, fieldKeys) {
+        inferJsonDataType: function (json, fieldKeys, options) {
+            if (typeof options === 'undefined' || options == null)
+                options = { thresholdConfidence: 1 };
+
             var stack = [];
             var fieldsType = {};
+            var fieldsSubType = {};
             var numOfRows = 0;
 
             if (typeof fieldKeys == 'undefined')
@@ -357,16 +422,25 @@ DataTypeConverter.prototype = (function () {
                     var sProcessedKeys = fieldKeys.slice(0, fieldKeyIndex).toString();
 
                     ArrayUtils.IteratorOverKeys(item, function (item, key) {
-                        var inferredType = _processInferType(item);
                         var curKey = sProcessedKeys + ((sProcessedKeys.length == 0) ? "" : ",") + key;
-
-                        var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredValues: [], numOfItems: 0 });
+                        var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredSubTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
+
+                        ///TYPE
+                        var inferredType = _processInferType(item);
                         ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)
                             ArrayUtils.TestAndIncrement(fieldType._inferredValues, item);
-                        //if (inferredType === DataTypeConverter.TYPES.LATITUDE || inferredType === DataTypeConverter.TYPES.LONGITUDE)
-                        //    ArrayUtils.TestAndIncrement(fieldType._inferredTypes, DataTypeConverter.TYPES.NUMBER);
+
+                        ///SUBTYPE
+                        var inferredSubType = _processInferSubType(item);
+                        if (inferredSubType != null && typeof inferredSubType !== 'undefined') {
+                            ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, inferredSubType.name);
+                            if (inferredSubType === DataTypeConverter.TYPES.LATITUDE)
+                                ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, DataTypeConverter.TYPES.LATITUDE);
+                            if (inferredSubType === DataTypeConverter.TYPES.LONGITUDE)
+                                ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, DataTypeConverter.TYPES.LONGITUDE);
+                        }//EndSubtype.
 
                     });
 
@@ -451,7 +525,11 @@ DataTypeConverter.prototype = (function () {
                 warningsTextual += description;
             });
 
-            return { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality, warningsTextual: warningsTextual };
+            var metadata = { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality, warningsTextual: warningsTextual };
+
+            _filterBasedOnThreshold(metadata, options.thresholdConfidence);
+
+            return metadata;
         },//EndFunction.
 
         /*inferDataTypes: function (jsonRows) {

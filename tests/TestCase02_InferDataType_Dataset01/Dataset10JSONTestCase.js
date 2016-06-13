@@ -21,10 +21,28 @@ function runTests(jsonTextualContent) {
         var path = [ "*" ];
         var infos = _converter.inferJsonDataType(jsonDataset, path);
 
-        //anne column.
+        //Intelligence column.
         var key = 'Intelligence';
         var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+
+        //Strength column.
+        var key = 'Strength';
+        var actualType = infos.types[key].type;
         var expectedType = DataTypeConverter.TYPES.NUMBER.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+
+        //Speed column.
+        var key = 'Speed';
+        var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+
+        //Similarity column.
+        var key = 'Similarity';
+        var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         //Converts the dataset.
