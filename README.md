@@ -13,8 +13,8 @@ The library has released with the LGPL license [link here](http://www.gnu.org/li
 
 Briefly with this license:
  
- - Freedom to modify and distribute modified copies of POLYWC-DATA-TABLE, distributing the source code and releasing it with the same LGPL license;
- - You can dynamically (not statically) link POLYWC-DATA-TABLE library in a proprietary software, keeping the JS files as they are.
+ - Freedom to modify and distribute modified copies of DataChecker, distributing the source code and releasing it with the same LGPL license;
+ - You can dynamically (not statically) link DataChecker library in a proprietary software, keeping the JS files as they are.
   
  
  
