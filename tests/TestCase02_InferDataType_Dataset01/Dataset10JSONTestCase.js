@@ -45,6 +45,24 @@ function runTests(jsonTextualContent) {
         var expectedType = DataTypeConverter.TYPES.TEXT.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
+        //Lat column.
+        var key = 'Lat';
+        var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.NUMBER.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+        var actualType = infos.types[key].subtype;
+        var expectedType = DataTypeConverter.SUBTYPES.GEOCOORDINATE.name;
+        assert.equal(actualType, expectedType, "Check inferred subtype on " + key);
+
+        //Lat column.
+        var key = 'Lon';
+        var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.TEXT.name; //It is textual because it has one value that is undefined.
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+        var actualType = infos.types[key].subtype;
+        var expectedType = DataTypeConverter.SUBTYPES.GEOCOORDINATE.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+
         //Converts the dataset.
         var converted = _converter.cast(infos);
 

@@ -42,9 +42,10 @@ DataTypeConverter.TYPES = {
 };
 
 DataTypeConverter.SUBTYPES = {
-    PERCENTAGE  : { value: 1000, name: "PERCENTAGE" },
-    LATITUDE    : { value: 1001, name: "LATITUDE" },
-    LONGITUDE   : { value: 1002, name: "LONGITUDE" }
+    GEOCOORDINATE   :   { value: 1000, name: "GEOCOORDINATE" },
+    PERCENTAGE      :   { value: 1000, name: "PERCENTAGE" },
+    LATITUDE        :   { value: 1001, name: "LATITUDE" },
+    LONGITUDE       :   { value: 1002, name: "LONGITUDE" }
 };
 
 DataTypeConverter.prototype = (function () {
@@ -149,11 +150,11 @@ DataTypeConverter.prototype = (function () {
                 //TODO: improve this piece of code.
                 //LAT/LNG.
                 var fieldName = field.name.toLowerCase();
-                var isLatType = (field.subtype === DataTypeConverter.TYPES.LATITUDE.name);
+                var isLatType = (field.subtype === DataTypeConverter.SUBTYPES.LATITUDE.name);
                 var fieldNameContainsLat = fieldName.indexOf('lat') >= 0;
                 var fieldNameContainsLon = fieldName.indexOf('ng') >= 0; //It could be 'lng'.
                 if (isLatType == true && fieldNameContainsLat == false && fieldNameContainsLon == true) {
-                    field.subtype = DataTypeConverter.TYPES.LONGITUDE.name;
+                    field.subtype = DataTypeConverter.SUBTYPES.LONGITUDE.name;
                 }
             }
 
@@ -226,15 +227,15 @@ DataTypeConverter.prototype = (function () {
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
-                return DataTypeConverter.TYPES.LATITUDE;
+                return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
 
             //It the number ranges from -180.0 to 180.0, the value is marked as Longitude.
             if (-180.0 <= isnumber && isnumber <= 180.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
-                return DataTypeConverter.TYPES.LONGITUDE;
+                return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
 
-            if (0.0 <= isnumber && isnumber <= 100.0)
-             if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
-             return DataTypeConverter.TYPES.PERCENTAGE;
+            /*if (0.0 <= isnumber && isnumber <= 100.0)
+                if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
+                    return DataTypeConverter.SUBTYPES.PERCENTAGE;*/
 
             return null;
         }
@@ -436,10 +437,10 @@ DataTypeConverter.prototype = (function () {
                         var inferredSubType = _processInferSubType(item);
                         if (inferredSubType != null && typeof inferredSubType !== 'undefined') {
                             ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, inferredSubType.name);
-                            if (inferredSubType === DataTypeConverter.TYPES.LATITUDE)
+                            /*if (inferredSubType === DataTypeConverter.TYPES.LATITUDE)
                                 ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, DataTypeConverter.TYPES.LATITUDE);
                             if (inferredSubType === DataTypeConverter.TYPES.LONGITUDE)
-                                ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, DataTypeConverter.TYPES.LONGITUDE);
+                                ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, DataTypeConverter.TYPES.LONGITUDE);*/
                         }//EndSubtype.
 
                     });
