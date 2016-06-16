@@ -123,3 +123,9 @@ DataTypesUtils.DecimalPlaces = function (num) {
             // Adjust for scientific notation.
         - (match[2] ? +match[2] : 0));
 }//EndFunction.
+
+DataTypesUtils.IsLatLng = function (num) {
+    if (DataTypesUtils.FilterFloat(num) == NaN) return false;
+    if (DataTypesUtils.DecimalPlaces(num) > 4) return true;
+    return false;
+}//EndFunction.

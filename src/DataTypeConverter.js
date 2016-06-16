@@ -222,12 +222,19 @@ DataTypeConverter.prototype = (function () {
     var _processInferSubType = function (value) {
         if (value === null || typeof value === 'undefined') return null;
 
+        //GEOCOORDINATE
         if (Array.isArray(value) && value.length == 2) {//It recognises the LAT LNG as array of two values.
             //Checks if the two array's values are numbers.
             if ( DataTypesUtils.FilterFloat(value[0]) != NaN && DataTypesUtils.FilterFloat(value[1]) != NaN  )
                 if (DataTypesUtils.DecimalPlaces(value[0]) > 4 && DataTypesUtils.DecimalPlaces(value[1]) > 4 )
                     return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
         }//EndIf.
+
+        if (typeof value === 'string') {
+            var split = value.split(",");
+            if (DataTypesUtils.IsLatLng(split[0]) && DataTypesUtils.IsLatLng(split[1]))
+                return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
+        }
 
         //Try to parse the float.
         var isnumber = DataTypesUtils.FilterFloat(value);
