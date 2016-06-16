@@ -577,6 +577,15 @@ DataTypeConverter.prototype = (function () {
          */
         inferDataTypeOfValue: function (value) {
             return _processInferType(value);
+        },//EndFunction.
+
+        /**
+         * Given in input a value, the function infers the data type.
+         * @param value
+         * @returns {*}
+         */
+        inferDataTypeOfValue: function (value) {
+            return _processInferSubType(value);
         }//EndFunction.
 
     };
