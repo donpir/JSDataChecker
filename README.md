@@ -3,6 +3,18 @@ JavaScript Library to read dataset content (e.g., Open Data), infer data types, 
 
 In details, it analysis the json (specified paths) to infer the data type. In addition, when request (via code) the library converts the json data based on the inferred type.
 
+Recognised basic types:
+ - Text;
+ - Number;
+ - Date;
+ - Object;
+ - Null.
+
+Recognised types:
+ - Geographic coordinates;
+ - JSON;
+ - GEOJSON.
+
 ## Documentation
 
 See wiki pages [here](https://github.com/donpir/JSDataChecker/wiki).
