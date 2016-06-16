@@ -584,7 +584,7 @@ DataTypeConverter.prototype = (function () {
          * @param value
          * @returns {*}
          */
-        inferDataTypeOfValue: function (value) {
+        inferDataSubTypeOfValue: function (value) {
             return _processInferSubType(value);
         }//EndFunction.
 
