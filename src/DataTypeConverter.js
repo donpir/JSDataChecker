@@ -43,10 +43,15 @@ DataTypeConverter.TYPES = {
 
 DataTypeConverter.SUBTYPES = {
     GEOCOORDINATE   :   { value: 1000, name: "GEOCOORDINATE" },
-    PERCENTAGE      :   { value: 1000, name: "PERCENTAGE" },
-    LATITUDE        :   { value: 1001, name: "LATITUDE" },
-    LONGITUDE       :   { value: 1002, name: "LONGITUDE" }
+    GEOJSON         :   { value: 1001, name: "GEOJSON" },
+
+    PERCENTAGE      :   { value: 1100, name: "PERCENTAGE" },
+    LATITUDE        :   { value: 1101, name: "LATITUDE" },
+    LONGITUDE       :   { value: 1102, name: "LONGITUDE" }
 };
+
+DataTypeConverter.GEOJSONTYPES = [ "Point", "MultiPoint", "LineString",
+    "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection" ];
 
 DataTypeConverter.prototype = (function () {
 
@@ -254,6 +259,14 @@ DataTypeConverter.prototype = (function () {
             return null;
         }
 
+        //Try to parse GEOJSON.
+        if (typeof value === 'object' && value.hasOwnProperty('type')) {
+            //Check the type variable.
+            var geotype = value.type;
+            var isincluded = DataTypeConverter.GEOJSONTYPES.includes(geotype);
+            if (isincluded) return DataTypeConverter.SUBTYPES.GEOJSON;
+        }
+
         return null;
     };//EndFunction.
 
@@ -262,6 +275,9 @@ DataTypeConverter.prototype = (function () {
             if (fieldType.typeConfidence >= threshold) return;
 
             var arrHierarchyTypes = DataTypeHierarchy.HIERARCHY[fieldType.type];
+            if (arrHierarchyTypes == null)
+                return metadata;
+
             var lastFieldType = { lastType: arrHierarchyTypes[0],
                 lastTypeCounter: fieldType._inferredTypes[arrHierarchyTypes[0]],
                 typeConfidence:  0 };

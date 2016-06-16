@@ -1,0 +1,359 @@
+{
+  "nhits": 36,
+  "parameters": {
+    "dataset": ["patrimoinedissy-feuille1"],
+    "timezone": "UTC",
+    "rows": 10,
+    "format": "json"
+  },
+  "records": [
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "8877e6eabb78f4df84b5c0a0da786053e047ea8a",
+      "fields": {
+        "web": "http://issy.com/ma-ville/histoire/patrimoine/parc-de-l-ile-saint-germain",
+        "description": "Le nom de l'\u00cele Saint-Germain \u00e9voque le souvenir de l'abbaye de Saint-Germain des Pr\u00e9s, qui en avait la suzerainet\u00e9 au Moyen Age. Longtemps p\u00e2turage de la ferme des Chartreux, elle est au XIXe si\u00e8cle fr\u00e9quent\u00e9e par les peintres ; les canotiers y font danser les grisettes au bal de Robinson. La soci\u00e9t\u00e9 des Glaces et Verreries de Montlu\u00e7on l'ach\u00e8te en 1853 et y \u00e9difie de grandes halles en bois. Un premier pont est inaugur\u00e9 en 1863, un second en 1905. L'Exposition Universelle de 1867 y installe ses pavillons de l'Agriculture, transform\u00e9s peu apr\u00e8s en magasins de l'Intendance Militaire. En 1980, le terrain est am\u00e9nag\u00e9 en parc, et depuis 1988 la Tour aux figures de Jean Dubuffet se dresse \u00e0 la proue de l'\u00eele.",
+        "numero_du_panneau": "24",
+        "nom": "Ile Saint-Germain",
+        "adresse": "Avenue Jean Monnet",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.82324,2.249797,3a,56.2y,126.87h,81.48t/data=!3m5!1e1!3m3!1sgOBnwXLOoC4PJ_Wc3irzbA!2e0!5s20140801T000000",
+        "details_emplacement": "Angle Boulevard des Iles",
+        "coordonnees_geo": [
+          48.823222,
+          2.24994
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-15T22:00:46.457667",
+          "width": 530,
+          "filename": "20267747059_48807b0a42_c.jpg",
+          "id": "f3e40976c2293605b35694c36f9f73a8"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.24994,
+          48.823222
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "73991d6e28f272d785a2d7118035b9560814bb2c",
+      "fields": {
+        "nom": "La place Paul Vaillant-Couturier",
+        "description": "Situ\u00e9e en bordure de la Grande Rue, cette place a \u00e9t\u00e9 cr\u00e9\u00e9e en 1852 en pr\u00e9vision de la construction de la premi\u00e8re Mairie d'Issy, inaugur\u00e9e cinq ans plus tard. Un march\u00e9 s'y installe aussi, ult\u00e9rieurement transf\u00e9r\u00e9 sous une halle voisine. Apr\u00e8s le percement des boulevards Voltaire (1867) et Gambetta (1880), elle devient le premier centre moderne d'Issy-les-Moulineaux, supplantant l'ancien carrefour de la Fontaine, tout proche. Au d\u00e9but des ann\u00e9es 1930, avec la reconstruction de l'\u00e9cole des gar\u00e7ons et l'implantation d'une station de m\u00e9tro, elle change de physionomie. Baptis\u00e9e Paul Vaillant-Couturier en 1937, elle est plus couramment d\u00e9sign\u00e9e sous le nom de l'\u00e9tablissement hospitalier qui la borde : \"Les Petits M\u00e9nages\", puis \"Corentin Celton\".",
+        "numero_du_panneau": "3",
+        "adresse": "Place Paul Vaillant Couturier",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.827057,2.279073,3a,50.8y,26.08h,79.59t/data=!3m4!1e1!3m2!1s1woYOWsXwE1fSYhJLgKlnA!2e0",
+        "coordonnees_geo": [
+          48.827165,
+          2.27913
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:00:58.784213",
+          "width": 530,
+          "filename": "19833477473_4cec4463c9_c.jpg",
+          "id": "741bf0c7f48939aab47090c75efc50de"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.27913,
+          48.827165
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "4aa8b0b804907e34e602eb0f2198d9657db857df",
+      "fields": {
+        "web": "http://issy.com/ma-ville/histoire/patrimoine/-tour-aux-figures-",
+        "panneau_histoire_de_la_cite": "Non",
+        "nom": "La Tour aux figures",
+        "monument_historique": "Non",
+        "coordonnees_geo": [
+          48.828502,
+          2.258535
+        ],
+        "description": "La \u00ab Tour aux figures \u00bb de Jean Dubuffet, \u00e9rig\u00e9e dans le parc d\u00e9partemental de l\u2019Ile Saint-Germain, a \u00e9t\u00e9 class\u00e9e au titre des Monuments historiques le 10 septembre 2008 ."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.258535,
+          48.828502
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "878503ab21ee1ffeb5a26036e4695c74e24b6d91",
+      "fields": {
+        "nom": "Le Vieil Issy",
+        "description": "C'est sur les hauteurs, au-dessus de la plaine, qu'\u00e9tait situ\u00e9 le vieux village d'Issy. En face de l'\u00e9glise Saint-Etienne, la maison forte de l'abbaye de Saint-Germain des Pr\u00e9s abritait les bureaux des \"officiers\" charg\u00e9s d'administrer le domaine et de percevoir les imp\u00f4ts. Sur le coteau commen\u00e7ait le fief de Saint-Magloire. La rue de Bourtibourg (rue Prudent Jassed\u00e9), qui le traversait, \u00e9tait une des princiaples voies du village parce qu'elle poss\u00e9dait une des deux fontaines publiques et le lavoir communal. Elle \u00e9tait donc parfois d\u00e9sign\u00e9e comme la \"rue de la Fontaine\". Dernier t\u00e9moin de ce pass\u00e9, un escalier en marque le sommet. A c\u00f4t\u00e9, s'\u00e9l\u00e8ve un b\u00e2timent, appel\u00e9 \"Le Prieur\u00e9\", dont l'origine remonte au XVIIIe si\u00e8cle. En 1817, une congr\u00e9gation d\u00e9di\u00e9e \u00e0 l'instruction gratuite des enfants pauvres, les \"Filles de la Croix\" ou \"Soeurs de Saint-Andr\u00e9\", y fonde une \u00e9cole de filles. L'\u00e9tablissement s'agrandit, puis est remplac\u00e9 par d'autres \u00e9coles priv\u00e9es et patronages. Le commissariat de police leur succ\u00e8de de 1971 \u00e0 1994.",
+        "numero_du_panneau": "10",
+        "adresse": "17 avenue Jean Jaur\u00e8s",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.823067,2.275192,3a,28.7y,11.35h,83.17t/data=!3m4!1e1!3m2!1smUTVI3jArB5LriH2dJmeHA!2e0",
+        "details_emplacement": "Angle rue Etienne Dolet",
+        "coordonnees_geo": [
+          48.823165,
+          2.275262
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-13T22:00:46.056491",
+          "width": 529,
+          "filename": "20267721819_579e2e4cc5_c.jpg",
+          "id": "a94d352a47be8b5dda922e75618eabee"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.275262,
+          48.823165
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "2db717d251680bdf29fd379ee1cdcb257793783d",
+      "fields": {
+        "nom": "Blanchisserie de Grenelle",
+        "description": "Fond\u00e9e boulevard de Grenelle \u00e0 Paris en 1865, la blanchisserie en a gard\u00e9 le nom. Elle s'\u00e9tablit en 1905 seulement \u00e0 Issy, o\u00f9 elle trouve une main-d'oeuvre nombreuse et exp\u00e9riment\u00e9e gr\u00e2ce \u00e0 la quantit\u00e9 et \u00e0 l'anciennet\u00e9 des \"buanderies\" dans le voisinage. Pour abriter ses activit\u00e9s principales, elle acquiert trois halles contig\u00fces, \u00e0 ossature m\u00e9tallique et larges baies cintr\u00e9es, qui proviennent de l'Exposition Universelle de 1900. Ses besoins en eau sont consid\u00e9rables et, en 1923, elle fait forer un puits a\u00e9rien, profond de 479,60 m\u00e8tres ; l'eau en jaillit \u00e0 une temp\u00e9rature de 28\u00b0. L'abandon de ce puits en 1965 appara\u00eet comme un signe pr\u00e9curseur de la fermeture de l'\u00e9tablissement, d\u00e9moli en 1989.",
+        "numero_du_panneau": "22",
+        "adresse": "8 rue Rouget de Lisle",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.828977,2.264118,3a,22.1y,259.41h,86.14t/data=!3m4!1e1!3m2!1sh7lhzjjHbaXky6usCiQLaw!2e0",
+        "details_emplacement": "Angle rue Camille Desmoulins",
+        "coordonnees_geo": [
+          48.828965,
+          2.263855
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 1059,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:00:50.665007",
+          "width": 1600,
+          "filename": "19833508583_9056f0399e_h.jpg",
+          "id": "8988efa3d90fcc41a94da7761df39d9c"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.263855,
+          48.828965
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "886c8c23db354429efbbcae809a73a96ce04e6c1",
+      "fields": {
+        "nom": "Eglise Saint-Beno\u00eet",
+        "description": "A l\u2019emplacement de l\u2019\u00e9glise Saint-Beno\u00eet actuelle s\u2019\u00e9levait au XVIIe si\u00e8cle la maison des champs des J\u00e9suites du Coll\u00e8ge de Clermont, fr\u00e9quent\u00e9e tour \u00e0 tour par Fran\u00e7ois de Sales, Moli\u00e8re et Armand de Conti. Leur succ\u00e8dent les B\u00e9n\u00e9dictines de l\u2019abbaye Saint-Anne de 1645 \u00e0 1753, puis une maison de retraite pour pr\u00eatres \u00e2g\u00e9s. Ses derniers pensionnaires sont arr\u00eat\u00e9s et massacr\u00e9 aux Carmes de paris en septembre 1792. Un pensionnat de jeunes filles est ouvert en 1823 par les \u00ab S\u0153urs Blanches \u00bb qui reconstruisent la chapelle en 1859, en style n\u00e9ogothique. Ferm\u00e9e de 1903 \u00e0 1921, tandis que la plupart des b\u00e2timents sont d\u00e9molis, elle est agrandie en 1932 et remplac\u00e9e en 1970 par l\u2019actuelle \u00e9glise b\u00e2tie en sous-sol. Les fondations ont r\u00e9v\u00e9l\u00e9 un important cimeti\u00e8re m\u00e9rovingien d\u2019une centaine de s\u00e9pultures.",
+        "numero_du_panneau": "2",
+        "adresse": "35 rue S\u00e9verine",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.828519,2.281122,3a,51.6y,348.43h,79.38t/data=!3m4!1e1!3m2!1srqHmVWmouIrH3eIX9p4vPA!2e0",
+        "details_emplacement": "Devant l'Eglise Saint-Beno\u00eet",
+        "coordonnees_geo": [
+          48.828582,
+          2.281015
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:00:52.474412",
+          "width": 529,
+          "filename": "20445717662_ef00884352_c.jpg",
+          "id": "8ad56fe8a8089ee035c706d0a0ff5cc1"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.281015,
+          48.828582
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "d7a0c5815e18b1375cce355a5a5f04e3e83417e7",
+      "fields": {
+        "nom": "La Soci\u00e9t\u00e9 Fran\u00e7aise de Munitions",
+        "description": "L\u2019\u00e9tablissement de la Soci\u00e9t\u00e9 Fran\u00e7aise des Munitions (ancienne usine G\u00e9velot) figure parmi les plus anciennes entreprises des Hauts-de-Seine. Simple fabrique d\u2019amorces implant\u00e9e \u00e0 Issy d\u00e8s 1825, elle se lance dans la production des cartouches et conna\u00eet un v\u00e9ritable essor sous la direction de Jules G\u00e9velot (1826-1904). Au fil du temps,  des \u00e9quipements sociaux (une cit\u00e9 ouvri\u00e8re, une cr\u00e8che) et des constructions de prestige (un portail monumental) sont \u00e9difi\u00e9s en bordure de l\u2019usine, qui atteint son apog\u00e9e apr\u00e8s 1918. Elle couvre alors plus de 9 hectares et compte plus de 3 000 employ\u00e9s. Un incendie, le 11 juillet 1973, ainsi qu'une r\u00e9duction des deux-tiers de sa surface apr\u00e8s 1980 sont les signes avant-coureurs de sa fermeture en 1992.",
+        "numero_du_panneau": "28",
+        "adresse": "26 rue du Docteur Lombard",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.819304,2.251305,3a,53.6y,34.96h,86.7t/data=!3m4!1e1!3m2!1sfoGvTUiM1T6THP0jSI6ssg!2e0",
+        "details_emplacement": "Au pied de la porte en pierre du square",
+        "coordonnees_geo": [
+          48.819383,
+          2.251387
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:00:59.479150",
+          "width": 530,
+          "filename": "20266352598_6fd2b89fa3_c.jpg",
+          "id": "ce05dfc93af66b255d8307c5c5c6f0d1"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.251387,
+          48.819383
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "d6e42253c9a9cf0a6ae9724a15e9bce9f3456897",
+      "fields": {
+        "web": "http://issy.com/ma-ville/histoire/patrimoine/crayeres-des-montquartiers",
+        "description": "Vers 1820 des carri\u00e8res de craies s\u2019ouvrent \u00e0 l\u2019extr\u00e9mit\u00e9 ouest d\u2019Issy. La famille Demame exploite ici l\u2019une d\u2019entre elles d\u00e8s 1840. Elle se tourne bient\u00f4t vers la fabrication, des \u00ab\u00a0pains de Blanc de Meudon\u00a0\u00bb, et pour le s\u00e9chage fait construire un hangar reconnaissable \u00e0 son ossature en bois, encore visible aujourd\u2019hui. Sans cesser ses activit\u00e9s, elle loue les galeries vides \u00e0 des champignonnistes et aussi, \u00e0 partir de 1919, \u00e0 une entreprise voisine, la Brasserie des Moulineaux. Cet \u00e9tablissement, n\u00e9 vers 1860, a connu une expansion consid\u00e9rable, avec des temps forts\u00a0: il a obtenu une m\u00e9daille d\u2019or \u00e0 l\u2019Exposition Universit\u00e9 de 1900.Toutefois, il traverse en 1936 de graves difficult\u00e9s sociales et financi\u00e8res qui entra\u00eenent sa fermeture. Aujourd\u2019hui, sur le terrain de l\u2019ancienne \u00ab\u00a0blanqueterie\u00a0\u00bb, s\u2019\u00e9tendent les serres municipales.",
+        "numero_du_panneau": "27",
+        "nom": "Les Carri\u00e8res - Brasseries des Moulineaux",
+        "adresse": "135 avenue de Verdun",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.818685,2.253179,3a,38.7y,189.45h,82.12t/data=!3m4!1e1!3m2!1sM64ksjGVMrJ7XEBhsWCoZQ!2e0",
+        "coordonnees_geo": [
+          48.81859,
+          2.253163
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-15T22:00:50.280488",
+          "width": 529,
+          "filename": "19833449283_7b2bec1bd2_c.jpg",
+          "id": "76ab163de1004571a15a15c665003bb7"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.253163,
+          48.81859
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "12e4481eb881512361fcceb19ff4f2ea7d1422a9",
+      "fields": {
+        "web": "http://issy.com/ma-ville/histoire/patrimoine/eglise-notre-dame-des-pauvres",
+        "description": "Dans ce quartier d\u00e9sh\u00e9rit\u00e9 de la Plaine, l'abb\u00e9 Ouvr\u00e9 fonde au d\u00e9but de ce si\u00e8cle un patronage, puis une chapelle appel\u00e9e Notre-Dame de la Plaine. En 1914, un nouveau lieu de culte, entour\u00e9 de plusieurs salles, est b\u00e2ti rue Camille Desmoulins. Mais il est bombard\u00e9 pendant la Seconde Guerre mondiale.Sa reconstruction sur un site plus central prend quelque temps. L'\u00e9glise est consacr\u00e9e par l'Archev\u00eaque de Paris, le 27 novembre 1955 seulement. En r\u00e9f\u00e9rence aux apparition mariales de Banneux (Belgique), elle est d\u00e9di\u00e9e \u00e0 Notre-Dame des Pauvres. Con\u00e7ue dans l'esprit du renouveau de l'Art Sacr\u00e9, elle est le fruit d'une \u00e9troite collaboration entre les architectes, les artistes et le clerg\u00e9 et montre des lignes r\u00e9solument sobres et modernes. Elle se distingue surtout par ses grandes verri\u00e8res abstraites et color\u00e9es dues au peintre L\u00e9on Zack.",
+        "numero_du_panneau": "20",
+        "nom": "Notre-Dame des Pauvres",
+        "adresse": "27 boulevard Gallieni",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/@48.827704,2.267519,3a,15y,145.81h,88.82t/data=!3m5!1e1!3m3!1sc8OfZzt8WFD9uYnq4skmRw!2e0!5s20140901T000000",
+        "coordonnees_geo": [
+          48.827296,
+          2.267908
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:01:05.995460",
+          "width": 530,
+          "filename": "20266241190_9b31055ed4_c.jpg",
+          "id": "017d0939f87c16aff06903346b126a13"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.267908,
+          48.827296
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    },
+    {
+      "datasetid": "patrimoinedissy-feuille1",
+      "recordid": "8c133f68ec90ce22692973707e0974d2f0768076",
+      "fields": {
+        "web": "http://issy.com/ma-ville/histoire/patrimoine/parc-municipal-henri-barbusse",
+        "description": "Ce parc est un vestige de l'ancienne et vaste propri\u00e9t\u00e9 des Princes de Bourbon-Conti; il poss\u00e9dait des parterres dessinn\u00e9s par le jardinier de Louis XIV, Andr\u00e9 Le N\u00f4tre. Un beau bassin subsiste, visible depuis une terrasse conserv\u00e9e jusqu'\u00e0 aujourd'hui. En 1857, le domaine est acquis par une soci\u00e9t\u00e9, le Comptoire Central de Cr\u00e9dit, qui lance une grande entreprise de lotissement. Parmi les voies nouvelles figure l'actuelle rue Henri Tariel, qui porte le nom de \"Rue du Parc\" jusqu'en 1927. Au d\u00e9but des ann\u00e9es 1930, seuls 4 hectares t\u00e9moignent encore de ces origines. Malgr\u00e9 la forme du terrain, tr\u00e8s allong\u00e9e, et sa forte d\u00e9nivellation, il est d\u00e9cid\u00e9 d'en faire un parc communal. L'am\u00e9nagement est confi\u00e9 \u00e0 l'architecte Marcel Chappey, \u00e9galement auteur du th\u00e9\u00e2tre municipal. L'inauguration officielle a lieu le 5 juillet 1936.",
+        "numero_du_panneau": "16",
+        "nom": "Parc Henri Barbusse",
+        "adresse": "1 rue Lasserre",
+        "monument_historique": "Non",
+        "street_view": "https://www.google.fr/maps/place/48%C2%B049'30.8%22N+2%C2%B016'23.2%22E/@48.821779,2.270426,3a,50.4y,186.45h,85.2t/data=!3m4!1e1!3m2!1s1jaEIhU0NCNx2s13Ff7Lbw!2e0!4m2!3m1!1s0x0:0x0",
+        "details_emplacement": "Entr\u00e9e Parc Henri Barbusse",
+        "coordonnees_geo": [
+          48.821671,
+          2.270409
+        ],
+        "panneau_histoire_de_la_cite": "Oui",
+        "image_panneau": {
+          "mimetype": "image/jpeg",
+          "height": 800,
+          "format": "JPEG",
+          "thumbnail": true,
+          "last_synchronized": "2016-06-14T22:01:06.675121",
+          "width": 530,
+          "filename": "20713765871_1b201f5f1e_c.jpg",
+          "id": "50f70aed6bf037d45971d6d7d36c5554"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.270409,
+          48.821671
+        ]
+      },
+      "record_timestamp": "2016-06-15T22:00:43+00:00"
+    }
+  ]
+}
