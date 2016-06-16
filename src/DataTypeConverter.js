@@ -222,6 +222,13 @@ DataTypeConverter.prototype = (function () {
     var _processInferSubType = function (value) {
         if (value === null || typeof value === 'undefined') return null;
 
+        if (Array.isArray(value) && value.length == 2) {//It recognises the LAT LNG as array of two values.
+            //Checks if the two array's values are numbers.
+            if ( DataTypesUtils.FilterFloat(value[0]) != NaN && DataTypesUtils.FilterFloat(value[1]) != NaN  )
+                if (DataTypesUtils.DecimalPlaces(value[0]) > 4 && DataTypesUtils.DecimalPlaces(value[1]) > 4 )
+                    return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
+        }//EndIf.
+
         //Try to parse the float.
         var isnumber = DataTypesUtils.FilterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.

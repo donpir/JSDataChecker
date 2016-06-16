@@ -63,6 +63,15 @@ function runTests(jsonTextualContent) {
         var expectedType = DataTypeConverter.SUBTYPES.GEOCOORDINATE.name;
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
+        //LatLng array as on OpenDataSoft.
+        var key = 'LatLon';
+        var actualType = infos.types[key].type;
+        var expectedType = DataTypeConverter.TYPES.OBJECT.name; //It is textual because it has one value that is undefined.
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+        var actualType = infos.types[key].subtype;
+        var expectedType = DataTypeConverter.SUBTYPES.GEOCOORDINATE.name;
+        assert.equal(actualType, expectedType, "Check inferred type on " + key);
+
         //Converts the dataset.
         var converted = _converter.cast(infos);
 
