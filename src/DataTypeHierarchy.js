@@ -29,9 +29,7 @@ DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.TEXT.name] = [ DataTypeConve
 DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.NUMBER.name] = [ DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
 DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.DATETIME.name] = [ DataTypeConverter.TYPES.DATETIME.name, DataTypeConverter.TYPES.TEXT.name ];
 
-DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.LATITUDE.name] = [ DataTypeConverter.SUBTYPES.LATITUDE.name,
-    DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
-DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.LONGITUDE.name] = [ DataTypeConverter.SUBTYPES.LONGITUDE.name,
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.GEOCOORDINATE.name] = [ DataTypeConverter.SUBTYPES.GEOCOORDINATE.name,
     DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
 
 DataTypeHierarchy.canConvert = function (fromType, toType) {

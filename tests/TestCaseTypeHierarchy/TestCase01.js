@@ -36,23 +36,21 @@ function runTests() {
         assert.equal(bval, false, "TEXT => NUMBER");
 
         //LAT and OTHERS
-        var bval = DataTypeHierarchy.canConvert("LATITUDE", "LATITUDE");
-        assert.equal(bval, true, "LATITUDE => LATITUDE");
+        var bval = DataTypeHierarchy.canConvert("GEOCOORDINATE", "GEOCOORDINATE");
+        assert.equal(bval, true, "GEOCOORDINATE => GEOCOORDINATE");
 
-        var bval = DataTypeHierarchy.canConvert("LATITUDE", "NUMBER");
-        assert.equal(bval, true, "LATITUDE => NUMBER");
+        var bval = DataTypeHierarchy.canConvert("GEOCOORDINATE", "NUMBER");
+        assert.equal(bval, true, "GEOCOORDINATE => NUMBER");
 
-        var bval = DataTypeHierarchy.canConvert("LATITUDE", "TEXT");
-        assert.equal(bval, true, "LATITUDE => TEXT");
+        var bval = DataTypeHierarchy.canConvert("GEOCOORDINATE", "TEXT");
+        assert.equal(bval, true, "GEOCOORDINATE => TEXT");
 
-        var bval = DataTypeHierarchy.canConvert( "TEXT", "LATITUDE");
-        assert.equal(bval, false, "TEXT => LATITUDE");
+        var bval = DataTypeHierarchy.canConvert( "TEXT", "GEOCOORDINATE");
+        assert.equal(bval, false, "TEXT => GEOCOORDINATE");
 
-        var bval = DataTypeHierarchy.canConvert( "NUMBER", "LATITUDE");
-        assert.equal(bval, false, "NUMBER => LATITUDE");
+        var bval = DataTypeHierarchy.canConvert( "NUMBER", "GEOCOORDINATE");
+        assert.equal(bval, false, "NUMBER => GEOCOORDINATE");
 
-        var bval = DataTypeHierarchy.canConvert( "LATITUDE", "LONGITUDE");
-        assert.equal(bval, false, "LATITUDE => LONGITUDE");
     });
 
 }//EndTestSuite.
