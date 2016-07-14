@@ -39,6 +39,7 @@ CKANApi.prototype = (function() {
                 errorCallback("Check DataStoreAPI.");
         };
         xhttp.open("GET", theUrl, true);//true for asynchronous.
+        //xhttp.setRequestHeader('Content-yype')
         xhttp.send(null);
     };//EndFunction.
 

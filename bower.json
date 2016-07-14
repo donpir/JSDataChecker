@@ -1,6 +1,6 @@
 {
   "name": "jsdatachecker",
-  "version": "v0.1.1",
+  "version": "v0.1.2",
   "homepage": "https://github.com/donpir/jsdatachecker",
   "authors": [
     "'Donato Pirozzi <'donatopirozzi@gmail.com'>"
@@ -19,7 +19,7 @@
     "polymer": "Polymer/polymer#1.2.0",
     "qunit": "~1.22.0",
     "csvjson": "0.1.1",
-    "polywc": "https://github.com/donpir/polywc.git#master"
+    "polywc-data-table": "https://github.com/donpir/polywc-data-table.git#master"
   },
   "private": false
 }

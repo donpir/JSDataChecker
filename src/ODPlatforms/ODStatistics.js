@@ -53,18 +53,44 @@ ODStatistics.prototype = (function() {
 
         stats.numOfDatasets = datasets.length;
         stats.formats = [];
+        stats.formatsAggregated = [];
 
         for (var i=0; i<datasets.length; i++) {
             var dataset = datasets[i];
 
             //Statistics on the datasets' formats.
             ArrayUtils.TestAndIncrement(stats.formats, dataset.format);
+
+            var dsformat = dataset.format.toLowerCase();
+
+            //Aggregated formats.
+            if (dsformat.includes("csv"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "csv");
+            else if (dsformat.includes("pdf"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "pdf");
+            else if (dsformat.includes("html"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "html");
+            else if (dsformat.includes("json"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "json");
+            else if (dsformat.includes("xml"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "xml");
+            else if (dsformat.includes("shp"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "shp");
+            else if (dsformat.includes("geojson"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "geojson");
+            else if (dsformat.includes("kml"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "kml");
+            else if (dsformat.includes("txt"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "txt");
+            else if (dsformat.includes("xls") || dsformat.includes("xlsx") || dsformat.includes("ods"))
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "xls/ods");
+            else
+                ArrayUtils.TestAndIncrement(stats.formatsAggregated, "other");
         }//EndForI.
 
         //Calculates the formats percentages.
         var tmpArrFormats = stats.formats;
         stats.formats = [];
-
         ArrayUtils.IteratorOverKeys(tmpArrFormats, function(item, property) {
             var recordFormat = {};
             recordFormat.name = property;
@@ -72,6 +98,18 @@ ODStatistics.prototype = (function() {
             recordFormat.occurrancePercentage = (item / datasets.length) * 100;
             recordFormat.occurrancePercentage = Math.round(recordFormat.occurrancePercentage * 100) / 100;
             stats.formats.push(recordFormat);
+        });
+
+        //Calculates the formats percentage for the aggregated formats.
+        var tmpArrFormatsAggregated = stats.formatsAggregated;
+        stats.formatsAggregated = [];
+        ArrayUtils.IteratorOverKeys(tmpArrFormatsAggregated, function(item, property) {
+            var recordFormat = {};
+            recordFormat.name = property;
+            recordFormat.occurrance = item;
+            recordFormat.occurrancePercentage = (item / datasets.length) * 100;
+            recordFormat.occurrancePercentage = Math.round(recordFormat.occurrancePercentage * 100) / 100;
+            stats.formatsAggregated.push(recordFormat);
         });
 
         return stats;

@@ -50,8 +50,17 @@ DataTypeConverter.SUBTYPES = {
     LONGITUDE       :   { value: 1102, name: "LONGITUDE" }
 };
 
+DataTypeConverter.LANGS = {
+    EN   :   { value: 1000, name: "EN" },
+    IT   :   { value: 1001, name: "IT" },
+    FR   :   { value: 1100, name: "FR" },
+    NL   :   { value: 1101, name: "NL" }
+};
+
+
 DataTypeConverter.GEOJSONTYPES = [ "Point", "MultiPoint", "LineString",
-    "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection" ];
+    "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection", "Feature",
+    "FeatureCollection" ];
 
 DataTypeConverter.prototype = (function () {
 
@@ -237,8 +246,9 @@ DataTypeConverter.prototype = (function () {
 
         if (typeof value === 'string') {
             var split = value.split(",");
-            if (DataTypesUtils.IsLatLng(split[0]) && DataTypesUtils.IsLatLng(split[1]))
-                return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
+            //if (split.length == 2)
+                if (DataTypesUtils.IsLatLng(split[0]) && DataTypesUtils.IsLatLng(split[1]))
+                    return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
         }
 
         //Try to parse the float.
@@ -299,6 +309,15 @@ DataTypeConverter.prototype = (function () {
 
         return metadata;
     };//EndFunction.
+
+    var _capitalizeFirstLetter = function(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };//EndFunction.
+
+    var _replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
 
     var jsonTraverse = function(json, fieldKeys, callback) {
         var stack = [];
@@ -426,8 +445,17 @@ DataTypeConverter.prototype = (function () {
          * @param options Infer Data Type options, in particular the threshold value for the confidence.
          */
         inferJsonDataType: function (json, fieldKeys, options) {
-            if (typeof options === 'undefined' || options == null)
-                options = { thresholdConfidence: 1 };
+
+            //Default options initialisation.
+            if (typeof options === 'undefined' || options == null) options = { };
+
+            if (options.hasOwnProperty("thresholdConfidence") == false)
+                options.thresholdConfidence = 1;
+
+            if (options.hasOwnProperty("language") == false)
+                options.language = DataTypeConverter.LANGS.EN.name;
+            else
+                options.language = options.language.toUpperCase();
 
             var stack = [];
             var fieldsType = {};
@@ -538,19 +566,43 @@ DataTypeConverter.prototype = (function () {
 
                     var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
                     if (incorrect > 0) {
-                        description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">";
+                        var _descr1 = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";
+                        var _descr2 = _capitalizeFirstLetter(JDC_LNG['key_notoftype_singular'][options.language]) + ".";
+                        if (incorrect > 1)
+                            _descr2 = _capitalizeFirstLetter(JDC_LNG['key_notoftype_plural'][options.language]) + ".";
+
+                        var descr = _descr1 + " " + _descr2;
+                        descr = descr.replace(/%COL_NAME/g, fieldType.name);
+                        descr = descr.replace(/%COL_TYPE/g, fieldType.type);
+                        descr = descr.replace(/%COL_ERRORS/g, incorrect);
+
+                        description += descr;
+
+                        /*description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">";
                         var verb = (incorrect == 1) ? " value is" : " values are";
-                        description += ", but " + incorrect + verb + " not a " + fieldType.type;
+                        description += ", but " + incorrect + verb + " not a " + fieldType.type;*/
                     }
                 }
 
-                if (fieldType.totalNullValues > 0) {
+                var descr = "";
+                if (fieldType.totalNullValues == 1)
+                    descr = _capitalizeFirstLetter(JDC_LNG['key_emptyvalue_singolar'][options.language]) + ".";
+                else if (fieldType.totalNullValues > 1 )
+                    descr = _capitalizeFirstLetter(JDC_LNG['key_emptyvalue_plural'][options.language]) + ".";
+
+                descr = descr.replace(/%COL_NAME/g, fieldType.name);
+                descr = descr.replace(/%COL_TYPE/g, fieldType.type);
+                descr = descr.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
+
+                /*if (fieldType.totalNullValues > 0) {
+                    var descr = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";
+
                     description += "The column <" + fieldType.name + "> has " + fieldType.totalNullValues + " EMPTY value";
                     if (fieldType.totalNullValues > 1) description += "s";
                 }
 
                 if (description.length > 0)
-                    description += ".";
+                    description += ".";*/
 
                 fieldType.errorsDescription = description;
                 warningsTextual += description;

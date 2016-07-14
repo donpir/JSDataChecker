@@ -11,12 +11,14 @@
 
     <script type="text/javascript" src="../../src/DataTypesUtils.js"></script>
     <script type="text/javascript" src="../../src/DataTypeConverter.js"></script>
+    <script type="text/javascript" src="../../src/DataTypeHierarchy.js"></script>
 
     <!-- POLYMER DEPENDENCY -->
     <link rel="import" href="../../bower_components/polymer/polymer.html">
     <script type="text/javascript" src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
-    <link rel="import" href="../../bower_components/polywc/data-table/data-table.html">
+    <link rel="import" href="../../bower_components/polywc-data-table/polywc-data-table.html">
+    <link rel="import" href="../../bower_components/polywc-data-table/polywc-data-source-array.html">
 
 </head>
 <body>
@@ -34,17 +36,30 @@
     <h4>Dataset Formats</h4>
 
 
-    <data-table id="tblFormats" headers='["format", "# datasets", "% datasets"]'
+    <polywc-data-table id="tblFormats" headers='["format", "# datasets", "% datasets"]'
                 fields='["name", "occurrance", "occurrancePercentage"]'
                 postfixes='["", "", "%"]'
-                show-pager></data-table>
+                show-pager export-csv>
+        <polywc-data-source-array id="dsFormats"></polywc-data-source-array>
+    </polywc-data-table>
+
+    <h4>Dataset Formats (Aggregated)</h4>
+
+    <polywc-data-table id="tblFormatsAggregated" headers='["format", "# datasets", "% datasets"]'
+                       fields='["name", "occurrance", "occurrancePercentage"]'
+                       postfixes='["", "", "%"]'
+                       show-pager export-csv>
+        <polywc-data-source-array id="dsFormats"></polywc-data-source-array>
+    </polywc-data-table>
 
     <h4>Datasets Quality Analysis</h4>
 
-    <data-table id="tblQuality" headers='["Dataset Title", "Number of Columns", "Number of Rows", "Homogeneity", "Completeness", "Link", "Warnings" ]'
+    <polywc-data-table id="tblQuality" headers='["Dataset Title", "Number of Columns", "Number of Rows", "Homogeneity", "Completeness", "Link", "Warnings" ]'
                 fields='["title", "numOfCols", "numOfRows", "homogeneity", "completeness", "link", "warningsTextual" ]'
                 postfixes='["", "", "", "%", "%"]'
-                show-pager></data-table>
+                show-pager export-csv>
+        <polywc-data-source-array id="dsQuality"></polywc-data-source-array>
+    </polywc-data-table>
 
     <h4>Datasets Content Analysis</h4>
 
@@ -83,16 +98,24 @@
             //Initialises the data-table with datasets formats.
             //This must be done via source code because the array fields are dinamic.
             var $tblFormats = document.querySelector("#tblFormats");
-            $tblFormats.data = _stat.formats;
-            $tblFormats.refreshPage(1);
+            var $dsFormats = Polymer.dom($tblFormats).children[0];
+            $dsFormats.data = _stat.formats;
+            $tblFormats.refresh();
 
-            RetrieveAllDatasetsContent(datasets, _stat);
+            //Table Formats aggregated.
+            var $tblFormatsAggr = document.querySelector("#tblFormatsAggregated");
+            var $dsFormatsAggr = Polymer.dom($tblFormatsAggr).children[0];
+            $dsFormatsAggr.data = _stat.formatsAggregated;
+            $tblFormatsAggr.refresh();
+
+            //RetrieveAllDatasetsContent(datasets, _stat);
         };//EndFunction.
 
 
         function RetrieveAllDatasetsContent(datasets, _stat) {
             var valPlatformUrl = document.getElementById('txtPortalURL').value;
             var $tblQualities = document.querySelector("#tblQuality");
+            var $dsQualities = Polymer.dom($tblQualities).children[0];
             _stat.datasets = [];
 
             //Perform statistics for all datasets.
@@ -124,8 +147,8 @@
                         //Updates the table.
                         _stat.datasets.push(dataset);
                         _stat.totDatasetsAnalysed++;
-                        $tblQualities.data = _stat.datasets;
-                        $tblQualities.refreshPage(1);
+                        $dsQualities.data = _stat.datasets;
+                        $tblQualities.refresh();
 
                         if (dataset.error == false) {
                             _stat = statapi.analyseDataset(dataset, _stat);
@@ -145,8 +168,6 @@
                 }
 
             }//EndForI.
-
-
 
         };//EndFunction.
 

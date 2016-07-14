@@ -31,6 +31,11 @@ function runTests(jsonTextualContent) {
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         debugger;
+
+        var path = [ "records", "fields", "*" ];
+        var infos = _converter.inferJsonDataType(jsonDataset, path);
+
+        debugger;
     });
 
 }//EndTestSuite.
