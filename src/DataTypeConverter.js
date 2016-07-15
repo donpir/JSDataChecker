@@ -25,29 +25,26 @@ function DataTypeConverter() {
 };//EndConstructor.
 
 DataTypeConverter.TYPES = {
-    TEXT        : { value: 0, name: "TEXT" },
-    CODE        : { value: 1, name: "CODE"},
+    EMPTY       : { value: 0, name: "NULL"},
 
+    TEXT        : { value: 1, name: "TEXT" },
     NUMBER      : { value: 2, name: "NUMBER" },
     OBJECT      : { value: 3, name: "OBJECT" },
-
-
-    BOOL        : { value: 5, name: "BOOL"},
-    CONST       : { value: 6, name: "CONST" },
-    CATEGORY    : { value: 7, name: "CATEGORY" },
-
-    DATETIME    : { value: 8, name: "DATETIME" },
-
-    EMPTY       : { value: 101, name: "NULL" }
+    DATETIME    : { value: 4, name: "DATETIME" }
 };
 
 DataTypeConverter.SUBTYPES = {
     GEOCOORDINATE   :   { value: 1000, name: "GEOCOORDINATE" },
     GEOJSON         :   { value: 1001, name: "GEOJSON" },
+    BOOL            :   { value: 1002, name: "BOOL"},
+    CONST           :   { value: 1003, name: "CONST" },
+    CATEGORY        :   { value: 1004, name: "CATEGORY" },
 
     PERCENTAGE      :   { value: 1100, name: "PERCENTAGE" },
     LATITUDE        :   { value: 1101, name: "LATITUDE" },
     LONGITUDE       :   { value: 1102, name: "LONGITUDE" }
+
+    /*CODE        : { value: 2000, name: "CODE"},*/
 };
 
 DataTypeConverter.LANGS = {
@@ -125,6 +122,10 @@ DataTypeConverter.prototype = (function () {
 
     var _analyseDataTypes = function(fields) {
         ArrayUtils.IteratorOverKeys(fields, function(field) {
+
+
+            /*
+            //TODO: removed CODE, I don't know whether it must be inserted
             if (field._inferredTypes[DataTypeConverter.TYPES.CODE.name]) {
                 var confidence = field._inferredTypes[DataTypeConverter.TYPES.CODE.name] / field.numOfItems;
                 var _numericalInferredType = field._inferredTypes[DataTypeConverter.TYPES.NUMBER.name];
@@ -133,7 +134,7 @@ DataTypeConverter.prototype = (function () {
                 field.type = DataTypeConverter.TYPES.CODE.name;
                 field.typeConfidence = confidence;
                 return;
-            }
+            }*/
 
             //Infers the field TYPE.
             var max = ArrayUtils.FindMinMax(field._inferredTypes, function (curval, lastval) {
@@ -203,11 +204,6 @@ DataTypeConverter.prototype = (function () {
         if (typeof value === 'object')
             return DataTypeConverter.TYPES.OBJECT;
 
-        //If the value starts with a zero and contains all numbers, it is
-        //inferred as textual content.
-        if (/^0[0-9]+$/.test(value))
-            return DataTypeConverter.TYPES.CODE;
-
         //Try to parse the float.
         var isnumber = DataTypesUtils.FilterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.
@@ -276,6 +272,11 @@ DataTypeConverter.prototype = (function () {
             var isincluded = DataTypeConverter.GEOJSONTYPES.includes(geotype);
             if (isincluded) return DataTypeConverter.SUBTYPES.GEOJSON;
         }
+
+        //If the value starts with a zero and contains all numbers, it is
+        //inferred as textual content.
+        /*if (/^0[0-9]+$/.test(value))
+         return DataTypeConverter.TYPES.CODE;*/
 
         return null;
     };//EndFunction.

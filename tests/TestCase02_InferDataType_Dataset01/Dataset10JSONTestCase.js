@@ -78,6 +78,24 @@ function runTests(jsonTextualContent) {
         //It converts the "types" object to "array"
         var arrFields = ArrayUtils.toFieldsArray(infos.types);
 
+        assert.notEqual(null, infos.warningsTextual);
+        assert.ok(infos.warningsTextual.startsWith("The column"), "EN translation is ok.");
+
+        //FRANCE TRANSLATION.
+        infos = _converter.inferJsonDataType(jsonDataset, path, { language: "FR" });
+        assert.notEqual(null, infos.warningsTextual);
+        assert.ok(infos.warningsTextual.startsWith("Le colum"), "France translation is ok");
+
+        //ITALIAN TRANSLATION.
+        infos = _converter.inferJsonDataType(jsonDataset, path, { language: "IT" });
+        assert.notEqual(null, infos.warningsTextual, "Warning present");
+        assert.ok(infos.warningsTextual.startsWith("La colonna"), "Italian translation is ok");
+
+        //NL TRANSLATION.
+        infos = _converter.inferJsonDataType(jsonDataset, path, { language: "NL" });
+        assert.notEqual(null, infos.warningsTextual, "Warning present");
+        assert.ok(infos.warningsTextual.startsWith("De kolom"), "Dutch translation is ok");
+
         debugger;
     });
 
