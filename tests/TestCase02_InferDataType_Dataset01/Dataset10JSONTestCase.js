@@ -84,7 +84,7 @@ function runTests(jsonTextualContent) {
         //FRANCE TRANSLATION.
         infos = _converter.inferJsonDataType(jsonDataset, path, { language: "FR" });
         assert.notEqual(null, infos.warningsTextual);
-        assert.ok(infos.warningsTextual.startsWith("Le colum"), "France translation is ok");
+        assert.ok(infos.warningsTextual.startsWith("La colonne"), "France translation is ok");
 
         //ITALIAN TRANSLATION.
         infos = _converter.inferJsonDataType(jsonDataset, path, { language: "IT" });
