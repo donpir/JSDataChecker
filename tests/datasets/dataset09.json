@@ -7,7 +7,8 @@
   "Intelligence": "7",
   "Lat": "40.778066",
   "_id": 1,
-  "Speed": "7"
+  "Speed": "7",
+  "currency": "1936,27"
 }, {
   "Strength": "6",
   "Name": "Lasso Boy",
@@ -17,7 +18,8 @@
   "Intelligence": "8",
   "Lat": "40.878066",
   "_id": 2,
-  "Speed": "8"
+  "Speed": "8",
+  "currency": "1937,27"
 }, {
   "Strength": "3",
   "Name": "Mini Girl",
@@ -27,7 +29,8 @@
   "Intelligence": "9",
   "Lat": "40.578066",
   "_id": 3,
-  "Speed": "8"
+  "Speed": "8",
+  "currency": "1938,27"
 }, {
   "Strength": "7",
   "Name": "Rocket Woman",
@@ -37,7 +40,8 @@
   "Intelligence": "6",
   "Lat": "40.478066",
   "_id": 4,
-  "Speed": "9"
+  "Speed": "9",
+  "currency": "1939,27"
 }, {
   "Strength": "8",
   "Name": "Man Boy",
@@ -47,7 +51,8 @@
   "Intelligence": "8",
   "Lat": "40.378066",
   "_id": 5,
-  "Speed": "8"
+  "Speed": "8",
+  "currency": "1940,27"
 }, {
   "Strength": "9",
   "Name": "Star Man",
@@ -57,7 +62,8 @@
   "Intelligence": "7",
   "Lat": "40.278066",
   "_id": 6,
-  "Speed": "7"
+  "Speed": "7",
+  "currency": "1941,27"
 }, {
   "Strength": "6",
   "Name": "Voltage Woman",
@@ -67,7 +73,8 @@
   "Intelligence": "7",
   "Lat": "40.778066",
   "_id": 7,
-  "Speed": "9"
+  "Speed": "9",
+  "currency": "1942,27"
 }, {
   "Strength": "8",
   "Name": "Angle Man",
@@ -77,5 +84,6 @@
   "Intelligence": "9",
   "Lat": "40.678066",
   "_id": 8,
-  "Speed": "6"
+  "Speed": "6",
+  "currency": "1943,27"
 }]

@@ -372,15 +372,19 @@ DataTypeConverter.prototype = (function () {
     return {
         constructor: DataTypeConverter,
 
+
         /**
-         * It parses the json in input and converts the content
-         * in according to the inferred data types.
-         * @param json
-         * @param path Format: field1->field2->field3
+         *
+         * @param metadata Previous information on the inferred types.
+         * @param options Some options to cast the data.
+         *     - castThresholdConfidence: for which threshold the library must perform the cast (default 1)
+         *     - makeChangesToDataset: is a boolean value, to indicate whether the library can do improvement on the storage
+         *     values, for instance, numbers with the comma will be replaced with the dot.
+         * @returns {*}
          */
         cast: function(metadata, options) {
             if (typeof options === 'undefined' || options == null)
-                options = { castThresholdConfidence: 1, castIfNull: false };
+                options = { castThresholdConfidence: 1, castIfNull: false, makeChangesToDataset: false };
             return this.convert(metadata, options);
         },
 
@@ -403,7 +407,7 @@ DataTypeConverter.prototype = (function () {
             var datasetMissingValues = 0;
 
             if (typeof options === 'undefined' || options == null)
-                options = { castThresholdConfidence: 1, castIfNull: false };
+                options = { castThresholdConfidence: 1, castIfNull: false, makeChangesToDataset: false };
 
             jsonTraverse(metadata.dataset, metadata.fieldKeys, function(value, key, traversedKeys, rowIndex) {
                 var inferredType = metadata.types[traversedKeys];
@@ -422,6 +426,9 @@ DataTypeConverter.prototype = (function () {
                 //var isCast = !(options.castIfNull == false && inferredType.totalNullValues > 0);
                 var isCast = inferredType.typeConfidence >= options.castThresholdConfidence;
                 if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name && isCast) {
+                    if (isNaN(DataTypesUtils.FilterNumber(value)) == false && typeof value === "string")
+                        value = value.replace(',', '.');
+
                     var number = parseFloat(value);
 
                     if (isNaN(number)) {

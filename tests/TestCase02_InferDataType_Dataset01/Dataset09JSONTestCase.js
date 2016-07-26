@@ -28,8 +28,8 @@ function runTests(jsonTextualContent) {
         assert.equal(actualType, expectedType, "Check inferred type on " + key);
 
         //Converts the dataset.
-        var converted = _converter.convert(infos);
-
+        var converted = _converter.cast(infos);
+        assert.ok(typeof converted.dataset[0].currency === "number", "Converted to number");
         debugger;
     });
 
