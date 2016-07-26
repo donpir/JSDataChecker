@@ -52,7 +52,23 @@ QUnit.test("TestIsNumber", function(assert) {
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
 
+    var value = "-1936.27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
+    var value = "+1936.27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
     var value = "1936,27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
+    var value = "-1936,27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
+    var value = "+1936,27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
 
