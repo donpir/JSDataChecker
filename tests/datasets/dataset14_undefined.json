@@ -1,0 +1,643 @@
+{
+  "nhits": 56,
+  "parameters": {
+    "dataset": ["repartitiondeladetteparpreteursau3112n-feuille1"],
+    "timezone": "UTC",
+    "rows": 10000,
+    "format": "json"
+  },
+  "records": [
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "253eca3a7bdcc1773a668d27932ec8e75430458a",
+      "fields": {
+        "capital_restant_du": 2400000.0,
+        "annee": "2008",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "acd92b1ab4ed0ba05f8d0edde42a212a251c4398",
+      "fields": {
+        "capital_restant_du": 4483333.33,
+        "annee": "2008",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "f50a3530fc8595948862393b48ee85dd70862eac",
+      "fields": {
+        "capital_restant_du": 1960765.28,
+        "annee": "2008",
+        "preteur": "Cr\u00e9dit Mutuel"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "924cc5f5be43f4b5b47ab20e539ba6af5f39f1dd",
+      "fields": {
+        "capital_restant_du": 16188489.95,
+        "annee": "2009",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "8ff5fbe6f1fd3ec16f9fbae33ea593922bca4d76",
+      "fields": {
+        "capital_restant_du": 1020268.58,
+        "annee": "2009",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "9d773d1603a41ab666d670f17b0970ae97454b22",
+      "fields": {
+        "capital_restant_du": 1768403.48,
+        "annee": "2009",
+        "preteur": "Cr\u00e9dit Mutuel"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "c0d2bcee8e60ad252c8e796cfc25bf7e2b32a0a6",
+      "fields": {
+        "capital_restant_du": 1600000.0,
+        "annee": "2010",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "92e25655a009e9001c6272221104b78d307c1a31",
+      "fields": {
+        "capital_restant_du": 287701.78,
+        "annee": "2010",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "e75847075b6e117ca32b3e9bf2f013617456f080",
+      "fields": {
+        "capital_restant_du": 1570113.11,
+        "annee": "2010",
+        "preteur": "Cr\u00e9dit Mutuel"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "4d3c0bc7689d309665c593e968d338c688970f23",
+      "fields": {
+        "capital_restant_du": 855024.52,
+        "annee": "2011",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "9bb0ae691934a7623a4f2322f2e81448b611c694",
+      "fields": {
+        "capital_restant_du": 3308333.32,
+        "annee": "2011",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "d91ab6c2bfc5878422f6d0d0cb1368204b1cc442",
+      "fields": {
+        "capital_restant_du": 33651.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2017-01",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "ffc8b79bf8735d5ed85010fd2e10a1e4df3e44b6",
+      "fields": {
+        "capital_restant_du": 86895.97,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2022-01",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "e271a38fa2507bcea0b6c60757cb7d8c18fa8635",
+      "fields": {
+        "capital_restant_du": 129000.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2024-12",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "b5b09e27386ae094699bed4167a71d0504c664be",
+      "fields": {
+        "capital_restant_du": 162144.74,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2022-01",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "2188c0feadcc5d9b4f7f043e03fe1a79aa2e5b53",
+      "fields": {
+        "capital_restant_du": 172621.06,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2020-01",
+        "annee": "2014",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92",
+        "taux": 2.85
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "cff42ce733fa0810272bcb74f401f6cdd5fab483",
+      "fields": {
+        "capital_restant_du": 46127.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "f255cc4024f86995e2bc74ea26fc5e3f36d5a6c4",
+      "fields": {
+        "capital_restant_du": 4091666.66,
+        "annee": "2009",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "9e19a0b89b81ca981f90ad4e4cd815b28f11bc12",
+      "fields": {
+        "capital_restant_du": 1200000.0,
+        "annee": "2011",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "3a3094bacb65c0ecc2c64717339fa7486d880030",
+      "fields": {
+        "capital_restant_du": 258931.6,
+        "annee": "2011",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "72f1d0b416d615583bf0ec8b3ddfa74979673add",
+      "fields": {
+        "capital_restant_du": 1365711.45,
+        "annee": "2011",
+        "preteur": "Cr\u00e9dit Mutuel"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "80c5d7417773939d1e44795d7df311be39f50c61",
+      "fields": {
+        "capital_restant_du": 800000.0,
+        "annee": "2012",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "be7421481b1fbcbd7739caca5be5265525e67fb4",
+      "fields": {
+        "capital_restant_du": 125000.0,
+        "annee": "2013",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "d94e371b85b231e0b69db7ad71695ff4a267a629",
+      "fields": {
+        "capital_restant_du": 134421.84,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2024-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "32d600833d20fe560c6a42cf50851d1a6d7306fa",
+      "fields": {
+        "capital_restant_du": 143850.88,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2020-01",
+        "annee": "2015",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92",
+        "taux": 2.85
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "bcc03c57e17dabf36c72ebc7f6568e2a5e77091b",
+      "fields": {
+        "capital_restant_du": 316471.96,
+        "annee": "2009",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "854a0b5bef3f161109e038312171b122eeca6da6",
+      "fields": {
+        "capital_restant_du": 937646.55,
+        "annee": "2010",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "d06f601d69bb59bb8bc690a435d853b03e7b363b",
+      "fields": {
+        "capital_restant_du": 9128714.06,
+        "annee": "2011",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "cebe20123b8f3e86a6a308f5b93581dd72ef659a",
+      "fields": {
+        "capital_restant_du": 772362.11,
+        "annee": "2012",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "d6d7ee6d0cfd6a9262ffee065d6a137a1d4ce6bc",
+      "fields": {
+        "capital_restant_du": 87453.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-03",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "941b1f080dd50386caa66fb9ec21334870bcd83b",
+      "fields": {
+        "capital_restant_du": 149671.84,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2024-11",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "99947a0c2ef8642dbeba4355e3f48ce50cca584a",
+      "fields": {
+        "capital_restant_du": 37751.35,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "3b84be48ece33833b74d89932bfd6f7e2b06d17d",
+      "fields": {
+        "capital_restant_du": 396059.18,
+        "annee": "2008",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "2255f9068857fbc0401eb24b51aeb5c37411fc26",
+      "fields": {
+        "capital_restant_du": 12605816.58,
+        "annee": "2010",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "0e89cfbe609ebb19c7fca75011656690d43b3b2d",
+      "fields": {
+        "capital_restant_du": 229551.37,
+        "annee": "2010",
+        "preteur": "Soci\u00e9t\u00e9 G\u00e9n\u00e9rale"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "2f128ec7a59a536a3ea79e4b058e3f0612db4353",
+      "fields": {
+        "capital_restant_du": 5755897.58,
+        "annee": "2012",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "1abda0906c49ca645bb61055819e61d7fd2d473a",
+      "fields": {
+        "capital_restant_du": 2916666.65,
+        "annee": "2012",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "0d5e67a58a6fff134b3cd002e1b708373b27c44c",
+      "fields": {
+        "capital_restant_du": 1155010.14,
+        "annee": "2012",
+        "preteur": "Cr\u00e9dit Mutuel"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "eb5a0d8138fb4510b92134521104a238c5b7cd0c",
+      "fields": {
+        "capital_restant_du": 2566666.64,
+        "annee": "2013",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "097a4641f08068e148e5a863367de7ac8432f929",
+      "fields": {
+        "capital_restant_du": 693374.37,
+        "annee": "2013",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "27ef70a0fbf3579832b13975bb144753879c220f",
+      "fields": {
+        "capital_restant_du": 400000.0,
+        "annee": "2013",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "0baad7fea6253a8b49d5cb7df30fb10b8ee53dfb",
+      "fields": {
+        "capital_restant_du": 51887.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-10",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "3086d27e2848cca23328098b037aa3e28de766d8",
+      "fields": {
+        "capital_restant_du": 21455.08,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2017-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "14d46bfc22fd745a92745ad49109c6405301392c",
+      "fields": {
+        "capital_restant_du": 77733.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "9bddc2fe1d37d7e25cde892e015d5f9138202da0",
+      "fields": {
+        "capital_restant_du": 129000.0,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2025-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "e5b9183c0c35e2fa10777bfa0c837521cf06e735",
+      "fields": {
+        "capital_restant_du": 19419985.28,
+        "annee": "2008",
+        "preteur": "Caisse Fran\u00e7aise de Financement Local (ex Dexia)"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "80dbef888351aeb691fb5b19bd17cce0a0069184",
+      "fields": {
+        "capital_restant_du": 1102890.61,
+        "annee": "2008",
+        "preteur": "CAF 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "ab66c697972d09c8e7d84c52c402ac98807e18cb",
+      "fields": {
+        "capital_restant_du": 1469159.97,
+        "annee": "2008",
+        "preteur": "Soci\u00e9t\u00e9 G\u00e9n\u00e9rale"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "5a42c12237aa2a1d3c0fba30528712a2cb22acba",
+      "fields": {
+        "capital_restant_du": 2000000.0,
+        "annee": "2009",
+        "preteur": "Caisse d'Epargne"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "4115474b091b171d2b83abd48c2c7fc3cabf05bd",
+      "fields": {
+        "capital_restant_du": 863714.83,
+        "annee": "2009",
+        "preteur": "Soci\u00e9t\u00e9 G\u00e9n\u00e9rale"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "ed6f3c7e46769813337c17c864e428ae7cee140c",
+      "fields": {
+        "capital_restant_du": 3699999.99,
+        "annee": "2010",
+        "preteur": "Cr\u00e9dit Agricole"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "be43791e1a8564f828b4a9d1fa583d865d263600",
+      "fields": {
+        "capital_restant_du": 230161.42,
+        "annee": "2012",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "fc2a02110df2dced3f09af4b566c84122fd4a81c",
+      "fields": {
+        "capital_restant_du": 201391.24,
+        "annee": "2013",
+        "preteur": "Conseil g\u00e9n\u00e9ral 92"
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "91b2402187fe12ef7e2b1befb8942c5338a6bf2c",
+      "fields": {
+        "capital_restant_du": 42683.08,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2023-10",
+        "annee": "2014",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "0d74ee9c7686d51143e696b3cda3a1fda64ba5ad",
+      "fields": {
+        "capital_restant_du": 76033.98,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2022-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    },
+    {
+      "datasetid": "repartitiondeladetteparpreteursau3112n-feuille1",
+      "recordid": "1ca7a0a5fbc75974dfd69884bd522f94fba808cd",
+      "fields": {
+        "capital_restant_du": 141876.64,
+        "cbc_charte_bonne_conduite": "1A",
+        "type": "Fixe",
+        "date_de_fin": "2022-01",
+        "annee": "2015",
+        "preteur": "CAF 92",
+        "taux": 0.0
+      },
+      "record_timestamp": "2016-07-25T22:00:29+00:00"
+    }
+  ]
+}

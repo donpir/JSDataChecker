@@ -107,6 +107,13 @@ DataTypesUtils.FilterFloat = function (value) {
     return NaN;
 };//EndFunction.
 
+DataTypesUtils.FilterNumber = function (value) {
+    if(/^(\-|\+)?((0|([1-9][0-9]*))((\.|,)[0-9]+)?|Infinity)$/
+            .test(value))
+        return Number(value);
+    return NaN;
+};//EndFunction.
+
 /**
  * Solution from here:
  * http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number

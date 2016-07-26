@@ -205,7 +205,8 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.OBJECT;
 
         //Try to parse the float.
-        var isnumber = DataTypesUtils.FilterFloat(value);
+        //var isnumber = DataTypesUtils.FilterFloat(value);
+        var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             //if (-90.0 <= isnumber && isnumber <= 90.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)
@@ -529,6 +530,25 @@ DataTypeConverter.prototype = (function () {
                 }
             }//EndWhile.
 
+
+            //Calculates the number of rows in the dataset.
+            var _numOfRows = 0;
+            ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
+                if (fieldType.numOfItems > _numOfRows)
+                    _numOfRows = fieldType.numOfItems;
+            });
+
+            //Computes the number of null values.
+            ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
+                if (!fieldType._inferredTypes.hasOwnProperty(DataTypeConverter.TYPES.EMPTY.name)) {
+                    //Initialises the field.
+                    fieldType._inferredTypes[DataTypeConverter.TYPES.EMPTY.name] = 0;
+                }
+
+                fieldType._inferredTypes[DataTypeConverter.TYPES.EMPTY.name] = fieldType._inferredTypes[DataTypeConverter.TYPES.EMPTY.name] +  (_numOfRows - fieldType.numOfItems);
+            });
+
+            //Infers the data type.
             _analyseDataTypes(fieldsType);
 
             //Data quality.
