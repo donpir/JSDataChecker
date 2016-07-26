@@ -206,7 +206,7 @@ DataTypeConverter.prototype = (function () {
 
         //Try to parse the float.
         //var isnumber = DataTypesUtils.FilterFloat(value);
-        var isnumber = DataTypesUtils.FilterNumber(value);
+        var isnumber = DataTypesUtils.FilterFloat(value);
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             //if (-90.0 <= isnumber && isnumber <= 90.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)

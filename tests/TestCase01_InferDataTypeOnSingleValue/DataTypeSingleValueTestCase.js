@@ -37,14 +37,39 @@ QUnit.test( "TestDate", function( assert ) {
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.NUMBER, "Text /" + value + "/ correctly recognized.");
 
-    var value = "1936,27";
+    /*var value = "1936,27";
     var dt = converter.inferDataTypeOfValue(value);
-    assert.equal(dt, DataTypeConverter.TYPES.NUMBER, "Text /" + value + "/ correctly recognized.");
+    assert.equal(dt, DataTypeConverter.TYPES.NUMBER, "Text /" + value + "/ correctly recognized.");*/
 
 });
 
 QUnit.test("TestIsNumber", function(assert) {
+    var value = "1936";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
+    var value = "1936.27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.ok(isnumber, value + " recognized.");
+
     var value = "1936,27";
     var isnumber = DataTypesUtils.FilterNumber(value);
-    
+    assert.ok(isnumber, value + " recognized.");
+
+    var value = "1.936.27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.notOk(isnumber, value + " recognized.");
+
+    var value = "1,936,27";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.notOk(isnumber, value + " recognized.");
+
+    var value = "1936.";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.notOk(isnumber, value + " recognized.");
+
+    var value = "1936,";
+    var isnumber = DataTypesUtils.FilterNumber(value);
+    assert.notOk(isnumber, value + " recognized.");
+
 });
