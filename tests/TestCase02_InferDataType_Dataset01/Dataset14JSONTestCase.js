@@ -31,6 +31,10 @@ function runTests(jsonTextualContent) {
         var expectedNullValues = 38;
         assert.equal(actualNullValues, expectedNullValues, "Checked the number of null values");
 
+        //Checking error messages.
+        assert.ok(infos.types[key].errorsDescription, "Null checking");
+        assert.ok(infos.types[key].errorsDescription.length > 0, "Checking error message length");
+        assert.ok(infos.warningsTextual.length > 0, "Checking error message length");
         debugger;
 
     });

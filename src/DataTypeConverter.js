@@ -614,6 +614,7 @@ DataTypeConverter.prototype = (function () {
                 descr = descr.replace(/%COL_NAME/g, fieldType.name);
                 descr = descr.replace(/%COL_TYPE/g, fieldType.type);
                 descr = descr.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
+                description = description + " " + descr;
 
                 /*if (fieldType.totalNullValues > 0) {
                     var descr = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";
@@ -625,8 +626,8 @@ DataTypeConverter.prototype = (function () {
                 if (description.length > 0)
                     description += ".";*/
 
-                fieldType.errorsDescription = description;
-                warningsTextual += description;
+                fieldType.errorsDescription = description.trim();
+                warningsTextual += description.trim();
             });
 
             var metadata = { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality, warningsTextual: warningsTextual };
