@@ -206,7 +206,7 @@ DataTypeConverter.prototype = (function () {
 
         //Try to parse the float.
         //var isnumber = DataTypesUtils.FilterFloat(value);
-        var isnumber = DataTypesUtils.FilterFloat(value);
+        var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             //if (-90.0 <= isnumber && isnumber <= 90.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)
@@ -236,7 +236,8 @@ DataTypeConverter.prototype = (function () {
         //GEOCOORDINATE
         if (Array.isArray(value) && value.length == 2) {//It recognises the LAT LNG as array of two values.
             //Checks if the two array's values are numbers.
-            if ( DataTypesUtils.FilterFloat(value[0]) != NaN && DataTypesUtils.FilterFloat(value[1]) != NaN  )
+            //if ( DataTypesUtils.FilterFloat(value[0]) != NaN && DataTypesUtils.FilterFloat(value[1]) != NaN  )
+            if ( DataTypesUtils.FilterNumber(value[0]) != NaN && DataTypesUtils.FilterNumber(value[1]) != NaN  )
                 if (DataTypesUtils.DecimalPlaces(value[0]) > 4 && DataTypesUtils.DecimalPlaces(value[1]) > 4 )
                     return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
         }//EndIf.
@@ -249,7 +250,8 @@ DataTypeConverter.prototype = (function () {
         }
 
         //Try to parse the float.
-        var isnumber = DataTypesUtils.FilterFloat(value);
+        //var isnumber = DataTypesUtils.FilterFloat(value);
+        var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)

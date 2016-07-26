@@ -108,6 +108,14 @@ DataTypesUtils.FilterFloat = function (value) {
 };//EndFunction.
 
 DataTypesUtils.FilterNumber = function (value) {
+    //Check immediatly if it is a classical number.
+    var valnum = DataTypesUtils.FilterFloat(value);
+    if (isNaN(valnum) == false) return valnum;
+
+    //Checks if the value is a string.
+    if (typeof value !== "string")
+        return NaN;
+
     var parts = value.split(/(,|\.)/g);
 
     //Find the smallest symbol.
