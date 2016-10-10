@@ -1,6 +1,4 @@
 
-
-
 var JDC_LNG = {
 
     "key_declaretype": {
