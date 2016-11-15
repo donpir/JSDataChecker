@@ -30,5 +30,7 @@ Briefly with this license:
   
 ## Publications
 
+Please, refer to this paper for details on the library and its use case:
+
 - _D. Pirozzi, V. Scarano_, **_Support citizens in Visualizing Open Data_**, 20th International Conference on Information Visualisation, Lisbon (Portugal), 19-22 July 2016 
  
