@@ -28,5 +28,7 @@ Briefly with this license:
  - Freedom to modify and distribute modified copies of DataChecker, distributing the source code and releasing it with the same LGPL license;
  - You can dynamically (not statically) link DataChecker library in a proprietary software, keeping the JS files as they are.
   
- 
+## Publications
+
+- _D. Pirozzi, V. Scarano_, **_Support citizens in Visualizing Open Data_**, 20th International Conference on Information Visualisation, Lisbon (Portugal), 19-22 July 2016 
  
