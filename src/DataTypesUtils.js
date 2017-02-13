@@ -148,7 +148,8 @@ DataTypesUtils.FilterNumber = function (value) {
     for (var str; i<splitted.length, str=splitted[i]; i++) {
         if (str == '.') numOfDots++;
         else if (str == ',') numOfComma++;
-        else if (/^(0|([1-9][0-9]*))$/g.test(str) == false)
+        //else if (/^(0|([1-9][0-9]*))$/g.test(str) == false)
+        else if (/^(0|([0-9]+))$/g.test(str) == false)
             return NaN;
     }//EndFor.
 
