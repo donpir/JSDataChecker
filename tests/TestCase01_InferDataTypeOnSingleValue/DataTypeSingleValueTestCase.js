@@ -92,5 +92,4 @@ QUnit.test("TestIsNumber", function(assert) {
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
 
-
 });
