@@ -577,6 +577,13 @@ DataTypeConverter.prototype = (function () {
             var totFullValues = quality.totalValues - quality.totalNullValues;
             quality.completeness = Math.round(totFullValues / quality.totalValues * 100) / 100;
 
+            //Translates the type.
+            ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
+                var _type = fieldType.type;
+                var _lngkey = ('key_type' + _type).toLowerCase();
+                fieldType.typeLabel = JDC_LNG[_lngkey][options.language];
+            });
+
             //Converts confidence to description.
             var warningsTextual = "";
             ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {

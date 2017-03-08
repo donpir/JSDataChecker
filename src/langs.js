@@ -60,7 +60,7 @@ var JDC_LNG = {
     "key_typenumber": {
         "EN": "number",
         "IT": "numero",
-        "FR": "nombre",
+        "FR": "chiffres",
         "NL": "aantal"
     },
 
@@ -79,6 +79,13 @@ var JDC_LNG = {
     },
 
     "key_typeempty": {
+        "EN": "empty",
+        "IT": "vuoto",
+        "FR": "vide",
+        "NL": "leeg"
+    },
+
+    "key_typenull": {
         "EN": "empty",
         "IT": "vuoto",
         "FR": "vide",

@@ -19,7 +19,7 @@ function runTests(jsonTextualContent) {
 
         var _converter = new DataTypeConverter();
         var path = [ "records", "fields", "*" ];
-        var infos = _converter.inferJsonDataType(jsonDataset, path);
+        var infos = _converter.inferJsonDataType(jsonDataset, path, { language: "it" });
 
         //type column.
         var key = 'records,fields,taux';
@@ -30,6 +30,7 @@ function runTests(jsonTextualContent) {
         var actualNullValues = infos.types[key].totalNullValues;
         var expectedNullValues = 38;
         assert.equal(actualNullValues, expectedNullValues, "Checked the number of null values");
+        assert.equal(infos.types[key].typeLabel, "numero", "Check the translation");
 
         //Checking error messages.
         assert.ok(infos.types[key].errorsDescription, "Null checking");
