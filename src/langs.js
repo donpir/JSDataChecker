@@ -104,6 +104,62 @@ var JDC_LNG = {
         "IT": "longitudine",
         "FR": "longitude",
         "NL": "lengtegraad"
+    },
+
+    "key_subtypegeocoordinate": {
+        "EN": "coordinate",
+        "IT": "coordinate",
+        "FR": "coordonnées",
+        "NL": "coordinate"
+    },
+
+    "key_subtypegeojson": {
+        "EN": "geojson",
+        "IT": "geojson",
+        "FR": "geojson",
+        "NL": "geojson"
+    },
+
+    "key_subtypebool": {
+        "EN": "bool",
+        "IT": "bool",
+        "FR": "bool",
+        "NL": "bool"
+    },
+
+    "key_subtypeconst": {
+        "EN": "const",
+        "IT": "costante",
+        "FR": "const",
+        "NL": "const"
+    },
+
+    "key_subtypecategory": {
+        "EN": "category",
+        "IT": "categoria",
+        "FR": "category",
+        "NL": "category"
+    },
+
+    "key_subtypepercentage": {
+        "EN": "percentage",
+        "IT": "percentuale",
+        "FR": "percentage",
+        "NL": "percentage"
+    },
+
+    "key_subtypelatitude": {
+        "EN": "latitude",
+        "IT": "latitudine",
+        "FR": "latitude",
+        "NL": "latitude"
+    },
+
+    "key_subtypelongitude": {
+        "EN": "longitude",
+        "IT": "longitudine",
+        "FR": "longitude",
+        "NL": "longitude"
     }
 
 };
