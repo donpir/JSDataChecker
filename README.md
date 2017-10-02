@@ -15,6 +15,8 @@ Recognised types:
  - JSON;
  - GEOJSON.
 
+It also provides a module to be used in nodejs.
+
 ## Documentation
 
 See wiki pages [here](https://github.com/donpir/JSDataChecker/wiki).
