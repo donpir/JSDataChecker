@@ -452,8 +452,12 @@ DataTypeConverter.prototype = (function () {
         /**
          * It parses the json and infers the data types.
          * @param json
-         * @param path Array of field keys/names.
-         * @param options Infer Data Type options, in particular the threshold value for the confidence.
+         * @param The json (it is mainly a treee) can be very big and one would not analyse it as whole
+         * but only a part of it. One can decide to analyse only a part of the json by indicating the path
+         * within the tree to analyse. The parameter fieldKeys is an array with keys within the json to analyse.
+         * @param options to use during the Infer Data Type process, in particular
+         *     - threshold value for the confidence;
+         *     - language of messages.
          */
         inferJsonDataType: function (json, fieldKeys, options) {
 
@@ -467,6 +471,7 @@ DataTypeConverter.prototype = (function () {
                 options.language = DataTypeConverter.LANGS.EN.name;
             else
                 options.language = options.language.toUpperCase();
+
 
             var stack = [];
             var fieldsType = {};
@@ -482,8 +487,9 @@ DataTypeConverter.prototype = (function () {
             while (stack.length > 0) {
                 var stackTask = stack.pop();
                 var item = stackTask.item;
-                var fieldKeyIndex = stackTask.fieldKeyIndex;
-                var fieldKey = fieldKeys[fieldKeyIndex];
+
+                var fieldKeyIndex = stackTask.fieldKeyIndex; //Index within the fieldKeys.
+                var fieldKey = fieldKeys[fieldKeyIndex]; //Value within the filedKeys corresponding to the fieldKeyIndex.
 
                 //Test fieldKey Value.
                 //This if is executed when the fieldKey is * and the dataset it is NOT an ARRAY.
@@ -527,9 +533,9 @@ DataTypeConverter.prototype = (function () {
                     continue;
                 }
 
-                //This is executed when the fieldKey is not *
-                var jsonSubtree = item[fieldKey];
-                if (Array.isArray(jsonSubtree)) { //It is an array.
+                //This is executed when the fieldKey is not '*'.
+                var jsonSubtree = item[fieldKey]; //Takes the json subtree.
+                if (Array.isArray(jsonSubtree)) { //It is an array, hence loops through the array and takes its items.
                     for (var j=0; j<jsonSubtree.length; j++) {
                         var jsonItem = jsonSubtree[j];
                         stack.push({ item: jsonItem, fieldKeyIndex: fieldKeyIndex+1 });
@@ -705,7 +711,22 @@ DataTypeConverter.prototype = (function () {
          */
         inferDataSubTypeOfValue: function (value) {
             return _processInferSubType(value);
+        },//EndFunction.
+
+        /**
+         *
+         * @param metadata
+         *     - metadata.dataset = contains the original dataset;
+         *     - metadata.fieldKeys = contains the array with the list of fields to traverse the json tree;
+         *     - metadata.types = contains the inferred types for each key;
+         *     -
+         * @param options
+         */
+        listOfCellsWithWarnings: function (metadata, options) {
+
         }//EndFunction.
 
     };
 })();
+
+
