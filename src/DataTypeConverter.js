@@ -644,7 +644,7 @@ DataTypeConverter.prototype = (function () {
                             _descr2 = _capitalizeFirstLetter(JDC_LNG['key_notoftype_plural'][options.language]) + ".";
 
                         var descr = _descr1 + " " + _descr2;
-                        descr = descr.replace(/%COL_NAME/g, fieldType.name);
+                        descr = descr.replace(/%COL_NAME/g, fieldType.label);
                         descr = descr.replace(/%COL_TYPE/g, fieldType.type);
                         descr = descr.replace(/%COL_ERRORS/g, incorrect);
 
@@ -662,7 +662,7 @@ DataTypeConverter.prototype = (function () {
                 else if (fieldType.totalNullValues > 1 )
                     descr = _capitalizeFirstLetter(JDC_LNG['key_emptyvalue_plural'][options.language]) + ".";
 
-                descr = descr.replace(/%COL_NAME/g, fieldType.name);
+                descr = descr.replace(/%COL_NAME/g, fieldType.label);
                 descr = descr.replace(/%COL_TYPE/g, fieldType.type);
                 descr = descr.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
                 description = description + " " + descr;
