@@ -2,38 +2,38 @@
 var JDC_LNG = {
 
     "key_declaretype": {
-        "EN": "the column <%COL_NAME> is of type <%COL_TYPE>",
-        "IT": "la colonna <%COL_NAME> è di tipo <%COL_TYPE>",
-        "FR": "le colonne <%COL_NAME> est de type <%COL_TYPE>",
-        "NL": "de kolom <%COL_NAME> is van het type <%COL_TYPE>"
+        "EN": "the column '%COL_NAME' is of type '%COL_TYPE'",
+        "IT": "la colonna '%COL_NAME' è di tipo '%COL_TYPE'",
+        "FR": "le colonne '%COL_NAME' est de type '%COL_TYPE'",
+        "NL": "de kolom '%COL_NAME' is van het type '%COL_TYPE'"
     },
 
     "key_notoftype_singular": {
-        "EN": "a value is not <%COL_TYPE>",
-        "IT": "un valore non è un <%COL_TYPE>",
-        "FR": "La valeur n'est pas <%COL_TYPE>",
-        "NL": "een waarde is niet <%COL_TYPE>"
+        "EN": "a value is not '%COL_TYPE'",
+        "IT": "un valore non è un '%COL_TYPE'",
+        "FR": "La valeur n'est pas '%COL_TYPE'",
+        "NL": "een waarde is niet '%COL_TYPE'"
     },
 
     "key_notoftype_plural": {
-        "EN": "%COL_ERRORS values are not <%COL_TYPE>",
-        "IT": "%COL_ERRORS valori non sono di tipo <%COL_TYPE>",
-        "FR": "%COL_ERRORS les valeurs ne sont pas de type <%COL_TYPE>",
-        "NL": "%COL_ERRORS waarden niet <%COL_TYPE>"
+        "EN": "%COL_ERRORS values are not '%COL_TYPE'",
+        "IT": "%COL_ERRORS valori non sono di tipo '%COL_TYPE'",
+        "FR": "%COL_ERRORS les valeurs ne sont pas de type '%COL_TYPE'",
+        "NL": "%COL_ERRORS waarden niet '%COL_TYPE'"
     },
 
     "key_emptyvalue_singolar": {
-        "EN": "the column <%COL_NAME> has an empty value",
-        "IT": "la colonna <%COL_NAME> ha un valore vuoto",
-        "FR": "La colonne <%COL_NAME>  a une valeur vide",
-        "NL": "de kolom <%COL_NAME> heeft een lege waarde"
+        "EN": "the column '%COL_NAME' has an empty value",
+        "IT": "la colonna '%COL_NAME' ha un valore vuoto",
+        "FR": "La colonne '%COL_NAME'  a une valeur vide",
+        "NL": "de kolom '%COL_NAME' heeft een lege waarde"
     },
 
     "key_emptyvalue_plural": {
-        "EN": "the column <%COL_NAME> has <%COL_NULLVALUES> empty values",
-        "IT": "la colonna <%COL_NAME> ha <%COL_NULLVALUES> valori vuoti",
-        "FR": "La colonne <%COL_NAME> a la valeur <%COL_NULLVALUES> qui est vide",
-        "NL": "de kolom <%COL_NAME> heeft <%COL_NULLVALUES> lege waarde"
+        "EN": "the column '%COL_NAME' has '%COL_NULLVALUES' empty values",
+        "IT": "la colonna '%COL_NAME' ha '%COL_NULLVALUES' valori vuoti",
+        "FR": "La colonne '%COL_NAME' a la valeur '%COL_NULLVALUES' qui est vide",
+        "NL": "de kolom '%COL_NAME' heeft '%COL_NULLVALUES' lege waarde"
     },
 
     "key_type": {
