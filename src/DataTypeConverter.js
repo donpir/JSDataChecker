@@ -499,7 +499,11 @@ DataTypeConverter.prototype = (function () {
 
                     ArrayUtils.IteratorOverKeys(item, function (item, key) {
                         var curKey = sProcessedKeys + ((sProcessedKeys.length == 0) ? "" : ",") + key;
-                        var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, _inferredTypes: [], _inferredSubTypes: [], _inferredValues: [], numOfItems: 0 });
+
+                        var _label = curKey;
+                        if (json.hasOwnProperty('fields')) _label = json.fields[key].label;
+
+                        var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, label: _label, _inferredTypes: [], _inferredSubTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
 
                         ///TYPE
