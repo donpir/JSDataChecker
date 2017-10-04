@@ -36,6 +36,13 @@ var JDC_LNG = {
         "NL": "de kolom '%COL_NAME' heeft '%COL_NULLVALUES' lege waarde"
     },
 
+    "key_seewrongrows": {
+        "EN": "check rows '%LIST_WRONG_ROWS'",
+        "IT": "controlla le righe '%LIST_WRONG_ROWS'",
+        "FR": "check rows '%LIST_WRONG_ROWS'",
+        "NL": "check rows '%LIST_WRONG_ROWS'"
+    },
+
     "key_type": {
         "EN": "type",
         "IT": "tipo",

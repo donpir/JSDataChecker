@@ -467,11 +467,17 @@ DataTypeConverter.prototype = (function () {
             if (options.hasOwnProperty("thresholdConfidence") == false)
                 options.thresholdConfidence = 1;
 
+            if (options.hasOwnProperty("filterOnThresholdConfidence") == false)
+                options.filterOnThresholdConfidence = true;
+
+
             if (options.hasOwnProperty("language") == false)
                 options.language = DataTypeConverter.LANGS.EN.name;
             else
                 options.language = options.language.toUpperCase();
 
+            if (options.hasOwnProperty('trackCellsForEachType') == false)
+                options.trackCellsForEachType = false;
 
             var stack = [];
             var fieldsType = {};
@@ -511,6 +517,12 @@ DataTypeConverter.prototype = (function () {
                         ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)
                             ArrayUtils.TestAndIncrement(fieldType._inferredValues, item);
+
+                        ///Tracks for each type X the cells in the dataset of that type.
+                        if (options.trackCellsForEachType) {
+                            var listCells = ArrayUtils.TestAndInitializeKey(fieldType._inferredTypes, inferredType.name + "_cells", []);
+                            listCells.push({ columnKey: key, rowIndex: numOfRows });
+                        }
 
                         ///SUBTYPE
                         var inferredSubType = _processInferSubType(item);
@@ -647,10 +659,26 @@ DataTypeConverter.prototype = (function () {
                         if (incorrect > 1)
                             _descr2 = _capitalizeFirstLetter(JDC_LNG['key_notoftype_plural'][options.language]) + ".";
 
-                        var descr = _descr1 + " " + _descr2;
+                        var _descr3 = ""; var _LISTWRONGROS = "";
+
+                        if (options.trackCellsForEachType) {
+                            _descr3 = _capitalizeFirstLetter(JDC_LNG['key_seewrongrows'][options.language]) + ".";
+                            var _cells = fieldType._inferredTypes[fieldType.type + "_cells"];
+                            for (var icell=0; icell<_cells.length; icell++) {
+                                var _cell = _cells[icell];
+                                _LISTWRONGROS += _cell.rowIndex +
+                                    (icell == _cells.length-2 ? ", and " : "") +
+                                    (icell < _cells.length -2 ? ", ": "");
+                            }
+                        }
+                        debugger;
+
+
+                        var descr = _descr1 + " " + _descr2 + " " + _descr3;
                         descr = descr.replace(/%COL_NAME/g, fieldType.label);
                         descr = descr.replace(/%COL_TYPE/g, fieldType.type);
                         descr = descr.replace(/%COL_ERRORS/g, incorrect);
+                        descr = descr.replace(/%LIST_WRONG_ROWS/g, _LISTWRONGROS);
 
                         description += descr;
 
@@ -687,7 +715,8 @@ DataTypeConverter.prototype = (function () {
 
             var metadata = { dataset: json, fieldKeys: fieldKeys, types: fieldsType, qualityIndex: quality, warningsTextual: warningsTextual };
 
-            _filterBasedOnThreshold(metadata, options.thresholdConfidence);
+            if (options.filterOnThresholdConfidence == true)
+                _filterBasedOnThreshold(metadata, options.thresholdConfidence);
 
             return metadata;
         },//EndFunction.
@@ -715,19 +744,6 @@ DataTypeConverter.prototype = (function () {
          */
         inferDataSubTypeOfValue: function (value) {
             return _processInferSubType(value);
-        },//EndFunction.
-
-        /**
-         *
-         * @param metadata
-         *     - metadata.dataset = contains the original dataset;
-         *     - metadata.fieldKeys = contains the array with the list of fields to traverse the json tree;
-         *     - metadata.types = contains the inferred types for each key;
-         *     -
-         * @param options
-         */
-        listOfCellsWithWarnings: function (metadata, options) {
-
         }//EndFunction.
 
     };
