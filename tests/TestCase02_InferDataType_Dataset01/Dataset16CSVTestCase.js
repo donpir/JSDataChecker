@@ -41,6 +41,13 @@ function runTests(textualContent) {
             var expectedType = expectedTypeName;
             assert.equal(actualType, expectedType, "Check inferred type on " + key);
         };
+
+        var AssertSubType = function (analysisResults, key, expectedTypeName) {
+            var actualType = analysisResults.types[key].subtype;
+            var expectedType = expectedTypeName;
+            assert.equal(actualType, expectedType, "Check inferred type on " + key);
+        };
+
         assert.notEqual(dataset, null, "Dataset correctly loaded.");
 
         //Infer the SEPARATOR.
@@ -65,6 +72,15 @@ function runTests(textualContent) {
         AssertType(analysisResults, "records,ID", DataTypeConverter.TYPES.TEXT.name);
         AssertType(analysisResults, "records,NAME", DataTypeConverter.TYPES.TEXT.name);
         AssertType(analysisResults, "records,AGE", DataTypeConverter.TYPES.NUMBER.name);
+
+        AssertType(analysisResults, "records,BORN_US", DataTypeConverter.TYPES.DATETIME.name);
+        AssertSubType(analysisResults, "records,BORN_US", DataTypeConverter.SUBTYPES.DATETIMEYMD.name);
+
+        AssertType(analysisResults, "records,BORN_IT", DataTypeConverter.TYPES.DATETIME.name);
+        AssertSubType(analysisResults, "records,BORN_IT", DataTypeConverter.SUBTYPES.DATETIMEDMY.name);
+
+        AssertType(analysisResults, "records,BORN_XX", DataTypeConverter.TYPES.DATETIME.name);
+        AssertSubType(analysisResults, "records,BORN_XX", DataTypeConverter.SUBTYPES.DATETIMEXXY.name);
 
     });
 

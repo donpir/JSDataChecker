@@ -42,7 +42,13 @@ DataTypeConverter.SUBTYPES = {
 
     PERCENTAGE      :   { value: 1100, name: "PERCENTAGE" },
     LATITUDE        :   { value: 1101, name: "LATITUDE" },
-    LONGITUDE       :   { value: 1102, name: "LONGITUDE" }
+    LONGITUDE       :   { value: 1102, name: "LONGITUDE" },
+
+    DATETIMEYM     :   { value:  1200, name: "DATETIMEYM"},
+    DATETIMEYMD    :   { value:  1201, name: "DATETIMEYMD"},
+    DATETIMEDMY    :   { value:  1202, name: "DATETIMEDMY"},
+    DATETIMEMDY    :   { value:  1203, name: "DATETIMEMDY"},
+    DATETIMEXXY    :   { value:  1203, name: "DATETIMEXXY"}
 
     /*CODE        : { value: 2000, name: "CODE"},*/
 };
@@ -223,9 +229,8 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.NUMBER;
         }
 
-        var _date = DataTypesUtils.FilterDateTime(value);
-        if (isNaN(_date) == false && _date != null)
-            return DataTypeConverter.TYPES.DATETIME;
+        var _datetype = DataTypesUtils.FilterDateTime(value);
+        if (_datetype != null) return _datetype;
 
         return DataTypeConverter.TYPES.TEXT;
     };//EndFunction.
@@ -513,7 +518,11 @@ DataTypeConverter.prototype = (function () {
                         fieldType.numOfItems++;
 
                         ///TYPE
-                        var inferredType = _processInferType(item);
+                        var compundTypeSubtype = _processInferType(item);
+
+                        var inferredType = compundTypeSubtype;
+                        if (compundTypeSubtype.hasOwnProperty("type")) inferredType = compundTypeSubtype.type;
+
                         ArrayUtils.TestAndIncrement(fieldType._inferredTypes, inferredType.name);
                         if (inferredType === DataTypeConverter.TYPES.TEXT)
                             ArrayUtils.TestAndIncrement(fieldType._inferredValues, item);
@@ -525,7 +534,7 @@ DataTypeConverter.prototype = (function () {
                         }
 
                         ///SUBTYPE
-                        var inferredSubType = _processInferSubType(item);
+                        var inferredSubType = compundTypeSubtype.hasOwnProperty("subtype") ? compundTypeSubtype.subtype : _processInferSubType(item);
                         if (inferredSubType != null && typeof inferredSubType !== 'undefined') {
                             ArrayUtils.TestAndIncrement(fieldType._inferredSubTypes, inferredSubType.name);
                             /*if (inferredSubType === DataTypeConverter.TYPES.LATITUDE)
@@ -663,13 +672,23 @@ DataTypeConverter.prototype = (function () {
 
                         if (options.trackCellsForEachType) {
                             _descr3 = _capitalizeFirstLetter(JDC_LNG['key_seewrongrows'][options.language]) + ".";
-                            var _cells = fieldType._inferredTypes[fieldType.type + "_cells"];
-                            for (var icell=0; icell<_cells.length; icell++) {
-                                var _cell = _cells[icell];
-                                _LISTWRONGROS += _cell.rowIndex +
-                                    (icell == _cells.length-2 ? ", and " : "") +
-                                    (icell < _cells.length -2 ? ", ": "");
-                            }
+
+                            var keysWrongTypes =  Object.keys(fieldType._inferredTypes).filter(function(typekey) {
+                                return (typekey.indexOf("_cells") <0) && (fieldType._inferredTypes[typekey] > 0)
+                                    && (typekey !== fieldType.type);
+                            });
+
+                            for (var iKeyType=0; iKeyType<keysWrongTypes.length; iKeyType++) {
+                                var _keytype = keysWrongTypes[iKeyType];
+                                var _cells = fieldType._inferredTypes[_keytype + "_cells"];
+
+                                for (var icell = 0; icell < _cells.length; icell++) {
+                                    var _cell = _cells[icell];
+                                    _LISTWRONGROS += (_cell.rowIndex + 1) + "(" + _keytype + ")" +
+                                        (icell == _cells.length - 2 ? ", and " : "") +
+                                        (icell < _cells.length - 2 ? ", " : "");
+                                }
+                            }//EndForInfTypes.
                         }
                         debugger;
 

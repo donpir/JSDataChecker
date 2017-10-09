@@ -56,40 +56,76 @@ DataTypesUtils.FilterDateTime = function (value) {
     }
 }//EndFunction.
 
+/***
+ * Recognized date formats are:
+ *     * YYYY-MM
+ *     * YYYY-MM-DD
+ *     * DD-MM-YYYY
+ *     * MM-DD-YYYY
+ * @param value
+ * @param dtDate
+ * @returns {*}
+ * @constructor
+ */
 DataTypesUtils.FilterDate = function (value, dtDate) {
-    if (dtDate == null) dtDate = new Date();
+    if (dtDate == null) dtDate = new Date("YYYY-MM-DD");
 
-    //year-month.
+    // [YYYY-MM] year-month.
     if (/^[0-9][0-9][0-9][0-9]\-[0-9][0-9]$/.test(value)) {
         var year = parseInt(value.substring(0, 4));
         var month = parseInt(value.substring(5));
+
         dtDate.setYear(year);
         dtDate.setMonth(month);
-        return dtDate;
+        return { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEYM, date: dtDate };
     }
 
+    // [YYYY-MM-DD]
     var expDate = /^[0-9]{4}(\-|\/)[0-9]{2}((\-|\/)[0-9]{2})?$/;
     if (expDate.test(value)) {
         var splitted = value.split(/[\-|\/]/);
         var year = parseInt(splitted[0]);
         var month = parseInt(splitted[1]);
         var day = splitted.length == 3 ? parseInt(splitted[2]) : 0;
+
+        //Checks the range.
+        if (month <= 0 || month >= 13) return null;
+        if (day <= 0 || day >= 32) return null;
+
         dtDate.setYear(year);
         dtDate.setMonth(month);
         dtDate.setDate(day);
-        return dtDate;
+        return { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEYMD, date: dtDate };
     }
 
+    ///
     expDate = /^[0-9]{2}(\-|\/)[0-9]{2}(\-|\/)[0-9]{4}$/;
     if (expDate.test(value)) {
         var splitted = value.split(/[\-|\/]/);
         var year = parseInt(splitted[2]);
         var month = parseInt(splitted[1]);
         var day = parseInt(splitted[0]);
+        var result =  { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEDMY, date: dtDate };
+
+        //Here, recognises the American vs Italian format.
+        //When month is greater than twelve, it swaps month and day variable.
+        if (month > 12) {
+            var temp = month;
+            month = day;
+            day = temp;
+            result.subtype = DataTypeConverter.SUBTYPES.DATETIMEMDY;
+        }
+
+        //Checks the range.
+        if (month <= 0 || month >= 13) return null;
+        if (day <= 0 || day >= 32) return null;
+
+        if (day <= 12 && month <= 12) result.subtype = DataTypeConverter.SUBTYPES.DATETIMEXXY; //It can be both formats.
+
         dtDate.setYear(year);
         dtDate.setMonth(month);
         dtDate.setDate(day);
-        return dtDate;
+        return result;
     }
 
     return null;

@@ -167,6 +167,27 @@ var JDC_LNG = {
         "IT": "longitudine",
         "FR": "longitude",
         "NL": "longitude"
-    }
+    },
+
+    "key_subtypedatetimeymd": {
+        "EN": "YYYY/MM/DD",
+        "IT": "YYYY/MM/DD",
+        "FR": "YYYY/MM/DD",
+        "NL": "YYYY/MM/DD"
+    },
+
+    "key_subtypedatetimedmy": {
+        "EN": "DD/MM/YYYY",
+        "IT": "DD/MM/YYYY",
+        "FR": "DD/MM/YYYY",
+        "NL": "DD/MM/YYYY"
+    },
+
+    "key_subtypedatetimexxy": {
+        "EN": "D?M/D?M/YYYY",
+        "IT": "D?M/D?M/YYYY",
+        "FR": "D?M/D?M/YYYY",
+        "NL": "D?M/D?M/YYYY"
+    },
 
 };
