@@ -512,7 +512,15 @@ DataTypeConverter.prototype = (function () {
                         var curKey = sProcessedKeys + ((sProcessedKeys.length == 0) ? "" : ",") + key;
 
                         var _label = curKey;
-                        if (json.hasOwnProperty('fields')) _label = json.fields[key].label;
+                        if (typeof json !== 'undefined' && json.hasOwnProperty('fields')) {
+                            if (typeof json.fields[key] !== 'undefined') _label = json.fields[key].label;
+                            else {
+                                for (var iField=0,field; iField < json.fields.length && (field=json.fields[iField]); iField++) {
+                                    if (field.hasOwnProperty('name') && field.name === key && field.hasOwnProperty('label'))
+                                        _label = field.label;
+                                }//EndFor.
+                            }
+                        }
 
                         var fieldType = ArrayUtils.TestAndInitializeKey(fieldsType, curKey, { name: curKey, label: _label, _inferredTypes: [], _inferredSubTypes: [], _inferredValues: [], numOfItems: 0 });
                         fieldType.numOfItems++;
@@ -561,7 +569,9 @@ DataTypeConverter.prototype = (function () {
                 //This is executed when the fieldKey is not '*'.
                 var jsonSubtree = item[fieldKey]; //Takes the json subtree.
                 if (Array.isArray(jsonSubtree)) { //It is an array, hence loops through the array and takes its items.
-                    for (var j=0; j<jsonSubtree.length; j++) {
+                    //Note: it is better to push items in reverse order in the stack, to conserve the processing sort.
+                    //for (var j=0; j<jsonSubtree.length; j++) {
+                    for (var j=jsonSubtree.length-1; j>=0; j--) {
                         var jsonItem = jsonSubtree[j];
                         stack.push({ item: jsonItem, fieldKeyIndex: fieldKeyIndex+1 });
                     }//EndForJ.
@@ -661,7 +671,8 @@ DataTypeConverter.prototype = (function () {
                             description += " and has " + numNulls + " EMPTY values, ";
                     }*/
 
-                    var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
+                    //var incorrect = fieldType.numOfItems - fieldType.totalNullValues - fieldType._inferredTypes[fieldType.type];
+                    var incorrect = fieldType.numOfItems - fieldType._inferredTypes[fieldType.type];
                     if (incorrect > 0) {
                         var _descr1 = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";
                         var _descr2 = _capitalizeFirstLetter(JDC_LNG['key_notoftype_singular'][options.language]) + ".";
@@ -681,6 +692,7 @@ DataTypeConverter.prototype = (function () {
                             for (var iKeyType=0; iKeyType<keysWrongTypes.length; iKeyType++) {
                                 var _keytype = keysWrongTypes[iKeyType];
                                 var _cells = fieldType._inferredTypes[_keytype + "_cells"];
+                                if (typeof _cells === 'undefined') continue;
 
                                 for (var icell = 0; icell < _cells.length; icell++) {
                                     var _cell = _cells[icell];

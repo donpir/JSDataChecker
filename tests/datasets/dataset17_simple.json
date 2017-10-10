@@ -1,0 +1,12 @@
+{
+  "fields":[
+    {"name":"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a","label":"ID","index":0,"key":"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a"},
+    {"name":"601f08be-3492-4100-901d-b1a251c865c8","label":"NAME","index":1,"key":"601f08be-3492-4100-901d-b1a251c865c8"},
+    {"name":"7e1b9ef4-525f-40af-ac2b-0f5388db409e","label":"AGE","index":2,"key":"7e1b9ef4-525f-40af-ac2b-0f5388db409e"}],
+  "records":[
+    {"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a":"ID1","601f08be-3492-4100-901d-b1a251c865c8":"Pippo","7e1b9ef4-525f-40af-ac2b-0f5388db409e":"18"},
+    {"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a":"ID2","601f08be-3492-4100-901d-b1a251c865c8":"Pluto","7e1b9ef4-525f-40af-ac2b-0f5388db409e":"18c"},
+    {"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a":"ID3","601f08be-3492-4100-901d-b1a251c865c8":"Paperino","7e1b9ef4-525f-40af-ac2b-0f5388db409e":"9"},
+    {"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a":"ID4","601f08be-3492-4100-901d-b1a251c865c8":"Minni","7e1b9ef4-525f-40af-ac2b-0f5388db409e":"10"},
+    {"9b6aae1c-03c0-4bf8-b9cc-1341a93f7b9a":"","601f08be-3492-4100-901d-b1a251c865c8":""}]
+}
