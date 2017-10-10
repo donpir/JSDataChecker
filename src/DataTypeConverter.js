@@ -163,6 +163,17 @@ DataTypeConverter.prototype = (function () {
             var max = ArrayUtils.FindMinMax(field._inferredSubTypes, function (curval, lastval) {
                 return curval > lastval;
             });
+
+            //SUBTYPE: special case with date format - when the system selects the XXY subtype.
+            if (typeof max !== 'undefined' && max != null &&
+                typeof max.first !== 'undefined' && max.first != null && max.first.key === DataTypeConverter.SUBTYPES.DATETIMEXXY.name &&
+                typeof max.second !== 'undefined' && max.second != null) {
+                //Swaps first and second.
+                var temp = max.first;
+                max.first = max.second;
+                max.second = temp;
+            }
+
             field.subtype = null;
             if (max != null && max.first != null) {
                 field.subtype = max.first.key;
