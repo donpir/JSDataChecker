@@ -707,7 +707,7 @@ DataTypeConverter.prototype = (function () {
 
                                 for (var icell = 0; icell < _cells.length; icell++) {
                                     var _cell = _cells[icell];
-                                    _LISTWRONGROS += (_cell.rowIndex + 1) + "(" + _keytype + ")" +
+                                    _LISTWRONGROS += (_cell.rowIndex + 2) + "(" + _keytype + ")" +
                                         (icell == _cells.length - 2 ? ", and " : "") +
                                         (icell < _cells.length - 2 ? ", " : "");
                                 }

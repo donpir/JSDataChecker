@@ -71,9 +71,12 @@ DataTypesUtils.FilterDate = function (value, dtDate) {
     if (dtDate == null) dtDate = new Date("YYYY-MM-DD");
 
     // [YYYY-MM] year-month.
-    if (/^[0-9][0-9][0-9][0-9]\-[0-9][0-9]$/.test(value)) {
-        var year = parseInt(value.substring(0, 4));
-        var month = parseInt(value.substring(5));
+    if (/^[0-9]{1,4}(\-|\/)[0-9]{1,2}$/.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[0]);
+        var month = parseInt(splitted[1]);
+
+        if (month > 12) return null;
 
         dtDate.setYear(year);
         dtDate.setMonth(month);
@@ -81,7 +84,7 @@ DataTypesUtils.FilterDate = function (value, dtDate) {
     }
 
     // [YYYY-MM-DD]
-    var expDate = /^[0-9]{4}(\-|\/)[0-9]{2}((\-|\/)[0-9]{2})?$/;
+    var expDate = /^[0-9]{1,4}(\-|\/)[0-9]{1,2}((\-|\/)[0-9]{1,2})?$/;
     if (expDate.test(value)) {
         var splitted = value.split(/[\-|\/]/);
         var year = parseInt(splitted[0]);
@@ -98,8 +101,8 @@ DataTypesUtils.FilterDate = function (value, dtDate) {
         return { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEYMD, date: dtDate };
     }
 
-    ///
-    expDate = /^[0-9]{2}(\-|\/)[0-9]{2}(\-|\/)[0-9]{4}$/;
+    /// DD-MM-YYYY or MM-DD-YYYY
+    expDate = /^[0-9]{1,2}(\-|\/)[0-9]{1,2}(\-|\/)[0-9]{1,4}$/;
     if (expDate.test(value)) {
         var splitted = value.split(/[\-|\/]/);
         var year = parseInt(splitted[2]);
