@@ -174,6 +174,21 @@ DataTypeConverter.prototype = (function () {
                 max.second = temp;
             }
 
+            //SUBTYPE special case, when two DATETIME formats have the same number of items, the system cannot
+            //determine the format.
+            if (max.second !== 'undefined' && max.second != null && max.second.key === DataTypeConverter.SUBTYPES.DATETIMEXXY.name) {
+                var counter = 0;
+                var valueToCompare = field._inferredSubTypes[max.first.key];
+                for (var _key in field._inferredSubTypes) {
+                    if (_key === DataTypeConverter.SUBTYPES.DATETIMEXXY.name) continue;
+                    if (field._inferredSubTypes[_key] == valueToCompare) counter++;
+                }//EndFor.
+                if (counter > 1) { //There are two formats that have two equal number of cells.
+                    max.first = max.second;
+                    max.second = null;
+                }
+            }
+
             field.subtype = null;
             if (max != null && max.first != null) {
                 field.subtype = max.first.key;
@@ -728,6 +743,24 @@ DataTypeConverter.prototype = (function () {
                         var verb = (incorrect == 1) ? " value is" : " values are";
                         description += ", but " + incorrect + verb + " not a " + fieldType.type;*/
                     }
+
+                }
+
+                //Warning messages on the DATETIME formats.
+                if (fieldType.type === DataTypeConverter.TYPES.DATETIME.name) {
+                    if (fieldType.subtype === DataTypeConverter.SUBTYPES.DATETIMEXXY.name) {
+                        description += " " + _capitalizeFirstLetter(JDC_LNG['key_dateformatunknown'][options.language]) + ". ";
+                    } else {
+                        var valuesNotInRecognizedFormat = fieldType.numOfItems - fieldType._inferredSubTypes[fieldType.subtype] -
+                            (fieldType.hasOwnProperty(DataTypeConverter.SUBTYPES.DATETIMEXXY.name)?
+                                fieldType._inferredSubTypes[DataTypeConverter.SUBTYPES.DATETIMEXXY.name] : 0);
+                        if (valuesNotInRecognizedFormat > 0) {
+                            var descr = _capitalizeFirstLetter(JDC_LNG['key_datenotinformat'][options.language]);
+                            descr = descr.replace(/%COL_NUMDATENOTINFORMAT/g, valuesNotInRecognizedFormat);
+                            description += descr;
+                        }
+                        debugger;
+                    }
                 }
 
                 var descr = "";
@@ -736,10 +769,16 @@ DataTypeConverter.prototype = (function () {
                 else if (fieldType.totalNullValues > 1 )
                     descr = _capitalizeFirstLetter(JDC_LNG['key_emptyvalue_plural'][options.language]) + ".";
 
-                descr = descr.replace(/%COL_NAME/g, fieldType.label);
-                descr = descr.replace(/%COL_TYPE/g, fieldType.type);
-                descr = descr.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
+                //descr = descr.replace(/%COL_NAME/g, fieldType.label);
+                //descr = descr.replace(/%COL_TYPE/g, fieldType.type);
+                //descr = descr.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
                 description = description + " " + descr;
+
+                //Replaces keyword in the warning descriptions.
+                description = description.replace(/%COL_NAME/g, fieldType.label);
+                description = description.replace(/%COL_TYPE/g, fieldType.type);
+                description = description.replace(/%COL_SUBTYPE/g, fieldType.subtypeLabel);
+                description = description.replace(/%COL_NULLVALUES/g, fieldType.totalNullValues);
 
                 /*if (fieldType.totalNullValues > 0) {
                     var descr = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";

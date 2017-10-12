@@ -82,6 +82,14 @@ function runTests(textualContent) {
         AssertType(analysisResults, "records,BORN_XX", DataTypeConverter.TYPES.DATETIME.name);
         AssertSubType(analysisResults, "records,BORN_XX", DataTypeConverter.SUBTYPES.DATETIMEXXY.name);
 
+        AssertType(analysisResults, "records,BORN_XXY", DataTypeConverter.TYPES.DATETIME.name);
+        AssertSubType(analysisResults, "records,BORN_XXY", DataTypeConverter.SUBTYPES.DATETIMEXXY.name);
+        assert.ok(analysisResults.types["records,BORN_XXY"].errorsDescription.startsWith("Cannot determine"));
+
+        AssertType(analysisResults, "records,BORN_DMY_MDY", DataTypeConverter.TYPES.DATETIME.name);
+        AssertSubType(analysisResults, "records,BORN_DMY_MDY", DataTypeConverter.SUBTYPES.DATETIMEDMY.name);
+        assert.ok(analysisResults.types["records,BORN_DMY_MDY"].errorsDescription.startsWith("are not in format"));
+
     });
 
 }//EndTestSuite.

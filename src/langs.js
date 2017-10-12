@@ -190,4 +190,18 @@ var JDC_LNG = {
         "NL": "D?M/D?M/YYYY"
     },
 
+    "key_dateformatunknown": {
+        "EN": "Cannot determine the date format for the column '%COL_NAME'",
+        "IT": "Impossibile determinare il formato della data per la colonna '%COL_NAME'",
+        "FR": "Cannot determine the date format for the column '%COL_NAME'",
+        "NL": "Cannot determine the date format for the column '%COL_NAME'"
+    },
+
+    "key_datenotinformat": {
+        "EN": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'",
+        "IT": "'%COL_NUMDATENOTINFORMAT' valori della colonna '%COL_NAME' non sono in formato '%COL_SUBTYPE'",
+        "FR": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'",
+        "NL": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'"
+    },
+
 };
