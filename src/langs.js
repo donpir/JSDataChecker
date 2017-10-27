@@ -15,6 +15,13 @@ var JDC_LNG = {
         "NL": "een waarde is niet '%COL_TYPE'"
     },
 
+    "key_cellnotoftype": {
+        "EN": "the cell value is not '%COL_TYPE'",
+        "IT": "il valore della cella non è di tipo '%COL_TYPE'",
+        "FR": "the cell value is not '%COL_TYPE'",
+        "NL": "the cell value is not '%COL_TYPE'"
+    },
+
     "key_notoftype_plural": {
         "EN": "%COL_ERRORS values are not '%COL_TYPE'",
         "IT": "%COL_ERRORS valori non sono di tipo '%COL_TYPE'",
@@ -27,6 +34,13 @@ var JDC_LNG = {
         "IT": "la colonna '%COL_NAME' ha un valore vuoto",
         "FR": "La colonne '%COL_NAME'  a une valeur vide",
         "NL": "de kolom '%COL_NAME' heeft een lege waarde"
+    },
+
+    "key_emptycell": {
+        "EN": "the cell is empty",
+        "IT": "la cella è vuota",
+        "FR": "the cell is empty",
+        "NL": "the cell is empty"
     },
 
     "key_emptyvalue_plural": {

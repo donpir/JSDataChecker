@@ -1,24 +1,3 @@
-/*
- ** This file is part of JSDataChecker.
- **
- ** JSDataChecker is free software: you can redistribute it and/or modify
- ** it under the terms of the GNU General Public License as published by
- ** the Free Software Foundation, either version 3 of the License, or
- ** (at your option) any later version.
- **
- ** JSDataChecker is distributed in the hope that it will be useful,
- ** but WITHOUT ANY WARRANTY; without even the implied warranty of
- ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- ** GNU General Public License for more details.
- **
- ** You should have received a copy of the GNU General Public License
- ** along with JSDataChecker. If not, see <http://www.gnu.org/licenses/>.
- **
- ** Copyright (C) 2016 JSDataChecker - Donato Pirozzi (donatopirozzi@gmail.com)
- ** Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- ** License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
- **/
-
 
 var httpGetAsync = function(theUrl, callback) {
     var xhttp = new XMLHttpRequest();
@@ -30,12 +9,12 @@ var httpGetAsync = function(theUrl, callback) {
     xhttp.send(null);
 };//EndFunction.
 
-httpGetAsync("../datasets/dataset16_simple.csv", runTests);
+httpGetAsync("../datasets/dataset19.csv", runTests);
 
 function runTests(textualContent) {
     var dataset = textualContent
 
-    QUnit.test( "Dataset16", function( assert ) {
+    QUnit.test( "Dataset19", function( assert ) {
         var AssertType = function (analysisResults, key, expectedTypeName) {
             var actualType = analysisResults.types[key].type;
             var expectedType = expectedTypeName;
@@ -54,7 +33,7 @@ function runTests(textualContent) {
         try {
             var rows = dataset.split(/\r\n?/);
             var separator = csvjson.RecogniseCSVSeparator(rows);
-            assert.equal(separator, ',', "CSV Separator ',' recognized");
+            assert.equal(separator, ';', "CSV Separator ';' recognized");
         } catch (err) {
             assert.failed;
         }
@@ -68,6 +47,9 @@ function runTests(textualContent) {
         var path = [ "records", "*" ];
         var analysisResults = analyser.inferJsonDataType(jsonDataset, path, { filterOnThresholdConfidence: false, trackCellsForEachType: true});
 
+        debugger;
+
+        /*
         //Type checking.
         AssertType(analysisResults, "records,ID", DataTypeConverter.TYPES.TEXT.name);
         AssertType(analysisResults, "records,NAME", DataTypeConverter.TYPES.TEXT.name);
@@ -88,7 +70,7 @@ function runTests(textualContent) {
 
         AssertType(analysisResults, "records,BORN_DMY_MDY", DataTypeConverter.TYPES.DATETIME.name);
         AssertSubType(analysisResults, "records,BORN_DMY_MDY", DataTypeConverter.SUBTYPES.DATETIMEDMY.name);
-        assert.ok(analysisResults.types["records,BORN_DMY_MDY"].errorsDescription.indexOf("are not in format") !== -1);
+        assert.ok(analysisResults.types["records,BORN_DMY_MDY"].errorsDescription.indexOf("are not in format") !== -1);*/
 
     });
 

@@ -1,3 +1,130 @@
+if (typeof define !== 'function') { var define = require('amdefine')(module) } 
+define(function (require, exports, module) { 
+/*
+ ** This file is part of JSDataChecker.
+ **
+ ** JSDataChecker is free software: you can redistribute it and/or modify
+ ** it under the terms of the GNU General Public License as published by
+ ** the Free Software Foundation, either version 3 of the License, or
+ ** (at your option) any later version.
+ **
+ ** JSDataChecker is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ ** GNU General Public License for more details.
+ **
+ ** You should have received a copy of the GNU General Public License
+ ** along with JSDataChecker. If not, see <http://www.gnu.org/licenses/>.
+ **
+ ** Copyright (C) 2016 JSDataChecker - Donato Pirozzi (donatopirozzi@gmail.com)
+ ** Distributed under the GNU GPL v3. For full terms see the file LICENSE.
+ ** License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ **/
+
+function ArrayUtils() {}
+
+/**
+ * It tests if the array has an element with the specified key,
+ * if does not have the key it initialises it with the object.
+ * @param arr
+ * @param key
+ * @param object
+ * @returns {*}
+ * @constructor
+ */
+ArrayUtils.TestAndSet = function (arr, key, object) {
+    if (typeof arr == 'undefined') return null;
+    if (Array.isArray(arr) == false) return null;
+    if (typeof arr[key] == 'undefined')
+        arr[key] = object;
+    return arr[key];
+};//EndFunction.
+
+ArrayUtils.TestAndInitializeKey = function (obj, key, value) {
+    if (typeof obj == 'undefined') return null;
+    if (typeof obj[key] == 'undefined')
+        obj[key] = value;
+
+    return obj[key];
+};//EndFunction.
+
+/***
+ * It tests whether the array has the key, if not it insert it;
+ * then increases the value by one unit.
+ * @param arr
+ * @param key
+ * @returns {The array}
+ */
+ArrayUtils.TestAndIncrement = function (arr, key) {
+    var exists = arr[key];
+    if (typeof exists === 'undefined') arr[key] = 0;
+    arr[key]++;
+    return arr;
+};//EndFunction.
+
+/***
+ * It converts the object to an array. It loops through the object
+ * keys/properties, retrieves the objects and pushes it in the array.
+ * @param obj
+ * @returns {Array}
+ */
+ArrayUtils.toFieldsArray = function (obj) {
+    var fields = [];
+
+    ArrayUtils.IteratorOverKeys(obj, function(field, key) {
+        field.key = key;
+        fields.push(field);
+    });
+
+    return fields;
+};//EndFunction.
+
+/**
+ * Iterate over the key within the array arr. For each array
+ * value it calls the callback function.
+ * @param arr
+ * @param callback
+ * @constructor
+ */
+ArrayUtils.IteratorOverKeys = function (arr, callback) {
+    for (var property in arr) {
+        if (arr.hasOwnProperty(property)) {
+            var item = arr[property];
+            callback(item, property);
+        }
+    }
+};//EndFunction.
+
+/**
+ * Find the item with the max value within the array.
+ * @param arr
+ * @returns {*} It is an object with index, key, value.
+ */
+ArrayUtils.FindMinMax = function (arr, fncompare) {
+    var max1 = null;
+    var max2 = null;
+
+    for (var key in arr) {
+        //if (max1 == null) //Only the first time.
+        //    max1 = {index: -1, key: key, value: arr[key]};
+
+        if (max1 == null || fncompare(arr[key], max1.value)) {
+            max2 = max1;
+            max1 = {index: -1, key: key, value: arr[key]};
+        } else if (max2 == null || fncompare(arr[key], max2.value))
+            max2 = {index: -1, key: key, value: arr[key]};
+
+    }//EndFor.
+
+    return { first: max1, second: max2 };
+}//EndFunction.
+
+ArrayUtils.isArray = function (arr) {
+    if (Array.isArray(arr))
+        return (arr.length > 0);
+    return false;
+}//EndFunction.
+
 /*
  ** This file is part of JSDataChecker.
  **
@@ -857,3 +984,511 @@ DataTypeConverter.prototype = (function () {
 })();
 
 
+/*
+ ** This file is part of JSDataChecker.
+ **
+ ** JSDataChecker is free software: you can redistribute it and/or modify
+ ** it under the terms of the GNU General Public License as published by
+ ** the Free Software Foundation, either version 3 of the License, or
+ ** (at your option) any later version.
+ **
+ ** JSDataChecker is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ ** GNU General Public License for more details.
+ **
+ ** You should have received a copy of the GNU General Public License
+ ** along with JSDataChecker. If not, see <http://www.gnu.org/licenses/>.
+ **
+ ** Copyright (C) 2016 JSDataChecker - Donato Pirozzi (donatopirozzi@gmail.com)
+ ** Distributed under the GNU GPL v3. For full terms see the file LICENSE.
+ ** License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ **/
+
+function DataTypesUtils() {}
+
+DataTypesUtils.FilterTime = function (value) {
+    var expTime = /^[0-9]{2}:[0-9]{2}(:[0-9]{2})?(\+[0-9]{2}:[0-9]{2})?$/;
+    if (expTime.test(value) == false) return null;
+
+    var splitted = value.split(/[:|\+]/);
+
+    var expNumber = /^[0-9]{2}$/;
+    var HH = expNumber.test(splitted[0]) ? parseInt(splitted[0]) : 0;
+    var MM = expNumber.test(splitted[1]) ? parseInt(splitted[1]) : 0;
+    var SS = splitted.length >=3 && expNumber.test(splitted[2]) ? parseInt(splitted[2]) : 0;
+
+    var dt = new Date();
+    dt.setHours(HH);
+    dt.setMinutes(MM);
+    dt.setSeconds(SS);
+    return dt;
+}//EndFunction.
+
+DataTypesUtils.FilterDateTime = function (value) {
+    var _dtSplitted = value.split(/[T|\s]/);
+    if (_dtSplitted.length == 2) {
+        var dtTime = DataTypesUtils.FilterTime(_dtSplitted[1]);
+        if (dtTime == null) return null;
+
+        var dtDateTime = DataTypesUtils.FilterDate(_dtSplitted[0], dtTime);
+        return dtDateTime;
+    } else {
+        var dtDate = DataTypesUtils.FilterDate(value);
+        if (dtDate != null) return dtDate;
+
+        var dtTime = DataTypesUtils.FilterTime(value);
+        return dtTime;
+    }
+}//EndFunction.
+
+/***
+ * Recognized date formats are:
+ *     * YYYY-MM
+ *     * YYYY-MM-DD
+ *     * DD-MM-YYYY
+ *     * MM-DD-YYYY
+ * @param value
+ * @param dtDate
+ * @returns {*}
+ * @constructor
+ */
+DataTypesUtils.FilterDate = function (value, dtDate) {
+    if (dtDate == null) dtDate = new Date("YYYY-MM-DD");
+
+    // [YYYY-MM] year-month.
+    if (/^[0-9]{1,4}(\-|\/)[0-9]{1,2}$/.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[0]);
+        var month = parseInt(splitted[1]);
+
+        if (month > 12) return null;
+
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        return { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEYM, date: dtDate };
+    }
+
+    // [YYYY-MM-DD]
+    var expDate = /^[0-9]{1,4}(\-|\/)[0-9]{1,2}((\-|\/)[0-9]{1,2})?$/;
+    if (expDate.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[0]);
+        var month = parseInt(splitted[1]);
+        var day = splitted.length == 3 ? parseInt(splitted[2]) : 0;
+
+        //Checks the range.
+        if (month <= 0 || month >= 13) return null;
+        if (day <= 0 || day >= 32) return null;
+
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        dtDate.setDate(day);
+        return { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEYMD, date: dtDate };
+    }
+
+    /// DD-MM-YYYY or MM-DD-YYYY
+    expDate = /^[0-9]{1,2}(\-|\/)[0-9]{1,2}(\-|\/)[0-9]{1,4}$/;
+    if (expDate.test(value)) {
+        var splitted = value.split(/[\-|\/]/);
+        var year = parseInt(splitted[2]);
+        var month = parseInt(splitted[1]);
+        var day = parseInt(splitted[0]);
+        var result =  { type: DataTypeConverter.TYPES.DATETIME, subtype: DataTypeConverter.SUBTYPES.DATETIMEDMY, date: dtDate };
+
+        //Here, recognises the American vs Italian format.
+        //When month is greater than twelve, it swaps month and day variable.
+        if (month > 12) {
+            var temp = month;
+            month = day;
+            day = temp;
+            result.subtype = DataTypeConverter.SUBTYPES.DATETIMEMDY;
+        }
+
+        //Checks the range.
+        if (month <= 0 || month >= 13) return null;
+        if (day <= 0 || day >= 32) return null;
+
+        if (day <= 12 && month <= 12) result.subtype = DataTypeConverter.SUBTYPES.DATETIMEXXY; //It can be both formats.
+
+        dtDate.setYear(year);
+        dtDate.setMonth(month);
+        dtDate.setDate(day);
+        return result;
+    }
+
+    return null;
+};//EndFunction.
+
+/**
+ * Converts the value in a number, NaN if it is not a number.
+ * @param value
+ * @returns {*}
+ */
+DataTypesUtils.FilterFloat = function (value) {
+    if(/^(\-|\+)?((0|([1-9][0-9]*))(\.[0-9]+)?|Infinity)$/
+            .test(value))
+        return Number(value);
+    return NaN;
+};//EndFunction.
+
+DataTypesUtils.FilterNumber = function (value) {
+    //Check immediatly if it is a classical number.
+    var valnum = DataTypesUtils.FilterFloat(value);
+    if (isNaN(valnum) == false) return valnum;
+
+    //Checks if the value is a string.
+    if (typeof value !== "string")
+        return NaN;
+
+    var parts = value.split(/(,|\.)/g);
+
+    //Find the smallest symbol.
+    var idxDot          = { idx: value.indexOf('.'), sym: '.' };
+    var idxComma        = { idx: value.lastIndexOf(','), sym: ',' };
+    var idxFirst = {};
+    if (idxDot.idx == -1) idxFirst = idxComma;
+    else if (idxComma.idx == -1) idxFirst = idxDot;
+    else if (idxDot.idx < idxComma.idx) idxFirst = idxDot;
+    else idxFirst = idxComma;
+
+    //Find the greatest symbol.
+    var idxLastDot      = { idx: value.lastIndexOf('.'), sym: '.' };
+    var idxLastComma    = { idx: value.lastIndexOf(','), sym: ',' };
+    var idxLast = {};
+    if (idxLastDot.idx == -1) idxLast = idxLastComma;
+    else if (idxLastComma.idx == -1) idxLast = idxLastDot;
+    else if (idxLastDot.idx > idxLastComma.idx) idxLast = idxLastDot;
+    else idxLast = idxLastComma;
+
+    //Splits over the dot and comma and check that are all numbers.
+    var splitted = value.split(/(\.|,|\-|\+)/g);
+    if (splitted.length == 0) return NaN;
+
+    var numOfDots = 0;
+    var numOfComma = 0;
+    var i=0;
+    if (splitted[0] == '-' || splitted[0] == '+') i=1;
+
+    for (var str; i<splitted.length, str=splitted[i]; i++) {
+        if (str == '.') numOfDots++;
+        else if (str == ',') numOfComma++;
+        //else if (/^(0|([1-9][0-9]*))$/g.test(str) == false)
+        else if (/^(0|([0-9]+))$/g.test(str) == false)
+            return NaN;
+    }//EndFor.
+
+    var lastValue = splitted[splitted.length-1];
+    if (lastValue == '.' || lastValue == ',' || lastValue.length == 0) return NaN;
+
+    //No dot/comma char found
+    if (idxFirst.idx == -1 && idxLast.idx == -1)
+        return DataTypesUtils.FilterFloat(value);
+
+    //Only one dot symbol found
+    if (idxFirst.idx == idxLast.idx && idxFirst.sym == '.')
+        return Number(value);
+
+    //Only one comma symbol found
+    if (idxFirst.idx == idxLast.idx && idxFirst.sym == ',') {
+        var nval = value.replace(',', '.');
+        return Number(nval);
+    }
+
+    return NaN;
+};//EndFunction.
+
+/**
+ * Solution from here:
+ * http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
+ * @param num
+ * @returns {number}
+ */
+DataTypesUtils.DecimalPlaces = function (num) {
+    var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+    if (!match) { return 0; }
+    return Math.max(
+        0,
+        // Number of digits right of decimal point.
+        (match[1] ? match[1].length : 0)
+            // Adjust for scientific notation.
+        - (match[2] ? +match[2] : 0));
+}//EndFunction.
+
+DataTypesUtils.IsLatLng = function (num) {
+    if (DataTypesUtils.FilterFloat(num) == NaN) return false;
+    if (DataTypesUtils.DecimalPlaces(num) > 4) return true;
+    return false;
+}//EndFunction./*
+ ** This file is part of JSDataChecker.
+ **
+ ** JSDataChecker is free software: you can redistribute it and/or modify
+ ** it under the terms of the GNU General Public License as published by
+ ** the Free Software Foundation, either version 3 of the License, or
+ ** (at your option) any later version.
+ **
+ ** JSDataChecker is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ ** GNU General Public License for more details.
+ **
+ ** You should have received a copy of the GNU General Public License
+ ** along with JSDataChecker. If not, see <http://www.gnu.org/licenses/>.
+ **
+ ** Copyright (C) 2016 JSDataChecker - Donato Pirozzi (donatopirozzi@gmail.com)
+ ** Distributed under the GNU GPL v3. For full terms see the file LICENSE.
+ ** License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ **/
+
+function DataTypeHierarchy() {
+
+};//EndConstructor.
+
+DataTypeHierarchy.HIERARCHY = [ ];
+
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.TEXT.name] = [ DataTypeConverter.TYPES.TEXT.name ];
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.NUMBER.name] = [ DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.DATETIME.name] = [ DataTypeConverter.TYPES.DATETIME.name, DataTypeConverter.TYPES.TEXT.name ];
+
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.GEOCOORDINATE.name] = [ DataTypeConverter.SUBTYPES.GEOCOORDINATE.name,
+    DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
+
+DataTypeHierarchy.canConvert = function (fromType, toType) {
+    var arrConvertableTypes = DataTypeHierarchy.HIERARCHY[fromType];
+    var idx = arrConvertableTypes.indexOf(toType);
+    return (idx >= 0);
+};//EndFunction.
+
+var JDC_LNG = {
+
+    "key_declaretype": {
+        "EN": "the column '%COL_NAME' is of type '%COL_TYPE'",
+        "IT": "la colonna '%COL_NAME' è di tipo '%COL_TYPE'",
+        "FR": "le colonne '%COL_NAME' est de type '%COL_TYPE'",
+        "NL": "de kolom '%COL_NAME' is van het type '%COL_TYPE'"
+    },
+
+    "key_notoftype_singular": {
+        "EN": "a value is not '%COL_TYPE'",
+        "IT": "un valore non è un '%COL_TYPE'",
+        "FR": "La valeur n'est pas '%COL_TYPE'",
+        "NL": "een waarde is niet '%COL_TYPE'"
+    },
+
+    "key_cellnotoftype": {
+        "EN": "the cell value is not '%COL_TYPE'",
+        "IT": "il valore della cella non è di tipo '%COL_TYPE'",
+        "FR": "the cell value is not '%COL_TYPE'",
+        "NL": "the cell value is not '%COL_TYPE'"
+    },
+
+    "key_notoftype_plural": {
+        "EN": "%COL_ERRORS values are not '%COL_TYPE'",
+        "IT": "%COL_ERRORS valori non sono di tipo '%COL_TYPE'",
+        "FR": "%COL_ERRORS les valeurs ne sont pas de type '%COL_TYPE'",
+        "NL": "%COL_ERRORS waarden niet '%COL_TYPE'"
+    },
+
+    "key_emptyvalue_singolar": {
+        "EN": "the column '%COL_NAME' has an empty value",
+        "IT": "la colonna '%COL_NAME' ha un valore vuoto",
+        "FR": "La colonne '%COL_NAME'  a une valeur vide",
+        "NL": "de kolom '%COL_NAME' heeft een lege waarde"
+    },
+
+    "key_emptycell": {
+        "EN": "the cell is empty",
+        "IT": "la cella è vuota",
+        "FR": "the cell is empty",
+        "NL": "the cell is empty"
+    },
+
+    "key_emptyvalue_plural": {
+        "EN": "the column '%COL_NAME' has '%COL_NULLVALUES' empty values",
+        "IT": "la colonna '%COL_NAME' ha '%COL_NULLVALUES' valori vuoti",
+        "FR": "La colonne '%COL_NAME' a la valeur '%COL_NULLVALUES' qui est vide",
+        "NL": "de kolom '%COL_NAME' heeft '%COL_NULLVALUES' lege waarde"
+    },
+
+    "key_seewrongrows": {
+        "EN": "check rows '%LIST_WRONG_ROWS'",
+        "IT": "controlla le righe '%LIST_WRONG_ROWS'",
+        "FR": "check rows '%LIST_WRONG_ROWS'",
+        "NL": "check rows '%LIST_WRONG_ROWS'"
+    },
+
+    "key_type": {
+        "EN": "type",
+        "IT": "tipo",
+        "FR": "type",
+        "NL": "type"
+    },
+
+    "key_subtype": {
+        "EN": "subtype",
+        "IT": "sottotipo",
+        "FR": "sous-type",
+        "NL": "subtype"
+    },
+
+    "key_typetext": {
+        "EN": "text",
+        "IT": "testo",
+        "FR": "texte",
+        "NL": "tekst"
+    },
+
+    "key_typenumber": {
+        "EN": "number",
+        "IT": "numero",
+        "FR": "chiffres",
+        "NL": "aantal"
+    },
+
+    "key_typeobject": {
+        "EN": "object",
+        "IT": "oggetto",
+        "FR": "objet",
+        "NL": "voorwerp"
+    },
+
+    "key_typedatetime": {
+        "EN": "date or time",
+        "IT": "data o orario",
+        "FR": "date ou l'heure",
+        "NL": "datum of tijd"
+    },
+
+    "key_typeempty": {
+        "EN": "empty",
+        "IT": "vuoto",
+        "FR": "vide",
+        "NL": "leeg"
+    },
+
+    "key_typenull": {
+        "EN": "empty",
+        "IT": "vuoto",
+        "FR": "vide",
+        "NL": "leeg"
+    },
+
+    "key_typelatitude": {
+        "EN": "latitude",
+        "IT": "latitudine",
+        "FR": "latitude",
+        "NL": "breedtegraad"
+    },
+
+    "key_typelongitude": {
+        "EN": "longitude",
+        "IT": "longitudine",
+        "FR": "longitude",
+        "NL": "lengtegraad"
+    },
+
+    "key_subtypegeocoordinate": {
+        "EN": "coordinate",
+        "IT": "coordinate",
+        "FR": "coordonnées",
+        "NL": "coordinate"
+    },
+
+    "key_subtypegeojson": {
+        "EN": "geojson",
+        "IT": "geojson",
+        "FR": "geojson",
+        "NL": "geojson"
+    },
+
+    "key_subtypebool": {
+        "EN": "bool",
+        "IT": "bool",
+        "FR": "bool",
+        "NL": "bool"
+    },
+
+    "key_subtypeconst": {
+        "EN": "const",
+        "IT": "costante",
+        "FR": "const",
+        "NL": "const"
+    },
+
+    "key_subtypecategory": {
+        "EN": "category",
+        "IT": "categoria",
+        "FR": "category",
+        "NL": "category"
+    },
+
+    "key_subtypepercentage": {
+        "EN": "percentage",
+        "IT": "percentuale",
+        "FR": "percentage",
+        "NL": "percentage"
+    },
+
+    "key_subtypelatitude": {
+        "EN": "latitude",
+        "IT": "latitudine",
+        "FR": "latitude",
+        "NL": "latitude"
+    },
+
+    "key_subtypelongitude": {
+        "EN": "longitude",
+        "IT": "longitudine",
+        "FR": "longitude",
+        "NL": "longitude"
+    },
+
+    "key_subtypedatetimeymd": {
+        "EN": "YYYY/MM/DD",
+        "IT": "YYYY/MM/DD",
+        "FR": "YYYY/MM/DD",
+        "NL": "YYYY/MM/DD"
+    },
+
+    "key_subtypedatetimedmy": {
+        "EN": "DD/MM/YYYY",
+        "IT": "DD/MM/YYYY",
+        "FR": "DD/MM/YYYY",
+        "NL": "DD/MM/YYYY"
+    },
+
+    "key_subtypedatetimexxy": {
+        "EN": "D?M/D?M/YYYY",
+        "IT": "D?M/D?M/YYYY",
+        "FR": "D?M/D?M/YYYY",
+        "NL": "D?M/D?M/YYYY"
+    },
+
+    "key_dateformatunknown": {
+        "EN": "Cannot determine the date format for the column '%COL_NAME'",
+        "IT": "Impossibile determinare il formato della data per la colonna '%COL_NAME'",
+        "FR": "Cannot determine the date format for the column '%COL_NAME'",
+        "NL": "Cannot determine the date format for the column '%COL_NAME'"
+    },
+
+    "key_datenotinformat": {
+        "EN": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'",
+        "IT": "'%COL_NUMDATENOTINFORMAT' valori della colonna '%COL_NAME' non sono in formato '%COL_SUBTYPE'",
+        "FR": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'",
+        "NL": "'%COL_NUMDATENOTINFORMAT' values of the column '%COL_NAME' are not in format '%COL_SUBTYPE'"
+    },
+
+};function DataTypeHelper() {
+
+};//EndConstructor.
+
+DataTypeHelper.forEachType = function (metadata, callback) {
+    var keys = Object.keys(metadata.types);
+    for (var i=0; i<keys.length; i++) {
+        var key = keys[i];
+        var type = metadata.types[key];
+        callback(type);
+    }//EndFor.
+};var _converter = function(obj) { return new DataTypeConverter(); }; 
+module.exports = _converter; 
+}); 
