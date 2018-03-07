@@ -416,13 +416,6 @@ DataTypeConverter.prototype = (function () {
         var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
 
-            //Distinguish between INTEGER and REAL numbers (the discriminant is the presence of a dot or a comma.
-            var parts = value.split(/(,|\.)/g);
-            if (parts.length > 1)
-                return DataTypeConverter.SUBTYPES.NUMREAL;
-            else
-                return DataTypeConverter.SUBTYPES.NUMINTEGER;
-
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
                 return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
@@ -434,6 +427,13 @@ DataTypeConverter.prototype = (function () {
             /*if (0.0 <= isnumber && isnumber <= 100.0)
                 if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
                     return DataTypeConverter.SUBTYPES.PERCENTAGE;*/
+
+            //Distinguish between INTEGER and REAL numbers (the discriminant is the presence of a dot or a comma.
+            var parts = (value+"").split(/(,|\.)/g);
+            if (parts.length > 1)
+                return DataTypeConverter.SUBTYPES.NUMREAL;
+            else
+                return DataTypeConverter.SUBTYPES.NUMINTEGER;
 
             return null;
         }
