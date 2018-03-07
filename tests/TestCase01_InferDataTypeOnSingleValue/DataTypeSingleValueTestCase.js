@@ -84,33 +84,49 @@ QUnit.test( "TestDate", function( assert ) {
 });
 
 QUnit.test("TestIsNumber", function(assert) {
+    var converter = new DataTypeConverter();
+
     var value = "1936";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMINTEGER, "Text /" + value + "/ correctly recognized.");
 
     var value = "1936.27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "-1936.27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "+1936.27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "1936,27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "-1936,27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "+1936,27";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
     var value = "1.936.27";
     var isnumber = DataTypesUtils.FilterNumber(value);
@@ -139,5 +155,7 @@ QUnit.test("TestIsNumber", function(assert) {
     var value = "1936,07";
     var isnumber = DataTypesUtils.FilterNumber(value);
     assert.ok(isnumber, value + " recognized.");
+    var dt = converter.inferDataSubTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.SUBTYPES.NUMREAL, "Text /" + value + "/ correctly recognized.");
 
 });

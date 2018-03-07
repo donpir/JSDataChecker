@@ -171,11 +171,14 @@ DataTypeConverter.SUBTYPES = {
     LATITUDE        :   { value: 1101, name: "LATITUDE" },
     LONGITUDE       :   { value: 1102, name: "LONGITUDE" },
 
-    DATETIMEYM     :   { value:  1200, name: "DATETIMEYM"},
-    DATETIMEYMD    :   { value:  1201, name: "DATETIMEYMD"},
-    DATETIMEDMY    :   { value:  1202, name: "DATETIMEDMY"},
-    DATETIMEMDY    :   { value:  1203, name: "DATETIMEMDY"},
-    DATETIMEXXY    :   { value:  1203, name: "DATETIMEXXY"}
+    DATETIMEYM      :   { value:  1200, name: "DATETIMEYM" },
+    DATETIMEYMD     :   { value:  1201, name: "DATETIMEYMD" },
+    DATETIMEDMY     :   { value:  1202, name: "DATETIMEDMY" },
+    DATETIMEMDY     :   { value:  1203, name: "DATETIMEMDY" },
+    DATETIMEXXY     :   { value:  1203, name: "DATETIMEXXY" },
+
+    NUMINTEGER      :   { value:  1300, name: "NUMINTEGER" },
+    NUMREAL         :   { value:  1300, name: "NUMREAL" }
 
     /*CODE        : { value: 2000, name: "CODE"},*/
 };
@@ -412,6 +415,14 @@ DataTypeConverter.prototype = (function () {
         //var isnumber = DataTypesUtils.FilterFloat(value);
         var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
+
+            //Distinguish between INTEGER and REAL numbers (the discriminant is the presence of a dot or a comma.
+            var parts = value.split(/(,|\.)/g);
+            if (parts.length > 1)
+                return DataTypeConverter.SUBTYPES.NUMREAL;
+            else
+                return DataTypeConverter.SUBTYPES.NUMINTEGER;
+
             //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
             if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
                 return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
