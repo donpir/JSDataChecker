@@ -204,6 +204,34 @@ var JDC_LNG = {
         "NL": "D?M/D?M/YYYY"
     },
 
+    "key_subtypenuminteger": {
+        "EN": "integer number",
+        "IT": "numero intero",
+        "FR": "integer number",
+        "NL": "integer number"
+    },
+
+    "key_subtypenumreal": {
+        "EN": "real number",
+        "IT": "numero reale",
+        "FR": "real number",
+        "NL": "real number"
+    },
+
+    "key_subtypeinteger": {
+        "EN": "integer number",
+        "IT": "numero intero",
+        "FR": "integer number",
+        "NL": "integer number"
+    },
+
+    "key_subtypereal": {
+        "EN": "real number",
+        "IT": "numero reale",
+        "FR": "real number",
+        "NL": "real number"
+    },
+
     "key_dateformatunknown": {
         "EN": "Cannot determine the date format for the column '%COL_NAME'",
         "IT": "Impossibile determinare il formato della data per la colonna '%COL_NAME'",

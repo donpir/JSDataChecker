@@ -177,8 +177,8 @@ DataTypeConverter.SUBTYPES = {
     DATETIMEMDY     :   { value:  1203, name: "DATETIMEMDY" },
     DATETIMEXXY     :   { value:  1203, name: "DATETIMEXXY" },
 
-    NUMINTEGER      :   { value:  1300, name: "NUMINTEGER" },
-    NUMREAL         :   { value:  1300, name: "NUMREAL" }
+    NUMINTEGER      :   { value:  1300, name: "INTEGER" },
+    NUMREAL         :   { value:  1300, name: "REAL" }
 
     /*CODE        : { value: 2000, name: "CODE"},*/
 };
@@ -1230,7 +1230,9 @@ DataTypesUtils.IsLatLng = function (num) {
     if (DataTypesUtils.FilterFloat(num) == NaN) return false;
     if (DataTypesUtils.DecimalPlaces(num) > 4) return true;
     return false;
-}//EndFunction./*
+}//EndFunction
+
+ /*
  ** This file is part of JSDataChecker.
  **
  ** JSDataChecker is free software: you can redistribute it and/or modify
@@ -1473,6 +1475,34 @@ var JDC_LNG = {
         "IT": "D?M/D?M/YYYY",
         "FR": "D?M/D?M/YYYY",
         "NL": "D?M/D?M/YYYY"
+    },
+
+    "key_subtypenuminteger": {
+        "EN": "integer number",
+        "IT": "numero intero",
+        "FR": "integer number",
+        "NL": "integer number"
+    },
+
+    "key_subtypenumreal": {
+        "EN": "real number",
+        "IT": "numero reale",
+        "FR": "real number",
+        "NL": "real number"
+    },
+
+    "key_subtypeinteger": {
+        "EN": "integer number",
+        "IT": "numero intero",
+        "FR": "integer number",
+        "NL": "integer number"
+    },
+
+    "key_subtypereal": {
+        "EN": "real number",
+        "IT": "numero reale",
+        "FR": "real number",
+        "NL": "real number"
     },
 
     "key_dateformatunknown": {

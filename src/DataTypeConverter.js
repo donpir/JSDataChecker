@@ -50,8 +50,8 @@ DataTypeConverter.SUBTYPES = {
     DATETIMEMDY     :   { value:  1203, name: "DATETIMEMDY" },
     DATETIMEXXY     :   { value:  1203, name: "DATETIMEXXY" },
 
-    NUMINTEGER      :   { value:  1300, name: "NUMINTEGER" },
-    NUMREAL         :   { value:  1300, name: "NUMREAL" }
+    NUMINTEGER      :   { value:  1300, name: "INTEGER" },
+    NUMREAL         :   { value:  1300, name: "REAL" }
 
     /*CODE        : { value: 2000, name: "CODE"},*/
 };
