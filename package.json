@@ -1,0 +1,25 @@
+{
+  "name": "jsdatachecker",
+  "version": "2.0.0",
+  "description": "_Note: this branch is for the 2nd version of the library_",
+  "main": "jsdatachecker.min.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donpir/JSDataChecker.git"
+  },
+  "author": "Donato Pirozzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donpir/JSDataChecker/issues"
+  },
+  "homepage": "https://github.com/donpir/JSDataChecker#readme",
+  "devDependencies": {
+    "qunit": "^2.6.2"
+  }
+}

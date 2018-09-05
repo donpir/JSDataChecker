@@ -70,64 +70,6 @@ DataTypeConverter.GEOJSONTYPES = [ "Point", "MultiPoint", "LineString",
 
 DataTypeConverter.prototype = (function () {
 
-    /***
-     * Make an asynchronous call to load the content.
-     * @param theUrl
-     * @param callback
-     * @deprecated
-     */
-    var httpGetAsync = function(theUrl, callbackOnFinish) {
-        console.warn("Calling deprecated function.");
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200)
-                _processDataset(xhttp.responseText, callbackOnFinish);
-        }
-        xhttp.open("GET", theUrl, true); // true for asynchronous
-        xhttp.send(null);
-    };//EndFunction.
-
-    /*var _processDataset = function (jsonRows) {
-        //Check if the jsonRow is an array.
-        if (Array.isArray(jsonRows) == false) return;
-
-        for (var i=0; i<jsonRows.length; i++) {
-            var jsonRow = jsonRows[i];
-            _processRow(jsonRow);
-        }//EndFor.
-
-        _analyseDataTypes(this._fields);
-
-        return this._fields;
-    };//EndFunction.*/
-
-    /*var _processRow = function(row) {
-        //Avoid empty rows
-        if (typeof row === 'undefined') return;
-
-        //Get the object keys.
-        for (var property in row) {
-            if (row.hasOwnProperty(property)) {
-                var cellValue = row[property];
-
-                //if (property == 'votantspourcentages') debugger;
-                //if (property == 'va_no_voie') debugger;
-
-                var inferredType = _processInferType(cellValue);
-
-                if (typeof this._fields[property] === 'undefined')
-                    this._fields[property] = { name: property, _inferredTypes: [], _inferredValues: [] };
-
-                _arrUtil.testAndIncrement(this._fields[property]._inferredTypes, inferredType.name);
-                if (inferredType === DataTypeConverter.TYPES.TEXT)
-                    _arrUtil.testAndIncrement(this._fields[property]._inferredValues, cellValue);
-                if (inferredType === DataTypeConverter.TYPES.LATITUDE || inferredType === DataTypeConverter.TYPES.LONGITUDE)
-                    _arrUtil.testAndIncrement(this._fields[property]._inferredTypes, DataTypeConverter.TYPES.NUMBER);
-            }
-        }
-
-        this._numOfRows++;
-    };//EndFunction.*/
 
     var _analyseDataTypes = function(fields) {
         ArrayUtils.IteratorOverKeys(fields, function(field) {
