@@ -34,6 +34,21 @@ export class TDS {
 
     get root() { return this._root; }
 
+    traverseDepthFirst() {
+        let stack = [ this._root ];
+        let traverse = [];
+        let item = null;
+
+        while ( typeof (item = stack.pop()) !== 'undefined') {
+            traverse.unshift(item);
+            item.children.forEach( (element, index) => {
+                stack.push(element);
+            });
+        }
+
+        return traverse;
+    }//EndFunction.
+
 };//EndClass.
 
 export class TDSNODE {
@@ -53,6 +68,8 @@ export class TDSNODE {
 
     get value() { return this._value; }
     set value(value) { this._value = value; }
+
+    get children() { return this._children; }
 
     addChild(child) {
         child.parent = this;

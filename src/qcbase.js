@@ -143,9 +143,14 @@ DATATYPES.DT_DATEDMY.evaluate = DATATYPES.DT_DATE.evaluate;
 DATATYPES.DT_DATEMDY.evaluate = DATATYPES.DT_DATE.evaluate;
 
 DATATYPES.DT_OBJECT.evaluate = function(value) {
-    DATATYPES.evaluate
+    var dt_null = DATATYPES.DT_NULL.evaluate(value);
+    if (dt_null.datatype.name == DATATYPES.DT_NULL.name)
+        return dt_null;
+
     if (typeof value === 'object')
-        return DataTypeConverter.TYPES.OBJECT;
+        return { datatype: DATATYPES.DT_OBJECT, value: value };
+
+    return { datatype: DATATYPES.DT_TEXT, value: value };
 };
 
 //PRIVACY CHECKING.
@@ -162,24 +167,33 @@ DATATYPES.DT_EMAIL.evaluate = function (value) {
 /// Definition of the tree data structure.
 ///
 
-//Data Types.
-const dt_text = new TDSNODE(DATATYPES.DT_TEXT);
+export class QCBaseConfigFactory {
 
-const dt_null = new TDSNODE(DATATYPES.DT_NULL, dt_text);
+    constructor() { }//EndConstructor.
 
-const dt_real = new TDSNODE(DATATYPES.DT_REAL, dt_text);
-const dt_int = new TDSNODE(DATATYPES.DT_INT, dt_real);
+    build() {
+        const dt_text = new TDSNODE(DATATYPES.DT_TEXT);
 
-const dt_date = new TDSNODE(DATATYPES.DT_DATE, dt_text);
-const dt_date_ym = new TDSNODE(DATATYPES.DT_DATEYM, dt_date);
-const dt_date_ymd = new TDSNODE(DATATYPES.DT_DATEYMD, dt_date);
-const dt_date_xxy = new TDSNODE(DATATYPES.DT_DATEXXY, dt_date);
-const dt_date_dmy = new TDSNODE(DATATYPES.DT_DATEDMY, dt_date_xxy);
-const dt_date_mdy = new TDSNODE(DATATYPES.DT_DATEMDY, dt_date_xxy);
+        const dt_null = new TDSNODE(DATATYPES.DT_NULL, dt_text);
 
+        const dt_real = new TDSNODE(DATATYPES.DT_REAL, dt_text);
+        const dt_int = new TDSNODE(DATATYPES.DT_INT, dt_real);
 
+        const dt_date = new TDSNODE(DATATYPES.DT_DATE, dt_text);
+        const dt_date_ym = new TDSNODE(DATATYPES.DT_DATEYM, dt_date);
+        const dt_date_ymd = new TDSNODE(DATATYPES.DT_DATEYMD, dt_date);
+        const dt_date_xxy = new TDSNODE(DATATYPES.DT_DATEXXY, dt_date);
+        const dt_date_dmy = new TDSNODE(DATATYPES.DT_DATEDMY, dt_date_xxy);
+        const dt_date_mdy = new TDSNODE(DATATYPES.DT_DATEMDY, dt_date_xxy);
 
-//Tree Data Types.
-export const dts = new TDS(dt_text);
+        const dt_email = new TDSNODE(DATATYPES.DT_EMAIL, dt_text);
+
+        const dt_object = new TDSNODE(DATATYPES.DT_OBJECT, dt_text);
+
+        this._dtds = new TDS(dt_text);
+    };
+
+};//EndClass.
+
 
 
