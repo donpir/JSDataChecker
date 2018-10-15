@@ -135,7 +135,7 @@ DataTypesUtils.FilterDate = function (value, dtDate) {
 };//EndFunction.
 
 /**
- * Converts the value in a number, NaN if it is not a number.
+ * Converts the data in a number, NaN if it is not a number.
  * @param value
  * @returns {*}
  */
@@ -151,7 +151,7 @@ DataTypesUtils.FilterNumber = function (value) {
     var valnum = DataTypesUtils.FilterFloat(value);
     if (isNaN(valnum) == false) return valnum;
 
-    //Checks if the value is a string.
+    //Checks if the data is a string.
     if (typeof value !== "string")
         return NaN;
 

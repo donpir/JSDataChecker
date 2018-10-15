@@ -24,12 +24,13 @@
  **
  **/
 
-import { TDS, TDSNODE } from "./treedatastructure.js";
+import { TDS, TDSNODE } from "./treedatastructure.mjs";
 
 ////////////////////////////////////////////////////////////
 /// Definition of the data types recognised by the system.
 ///
 
+//TODO: remove the export from here. It must be accessible only trough the factory.
 export const DATATYPES = {
     DT_NULL:    { name: "NULL" },
 
@@ -46,7 +47,9 @@ export const DATATYPES = {
 
     DT_OBJECT:  { name: "OBJECT" },
 
-    DT_EMAIL:   { name: "EMAIL" }
+    DT_EMAIL:   { name: "EMAIL" },
+
+    DT_UNKNOWN: { name: "UNKNOWN" }
 };
 
 //Specific functions to recognize types.
@@ -54,8 +57,12 @@ DATATYPES.DT_NULL.evaluate = function(value) {
     if (value === null || typeof value === 'undefined')
         return { datatype: DATATYPES.DT_NULL, value: value };
 
-    return { datatype: DATATYPES.DT_TEXT, value: value };
+    return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 };
+
+DATATYPES.DT_TEXT.evaluate = function(value) {
+    return { datatype: DATATYPES.DT_TEXT, value: value };
+};//EndFunction.
 
 DATATYPES.DT_REAL.evaluate = function (value) {
     if(/^(\-|\+)?((0|([1-9][0-9]*))|Infinity)$/
@@ -66,7 +73,7 @@ DATATYPES.DT_REAL.evaluate = function (value) {
     if( match )
         return { datatype: DATATYPES.DT_REAL, value: value, parsedValue: Number(value), sign: match[1], decimalSeparator: match[5] }
 
-    return { datatype: DATATYPES.DT_TEXT, value: value };
+    return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 };
 DATATYPES.DT_INT.evaluate = DATATYPES.DT_REAL.evaluate;
 
@@ -80,7 +87,7 @@ DATATYPES.DT_DATE.evaluate = function (value) {
         var year = parseInt(match[1]);
         var month = parseInt(match[3]);
 
-        if (month > 12) return { datatype: DATATYPES.DT_TEXT, value: value };
+        if (month > 12) return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 
         dtDate.setYear(year);
         dtDate.setMonth(month);
@@ -123,8 +130,8 @@ DATATYPES.DT_DATE.evaluate = function (value) {
         }
 
         //Checks the range.
-        if (month <= 0 || month >= 13) return { datatype: DATATYPES.DT_TEXT, value: value };
-        if (day <= 0 || day >= 32) return { datatype: DATATYPES.DT_TEXT, value: value };
+        if (month <= 0 || month >= 13) return { datatype: DATATYPES.DT_UNKNOWN, value: value };
+        if (day <= 0 || day >= 32) return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 
         if (day <= 12 && month <= 12) result.datatype = DATATYPES.DT_DATEXXY;//It can be both formats.
 
@@ -134,7 +141,7 @@ DATATYPES.DT_DATE.evaluate = function (value) {
         return result;
     }
 
-    return { datatype: DATATYPES.DT_TEXT, value: value };
+    return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 };
 DATATYPES.DT_DATEYM.evaluate = DATATYPES.DT_DATE.evaluate;
 DATATYPES.DT_DATEYMD.evaluate = DATATYPES.DT_DATE.evaluate;
@@ -150,7 +157,7 @@ DATATYPES.DT_OBJECT.evaluate = function(value) {
     if (typeof value === 'object')
         return { datatype: DATATYPES.DT_OBJECT, value: value };
 
-    return { datatype: DATATYPES.DT_TEXT, value: value };
+    return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 };
 
 //PRIVACY CHECKING.
@@ -160,16 +167,25 @@ DATATYPES.DT_EMAIL.evaluate = function (value) {
     if (regex.test(value))
         return { datatype: DATATYPES.DT_EMAIL, value: value };
 
-    return { datatype: DATATYPES.DT_TEXT, value: value };
+    return { datatype: DATATYPES.DT_UNKNOWN, value: value };
 };
 
 ////////////////////////////////////////////////////////////
 /// Definition of the tree data structure.
 ///
 
-export class QCBaseConfigFactory {
+export class BasicDataTypeConfigFactory {
 
     constructor() { }//EndConstructor.
+
+    get DATATYPES() {
+        return DATATYPES;
+    };
+
+    get types() {
+        var dtds = this.build();
+        return dtds.traverseDepthFirst();
+    };
 
     build() {
         const dt_text = new TDSNODE(DATATYPES.DT_TEXT);
@@ -190,7 +206,7 @@ export class QCBaseConfigFactory {
 
         const dt_object = new TDSNODE(DATATYPES.DT_OBJECT, dt_text);
 
-        this._dtds = new TDS(dt_text);
+        return new TDS(dt_text);
     };
 
 };//EndClass.

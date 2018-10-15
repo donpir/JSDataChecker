@@ -48,7 +48,7 @@ ArrayUtils.TestAndInitializeKey = function (obj, key, value) {
 
 /***
  * It tests whether the array has the key, if not it insert it;
- * then increases the value by one unit.
+ * then increases the data by one unit.
  * @param arr
  * @param key
  * @returns {The array}
@@ -79,7 +79,7 @@ ArrayUtils.toFieldsArray = function (obj) {
 
 /**
  * Iterate over the key within the array arr. For each array
- * value it calls the callback function.
+ * data it calls the callback function.
  * @param arr
  * @param callback
  * @constructor
@@ -94,9 +94,9 @@ ArrayUtils.IteratorOverKeys = function (arr, callback) {
 };//EndFunction.
 
 /**
- * Find the item with the max value within the array.
+ * Find the item with the max data within the array.
  * @param arr
- * @returns {*} It is an object with index, key, value.
+ * @returns {*} It is an object with index, key, data.
  */
 ArrayUtils.FindMinMax = function (arr, fncompare) {
     var max1 = null;
@@ -104,7 +104,7 @@ ArrayUtils.FindMinMax = function (arr, fncompare) {
 
     for (var key in arr) {
         //if (max1 == null) //Only the first time.
-        //    max1 = {index: -1, key: key, value: arr[key]};
+        //    max1 = {index: -1, key: key, data: arr[key]};
 
         if (max1 == null || fncompare(arr[key], max1.value)) {
             max2 = max1;

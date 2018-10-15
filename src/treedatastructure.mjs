@@ -53,9 +53,9 @@ export class TDS {
 
 export class TDSNODE {
 
-    constructor(value, parent) {
+    constructor(data, parent) {
         this._parent = parent;
-        this._value = value;
+        this._data = data;
         this._children = [];
 
         if (typeof this._parent !== 'undefined') {
@@ -66,8 +66,8 @@ export class TDSNODE {
     get parent() { return this._parent; }
     set parent(parent) { this._parent = parent; }
 
-    get value() { return this._value; }
-    set value(value) { this._value = value; }
+    get data() { return this._data; }
+    set data(value) { this._data = value; }
 
     get children() { return this._children; }
 

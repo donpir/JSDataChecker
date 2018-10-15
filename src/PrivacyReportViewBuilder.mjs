@@ -20,25 +20,32 @@
  **
  ** ----------------------------------------------------------------------------------
  **
- ** Main class.
- **
+ ** A basic configuration for the privacy module.
  **/
 
-export class DataChecker {
+export class PrivacyReportViewBuilder {
 
-    constructor(configFactory) {
-        this._configFactory = configFactory;
-    }//EndConstructor.
+    /**
+     * It builds a report in which the statistics are provided
+     * summarised based on DATATYPES
+     * @param evaLogs
+     */
+    build(evaLogs) {
+        let reportView = {
+            DATATYPES: {}
+        };
 
-    inferDataTypeOfValue(value) {
-        var dtds = this._configFactory.build();
-        var arrTraverseOrder = dtds.traverseDepthFirst();
+        for (let ilog=0; ilog<evaLogs.length; ilog++) {
+            let slog = evaLogs[ilog];
+            let sdtkey = slog.datatype.name;
 
-        arrTraverseOrder.forEach( (datatype, index) => {
-            let _inferredDataType = datatype.evaluate(value);
+            if (typeof reportView.DATATYPES[sdtkey] === 'undefined')
+                reportView.DATATYPES[sdtkey] = { datatypekey: sdtkey, warnings: 0 };
 
-            debugger;
-        });
+            reportView.DATATYPES[sdtkey].warnings++;
+        }//EndFor.
+
+        return reportView;
     }//EndFunction.
 
 }//EndClass.

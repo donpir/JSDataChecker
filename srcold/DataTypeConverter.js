@@ -53,7 +53,7 @@ DataTypeConverter.SUBTYPES = {
     NUMINTEGER      :   { value:  1300, name: "INTEGER" },
     NUMREAL         :   { value:  1300, name: "REAL" }
 
-    /*CODE        : { value: 2000, name: "CODE"},*/
+    /*CODE        : { data: 2000, name: "CODE"},*/
 };
 
 DataTypeConverter.LANGS = {
@@ -167,14 +167,14 @@ DataTypeConverter.prototype = (function () {
     };//EndFunction.
 
     /**
-     * Given a dataset value, it tries to recognise the data types.
+     * Given a dataset data, it tries to recognise the data types.
      * This is the central function within the library.
      * @param value
      * @returns {*}
      * @private
      */
     var _processInferType = function(value) {
-        //value = value.toLocaleString();
+        //data = data.toLocaleString();
 
         if (value === null || typeof value === 'undefined')
             return DataTypeConverter.TYPES.EMPTY;
@@ -183,19 +183,19 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.OBJECT;
 
         //Try to parse the float.
-        //var isnumber = DataTypesUtils.FilterFloat(value);
+        //var isnumber = DataTypesUtils.FilterFloat(data);
         var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
-            //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
+            //If the number ranges from -90.0 to 90.0, the data is marked as Latitude.
             //if (-90.0 <= isnumber && isnumber <= 90.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)
             //    return DataTypeConverter.TYPES.LATITUDE;
 
-            //It the number ranges from -180.0 to 180.0, the value is marked as Longitude.
+            //It the number ranges from -180.0 to 180.0, the data is marked as Longitude.
             //if (-180.0 <= isnumber && isnumber <= 180.0 && _dataTypesUtils.decimalPlaces(isnumber) >= 5)
             //    return DataTypeConverter.TYPES.LONGITUDE;
 
             /*if (0.0 <= isnumber && isnumber <= 100.0)
-                if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
+                if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(data))
                     return DataTypeConverter.TYPES.PERCENTAGE;*/
 
             return DataTypeConverter.TYPES.NUMBER;
@@ -213,7 +213,7 @@ DataTypeConverter.prototype = (function () {
         //GEOCOORDINATE
         if (Array.isArray(value) && value.length == 2) {//It recognises the LAT LNG as array of two values.
             //Checks if the two array's values are numbers.
-            //if ( DataTypesUtils.FilterFloat(value[0]) != NaN && DataTypesUtils.FilterFloat(value[1]) != NaN  )
+            //if ( DataTypesUtils.FilterFloat(data[0]) != NaN && DataTypesUtils.FilterFloat(data[1]) != NaN  )
             if ( DataTypesUtils.FilterNumber(value[0]) != NaN && DataTypesUtils.FilterNumber(value[1]) != NaN  )
                 if (DataTypesUtils.DecimalPlaces(value[0]) > 4 && DataTypesUtils.DecimalPlaces(value[1]) > 4 )
                     return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
@@ -227,20 +227,20 @@ DataTypeConverter.prototype = (function () {
         }
 
         //Try to parse the float.
-        //var isnumber = DataTypesUtils.FilterFloat(value);
+        //var isnumber = DataTypesUtils.FilterFloat(data);
         var isnumber = DataTypesUtils.FilterNumber(value);
         if (isNaN(isnumber) !== true) {//It is a number.
 
-            //If the number ranges from -90.0 to 90.0, the value is marked as Latitude.
+            //If the number ranges from -90.0 to 90.0, the data is marked as Latitude.
             if (-90.0 <= isnumber && isnumber <= 90.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
                 return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
 
-            //It the number ranges from -180.0 to 180.0, the value is marked as Longitude.
+            //It the number ranges from -180.0 to 180.0, the data is marked as Longitude.
             if (-180.0 <= isnumber && isnumber <= 180.0 && DataTypesUtils.DecimalPlaces(isnumber) >= 5)
                 return DataTypeConverter.SUBTYPES.GEOCOORDINATE;
 
             /*if (0.0 <= isnumber && isnumber <= 100.0)
-                if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(value))
+                if(/^(\+)?((0|([1-9][0-9]*))\.([0-9]+))$/ .test(data))
                     return DataTypeConverter.SUBTYPES.PERCENTAGE;*/
 
             //Distinguish between INTEGER and REAL numbers (the discriminant is the presence of a dot or a comma.
@@ -261,9 +261,9 @@ DataTypeConverter.prototype = (function () {
             if (isincluded) return DataTypeConverter.SUBTYPES.GEOJSON;
         }
 
-        //If the value starts with a zero and contains all numbers, it is
+        //If the data starts with a zero and contains all numbers, it is
         //inferred as textual content.
-        /*if (/^0[0-9]+$/.test(value))
+        /*if (/^0[0-9]+$/.test(data))
          return DataTypeConverter.TYPES.CODE;*/
 
         return null;
@@ -363,7 +363,7 @@ DataTypeConverter.prototype = (function () {
          * @param metadata Previous information on the inferred types.
          * @param options Some options to cast the data.
          *     - castThresholdConfidence: for which threshold the library must perform the cast (default 1)
-         *     - makeChangesToDataset: is a boolean value, to indicate whether the library can do improvement on the storage
+         *     - makeChangesToDataset: is a boolean data, to indicate whether the library can do improvement on the storage
          *     values, for instance, numbers with the comma will be replaced with the dot.
          * @returns {*}
          */
@@ -441,7 +441,7 @@ DataTypeConverter.prototype = (function () {
          * but only a part of it. One can decide to analyse only a part of the json by indicating the path
          * within the tree to analyse. The parameter fieldKeys is an array with keys within the json to analyse.
          * @param options to use during the Infer Data Type process, in particular
-         *     - threshold value for the confidence;
+         *     - threshold data for the confidence;
          *     - language of messages.
          */
         inferJsonDataType: function (json, fieldKeys, options) {
@@ -602,7 +602,7 @@ DataTypeConverter.prototype = (function () {
             ArrayUtils.IteratorOverKeys(fieldsType, function(fieldType) {
                 //Translates the type.
                 var _type = fieldType.type;
-                fieldType.typeLabel = _type; //Default value.
+                fieldType.typeLabel = _type; //Default data.
                 var _lngkey = ('key_type' + _type).toLowerCase();
                 if (JDC_LNG.hasOwnProperty(_lngkey)) {
                     var _entry = JDC_LNG[_lngkey];
@@ -720,7 +720,7 @@ DataTypeConverter.prototype = (function () {
                         description += descr;
 
                         /*description += "The column <" + fieldType.name + "> has the type <" + fieldType.type + ">";
-                        var verb = (incorrect == 1) ? " value is" : " values are";
+                        var verb = (incorrect == 1) ? " data is" : " values are";
                         description += ", but " + incorrect + verb + " not a " + fieldType.type;*/
                     }
 
@@ -762,7 +762,7 @@ DataTypeConverter.prototype = (function () {
                 /*if (fieldType.totalNullValues > 0) {
                     var descr = _capitalizeFirstLetter(JDC_LNG['key_declaretype'][options.language]) + ".";
 
-                    description += "The column <" + fieldType.name + "> has " + fieldType.totalNullValues + " EMPTY value";
+                    description += "The column <" + fieldType.name + "> has " + fieldType.totalNullValues + " EMPTY data";
                     if (fieldType.totalNullValues > 1) description += "s";
                 }
 
@@ -789,7 +789,7 @@ DataTypeConverter.prototype = (function () {
         },//EndFunction.*/
 
         /**
-         * Given in input a value, the function infers the data type.
+         * Given in input a data, the function infers the data type.
          * @param value
          * @returns {*}
          */
@@ -798,7 +798,7 @@ DataTypeConverter.prototype = (function () {
         },//EndFunction.
 
         /**
-         * Given in input a value, the function infers the data type.
+         * Given in input a data, the function infers the data type.
          * @param value
          * @returns {*}
          */

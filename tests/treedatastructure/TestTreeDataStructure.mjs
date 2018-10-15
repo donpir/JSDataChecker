@@ -1,4 +1,4 @@
-import { TDS, TDSNODE } from '../../src/treedatastructure.js';
+import { TDS, TDSNODE } from '../../src/treedatastructure.mjs';
 
 QUnit.test("TestTreeDataStructure", function(assert) {
 
@@ -8,11 +8,12 @@ QUnit.test("TestTreeDataStructure", function(assert) {
     var D = new TDSNODE("D", A);
 
     const _tree = new TDS(A);
+    debugger;
     let travereOrder = _tree.traverseDepthFirst();
 
-    assert.equal( travereOrder[0].value, "C");
-    assert.equal( travereOrder[1].value, "B");
-    assert.equal( travereOrder[2].value, "D");
-    assert.equal( travereOrder[3].value, "A");
+    assert.equal( travereOrder[0].data, "C", "Primo nodo ok");
+    assert.equal( travereOrder[1].data, "B");
+    assert.equal( travereOrder[2].data, "D");
+    assert.equal( travereOrder[3].data, "A");
 
 });

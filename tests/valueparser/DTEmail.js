@@ -1,4 +1,4 @@
-import {DATATYPES} from "../../src/qcbase.js";
+import {DATATYPES} from "../../src/BasicDataTypeConfigFactory.mjs";
 
 QUnit.test("TestEmail", function(assert) {
 
