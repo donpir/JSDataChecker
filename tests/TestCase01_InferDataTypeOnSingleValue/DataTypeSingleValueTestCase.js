@@ -91,6 +91,12 @@ QUnit.test("TestIsPercentage", function (assert) {
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt.type, DataTypeConverter.TYPES.PERCENTAGE, "Text /" + value + "/ correctly recognized.");
 
+    var value = "5 %";
+    var isperc = DataTypesUtils.FilterPercentage(value);
+    assert.ok(isperc, value + " recognized.");
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt.type, DataTypeConverter.TYPES.PERCENTAGE, "Text /" + value + "/ correctly recognized.");
+
     var value = "%5%";
     var isperc = DataTypesUtils.FilterPercentage(value);
     assert.equal(isperc, null, value + " recognized.");

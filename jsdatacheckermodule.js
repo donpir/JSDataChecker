@@ -1157,14 +1157,15 @@ DataTypesUtils.FilterFloat = function (value) {
 };//EndFunction.
 
 DataTypesUtils.FilterPercentage = function (value) {
-    var index = value.trim().indexOf("%");
+    value = value.trim();
+    var index = value.indexOf("%");
     if (index < 0) //Percentage symbol not found.
         return null;
 
     if (index != value.length - 1)
         return null;
 
-    var _number = value.split('%')[0];
+    var _number = value.split('%')[0].trim();
     var number = DataTypesUtils.FilterNumber(_number);
     if (isNaN(number))
         return null;
