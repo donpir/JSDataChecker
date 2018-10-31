@@ -160,7 +160,7 @@ DataTypesUtils.FilterPercentage = function (value) {
     if (isNaN(number))
         return null;
 
-    return { type: DataTypeConverter.TYPES.PERCENTAGE, value: number};
+    return { type: DataTypeConverter.TYPES.NUMBER, subtype: DataTypeConverter.SUBTYPES.PERCENTAGE, value: number};
 };//EndFunction.
 
 DataTypesUtils.FilterNumber = function (value) {

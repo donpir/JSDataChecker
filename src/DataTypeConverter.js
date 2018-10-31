@@ -29,7 +29,6 @@ DataTypeConverter.TYPES = {
 
     TEXT        : { value: 1, name: "TEXT" },
     NUMBER      : { value: 2, name: "NUMBER" },
-    PERCENTAGE  :   { value: 1100, name: "PERCENTAGE" },
     OBJECT      : { value: 3, name: "OBJECT" },
     DATETIME    : { value: 4, name: "DATETIME" }
 };
@@ -51,7 +50,8 @@ DataTypeConverter.SUBTYPES = {
     DATETIMEXXY     :   { value:  1203, name: "DATETIMEXXY" },
 
     NUMINTEGER      :   { value:  1300, name: "INTEGER" },
-    NUMREAL         :   { value:  1300, name: "REAL" }
+    NUMREAL         :   { value:  1300, name: "REAL" },
+    PERCENTAGE      :   { value:  1400, name: "PERCENTAGE" },
 
     /*CODE        : { value: 2000, name: "CODE"},*/
 };
@@ -474,6 +474,18 @@ DataTypeConverter.prototype = (function () {
                 //var isCast = !(options.castIfNull == false && inferredType.totalNullValues > 0);
                 var isCast = inferredType.typeConfidence >= options.castThresholdConfidence;
                 if (inferredType.type == DataTypeConverter.TYPES.NUMBER.name && isCast) {
+                    //It is a number but I need to check also the subtype to see whether it is a percentage.
+                    if (inferredType.subtype === DataTypeConverter.SUBTYPES.PERCENTAGE.name) {
+                        if (value == null || typeof value == 'undefined' || (value + "").length == 0) {
+                            //datasetErrors++;
+                        } else {
+                            var dt = DataTypesUtils.FilterPercentage(value);
+                            if (typeof dt !== 'undefined' && 'type' in dt)
+                                return dt.value;
+                        }
+                    }
+
+                    //--- It is a number (not a pecentage)
                     if (isNaN(DataTypesUtils.FilterNumber(value)) == false && typeof value === "string")
                         value = value.replace(',', '.');
 
@@ -485,14 +497,6 @@ DataTypeConverter.prototype = (function () {
                     }
 
                     return number;
-                } else if (inferredType.type === DataTypeConverter.TYPES.PERCENTAGE.name) {
-                    if (value == null || typeof value == 'undefined' || (value + "").length == 0) {
-                        //datasetErrors++;
-                    } else {
-                        var dt = DataTypesUtils.FilterPercentage(value);
-                        if (typeof dt !== 'undefined' && 'type' in dt)
-                            return dt.value;
-                    }
                 }
 
                 return value;

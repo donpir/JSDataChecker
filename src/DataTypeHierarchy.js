@@ -32,6 +32,9 @@ DataTypeHierarchy.HIERARCHY[DataTypeConverter.TYPES.DATETIME.name] = [ DataTypeC
 DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.GEOCOORDINATE.name] = [ DataTypeConverter.SUBTYPES.GEOCOORDINATE.name,
     DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
 
+DataTypeHierarchy.HIERARCHY[DataTypeConverter.SUBTYPES.PERCENTAGE.name] = [DataTypeConverter.SUBTYPES.PERCENTAGE.name,
+    DataTypeConverter.TYPES.NUMBER.name, DataTypeConverter.TYPES.TEXT.name];
+
 DataTypeHierarchy.canConvert = function (fromType, toType) {
     var arrConvertableTypes = DataTypeHierarchy.HIERARCHY[fromType];
     var idx = arrConvertableTypes.indexOf(toType);

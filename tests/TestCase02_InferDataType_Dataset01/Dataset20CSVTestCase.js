@@ -49,8 +49,10 @@ function runTests(textualContent) {
 
         //Type checking.
         AssertType(analysisResults, "records,name", DataTypeConverter.TYPES.TEXT.name);
-        AssertType(analysisResults, "records,values", DataTypeConverter.TYPES.NUMBER.name);
-        AssertType(analysisResults, "records,percentage", DataTypeConverter.TYPES.PERCENTAGE.name);
+        AssertType(analysisResults, "records,colvalues", DataTypeConverter.TYPES.NUMBER.name);
+        AssertType(analysisResults, "records,colpercentage", DataTypeConverter.TYPES.NUMBER.name);
+        AssertSubType(analysisResults, "records,colpercentage", DataTypeConverter.SUBTYPES.PERCENTAGE.name);
+
 
         var casted = analyser.cast(analysisResults);
 
