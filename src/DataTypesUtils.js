@@ -146,6 +146,22 @@ DataTypesUtils.FilterFloat = function (value) {
     return NaN;
 };//EndFunction.
 
+DataTypesUtils.FilterPercentage = function (value) {
+    var index = value.trim().indexOf("%");
+    if (index < 0) //Percentage symbol not found.
+        return null;
+
+    if (index != value.length - 1)
+        return null;
+
+    var _number = value.split('%')[0];
+    var number = DataTypesUtils.FilterNumber(_number);
+    if (isNaN(number))
+        return null;
+
+    return { type: DataTypeConverter.TYPES.PERCENTAGE, value: number};
+};//EndFunction.
+
 DataTypesUtils.FilterNumber = function (value) {
     //Check immediatly if it is a classical number.
     var valnum = DataTypesUtils.FilterFloat(value);

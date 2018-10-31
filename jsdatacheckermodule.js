@@ -156,6 +156,7 @@ DataTypeConverter.TYPES = {
 
     TEXT        : { value: 1, name: "TEXT" },
     NUMBER      : { value: 2, name: "NUMBER" },
+    PERCENTAGE  :   { value: 1100, name: "PERCENTAGE" },
     OBJECT      : { value: 3, name: "OBJECT" },
     DATETIME    : { value: 4, name: "DATETIME" }
 };
@@ -167,7 +168,6 @@ DataTypeConverter.SUBTYPES = {
     CONST           :   { value: 1003, name: "CONST" },
     CATEGORY        :   { value: 1004, name: "CATEGORY" },
 
-    PERCENTAGE      :   { value: 1100, name: "PERCENTAGE" },
     LATITUDE        :   { value: 1101, name: "LATITUDE" },
     LONGITUDE       :   { value: 1102, name: "LONGITUDE" },
 
@@ -386,7 +386,12 @@ DataTypeConverter.prototype = (function () {
             return DataTypeConverter.TYPES.NUMBER;
         }
 
+        //Tries to indentify whether the value is a data and/or time.
         var _datetype = DataTypesUtils.FilterDateTime(value);
+        if (_datetype != null) return _datetype;
+
+        //Tries to identify whether the value is a percentage.
+        var _datetype = DataTypesUtils.FilterPercentage(value);
         if (_datetype != null) return _datetype;
 
         return DataTypeConverter.TYPES.TEXT;
@@ -607,6 +612,14 @@ DataTypeConverter.prototype = (function () {
                     }
 
                     return number;
+                } else if (inferredType.type === DataTypeConverter.TYPES.PERCENTAGE.name) {
+                    if (value == null || typeof value == 'undefined' || (value + "").length == 0) {
+                        //datasetErrors++;
+                    } else {
+                        var dt = DataTypesUtils.FilterPercentage(value);
+                        if (typeof dt !== 'undefined' && 'type' in dt)
+                            return dt.value;
+                    }
                 }
 
                 return value;
@@ -1143,6 +1156,22 @@ DataTypesUtils.FilterFloat = function (value) {
     return NaN;
 };//EndFunction.
 
+DataTypesUtils.FilterPercentage = function (value) {
+    var index = value.trim().indexOf("%");
+    if (index < 0) //Percentage symbol not found.
+        return null;
+
+    if (index != value.length - 1)
+        return null;
+
+    var _number = value.split('%')[0];
+    var number = DataTypesUtils.FilterNumber(_number);
+    if (isNaN(number))
+        return null;
+
+    return { type: DataTypeConverter.TYPES.PERCENTAGE, value: number};
+};//EndFunction.
+
 DataTypesUtils.FilterNumber = function (value) {
     //Check immediatly if it is a classical number.
     var valnum = DataTypesUtils.FilterFloat(value);
@@ -1230,9 +1259,7 @@ DataTypesUtils.IsLatLng = function (num) {
     if (DataTypesUtils.FilterFloat(num) == NaN) return false;
     if (DataTypesUtils.DecimalPlaces(num) > 4) return true;
     return false;
-}//EndFunction
-
- /*
+}//EndFunction./*
  ** This file is part of JSDataChecker.
  **
  ** JSDataChecker is free software: you can redistribute it and/or modify

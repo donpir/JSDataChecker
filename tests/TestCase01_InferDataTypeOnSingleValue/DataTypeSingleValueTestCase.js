@@ -80,7 +80,28 @@ QUnit.test( "TestDate", function( assert ) {
     /*var value = "1936,27";
     var dt = converter.inferDataTypeOfValue(value);
     assert.equal(dt, DataTypeConverter.TYPES.NUMBER, "Text /" + value + "/ correctly recognized.");*/
+});
 
+QUnit.test("TestIsPercentage", function (assert) {
+    var converter = new DataTypeConverter();
+
+    var value = "5%";
+    var isperc = DataTypesUtils.FilterPercentage(value);
+    assert.ok(isperc, value + " recognized.");
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt.type, DataTypeConverter.TYPES.PERCENTAGE, "Text /" + value + "/ correctly recognized.");
+
+    var value = "%5%";
+    var isperc = DataTypesUtils.FilterPercentage(value);
+    assert.equal(isperc, null, value + " recognized.");
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.TYPES.TEXT, "Text /" + value + "/ correctly recognized.");
+
+    var value = "%";
+    var isperc = DataTypesUtils.FilterPercentage(value);
+    assert.equal(isperc, null, value + " recognized.");
+    var dt = converter.inferDataTypeOfValue(value);
+    assert.equal(dt, DataTypeConverter.TYPES.TEXT, "Text /" + value + "/ correctly recognized.");
 });
 
 QUnit.test("TestIsNumber", function(assert) {
