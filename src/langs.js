@@ -85,6 +85,13 @@ var JDC_LNG = {
         "NL": "aantal"
     },
 
+    "key_typepercentage": {
+        "EN": "percentage",
+        "IT": "percentuale",
+        "FR": "pourcentage",
+        "NL": "percentage"
+    },
+
     "key_typeobject": {
         "EN": "object",
         "IT": "oggetto",
