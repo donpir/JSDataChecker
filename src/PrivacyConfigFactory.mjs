@@ -31,6 +31,7 @@ const PRDATATYPES = {
 
 PRDATATYPES.DT_CF.evaluate = function (value) {
     var regex = /^(?:(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i;
+
     value = value.toLowerCase();
     if (regex.test(value))
         return { datatype: PRDATATYPES.DT_CF, value: value };
@@ -40,6 +41,7 @@ PRDATATYPES.DT_CF.evaluate = function (value) {
 
 PRDATATYPES.DT_EMAIL.evaluate = function (value) {
     var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     value = value.toLowerCase();
     if (regex.test(value))
         return { datatype: PRDATATYPES.DT_EMAIL, value: value };

@@ -69,7 +69,13 @@ export class DataChecker {
             for (let ikey=0; ikey<fieldKeys.length; ikey++) {
                 let key = fieldKeys[ikey];
 
-                let fieldValue = row[key.name];
+                //Value to evaluate.
+                let fieldValue = row[key.name] + '';
+
+                //
+                //if (typeof value === 'undefined')
+                //   return  { datatype: PRDATATYPES.DT_UNKNOWN, value: value };
+
                 let _inferredType =  this.inferDataTypeOfValue(fieldValue);
 
                 if (_inferredType.datatype !== this._dataTypeConfigFactory.DATATYPES.DT_UNKNOWN) {
