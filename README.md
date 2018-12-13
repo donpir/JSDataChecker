@@ -1,3 +1,5 @@
+# Last update (13/12/2018) - This repository has been transferred to the ROUTE-TO-PA project (see https://github.com/routetopa/qualicy) where there is the ongoing development of the 2nd version of the library based on the previous version. This repository is maintained only for retro-compatibility reasons.
+
 # JSDataChecker
 JavaScript Library to read dataset content (e.g., Open Data), infer data types, give a data quality indicator and parse content.
 
