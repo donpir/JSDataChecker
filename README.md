@@ -36,6 +36,6 @@ Please, refer to this paper for details on the library and its use case:
 
 - _D. Pirozzi, V. Scarano_, **_Support citizens in Visualizing Open Data_**, 20th International Conference on Information Visualisation, Lisbon (Portugal), 19-22 July 2016 ([Citation](http://ieeexplore.ieee.org/abstract/document/7557938/)) 
 
-## Other for projects
+## Other Fork Projects
 
-* ROUTE-TO-PA project (see https://github.com/routetopa/qualicy) where there is the ongoing development of the 2nd version of the library based on the previous version. 
+* ROUTE-TO-PA project (see https://github.com/routetopa/qualicy) where there is the ongoing development of the 2nd version of the library that takes in consideration the privacy issues within the datasets based on the previous version. 
